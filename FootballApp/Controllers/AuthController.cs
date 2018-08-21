@@ -1,8 +1,20 @@
+<<<<<<< HEAD
+=======
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+>>>>>>> ef3a1da
 using System.Threading.Tasks;
 using FootballApp.Data;
 using FootballApp.Dtos;
 using FootballApp.Models;
 using Microsoft.AspNetCore.Mvc;
+<<<<<<< HEAD
+=======
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+>>>>>>> ef3a1da
 
 namespace FootballApp.Controllers
 {
@@ -11,9 +23,18 @@ namespace FootballApp.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
+<<<<<<< HEAD
         public AuthController(IAuthRepository repo)
         {
             _repo = repo;
+=======
+
+        private readonly IConfiguration _config;
+        public AuthController(IAuthRepository repo, IConfiguration config)
+        {
+            _repo = repo;
+            _config = config;
+>>>>>>> ef3a1da
         }
 
         [HttpPost("register")]
@@ -34,6 +55,43 @@ namespace FootballApp.Controllers
 
         }
 
+<<<<<<< HEAD
+=======
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        {
+                var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
+
+                if (userFromRepo == null)
+                    return Unauthorized();
+
+                var claims = new[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+                    new Claim(ClaimTypes.Name, userFromRepo.Username)
+                };
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+                
+                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.Now.AddDays(1),
+                    SigningCredentials = credentials
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                return Ok(new {
+                    token = tokenHandler.WriteToken(token)
+                });
+        }
+
+>>>>>>> ef3a1da
 
     }
 }

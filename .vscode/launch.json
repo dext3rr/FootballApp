@@ -11,6 +11,15 @@
             "processId": "${command:pickProcess}"
         },
         {
+<<<<<<< HEAD
+=======
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+        {
+>>>>>>> ef3a1da
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",

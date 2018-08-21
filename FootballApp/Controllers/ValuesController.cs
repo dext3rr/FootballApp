@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.Data;
+<<<<<<< HEAD
+=======
+using Microsoft.AspNetCore.Authorization;
+>>>>>>> ef3a1da
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballApp.API.Controllers
 {
+<<<<<<< HEAD
+=======
+    [Authorize]
+>>>>>>> ef3a1da
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -27,7 +35,11 @@ namespace FootballApp.API.Controllers
             return Ok(values);
         }
 
+<<<<<<< HEAD
         // GET api/values/5
+=======
+        [AllowAnonymous]
+>>>>>>> ef3a1da
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
