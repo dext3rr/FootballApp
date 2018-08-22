@@ -1,20 +1,14 @@
-<<<<<<< HEAD
-=======
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
->>>>>>> ef3a1da
 using System.Threading.Tasks;
 using FootballApp.Data;
 using FootballApp.Dtos;
 using FootballApp.Models;
 using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
-=======
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
->>>>>>> ef3a1da
 
 namespace FootballApp.Controllers
 {
@@ -23,18 +17,12 @@ namespace FootballApp.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
-<<<<<<< HEAD
-        public AuthController(IAuthRepository repo)
-        {
-            _repo = repo;
-=======
 
         private readonly IConfiguration _config;
         public AuthController(IAuthRepository repo, IConfiguration config)
         {
             _repo = repo;
             _config = config;
->>>>>>> ef3a1da
         }
 
         [HttpPost("register")]
@@ -55,8 +43,6 @@ namespace FootballApp.Controllers
 
         }
 
-<<<<<<< HEAD
-=======
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
@@ -91,7 +77,6 @@ namespace FootballApp.Controllers
                 });
         }
 
->>>>>>> ef3a1da
 
     }
 }

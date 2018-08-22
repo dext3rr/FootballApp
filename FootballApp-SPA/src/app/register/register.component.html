@@ -7,11 +7,11 @@
   </div>
 
   <div class="form-group">
-    <input type="password" class="form-control" name = "password" [(ngModel)]="model.password" required placeholder="Hasło">
+    <input type="password" class="form-control" name="password" [(ngModel)]="model.password" required placeholder="Hasło">
   </div>
 
   <div class="form-group text-center">
     <button class="btn btn-success mr-3" type="submit">Zarejestruj</button>
-    <button class="btn btn-default" type="button">Anuluj</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Anuluj</button>
   </div>
 </form>
