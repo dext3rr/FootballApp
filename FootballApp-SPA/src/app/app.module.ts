@@ -17,6 +17,7 @@ import { TeamsComponent } from './teams/teams.component';
 import { appRoutes } from './routes';
 import { FeedComponent } from './feed/feed.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -28,7 +29,9 @@ import { AuthGuard } from './_guards/auth.guard';
       RegisterComponent,
       LeaguesComponent,
       TeamsComponent,
-      FeedComponent
+      FeedComponent,
+      FooterComponent,
+      FooterComponent
    ],
    imports: [
       BrowserModule,
