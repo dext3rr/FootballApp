@@ -9,13 +9,8 @@ namespace FootballApp.Models
         public string Username { get; set; }   
         public byte[] PasswordHash { get; set; }  
         public byte[] PasswordSalt { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Gender { get; set; }
-        public string City { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string Email { get; set; }
         public DateTime AccountCreationDate { get; set; }
-        public ICollection<ProfilePic> ProfiePic { get; set; }
 
         
     }
