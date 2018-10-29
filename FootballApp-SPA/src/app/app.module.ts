@@ -18,6 +18,9 @@ import { appRoutes } from './routes';
 import { FeedComponent } from './feed/feed.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { FooterComponent } from './footer/footer.component';
+import { TeamService } from './_services/team.service';
+import { AreasComponent } from './areas/areas.component';
+import { AreaService } from './_services/area.service';
 
 
 
@@ -31,7 +34,8 @@ import { FooterComponent } from './footer/footer.component';
       TeamsComponent,
       FeedComponent,
       FooterComponent,
-      FooterComponent
+      FooterComponent,
+      AreasComponent
    ],
    imports: [
       BrowserModule,
@@ -44,7 +48,9 @@ import { FooterComponent } from './footer/footer.component';
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
-      AuthGuard
+      AuthGuard,
+      TeamService,
+      AreaService
    ],
    bootstrap: [
       AppComponent
