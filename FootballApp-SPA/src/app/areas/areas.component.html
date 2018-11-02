@@ -1,4 +1,6 @@
-<div class="container">
+<div class="container mt-5">
   <h2 class="text-center text-primary">Okręgi</h2>
-  <p *ngFor="let area of areas">{{area.name}}</p>
+  <mat-card *ngFor="let area of areas">
+    <a [routerLink]="['/areas/', area.id]">{{area.name}}</a>
+  </mat-card>
 </div>

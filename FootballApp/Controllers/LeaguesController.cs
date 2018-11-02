@@ -9,11 +9,11 @@ namespace FootballApp.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TeamsController : ControllerBase
+    public class LeaguesController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public TeamsController(DataContext context)
+        public LeaguesController(DataContext context)
         {
             _context = context;
         }
@@ -21,18 +21,18 @@ namespace FootballApp.Controllers
         [AllowAnonymous]
         [HttpGet]
 
-        public async Task<IActionResult> getTeams()
+        public async Task<IActionResult> getLeagues()
         {
-            var teams = await _context.Teams.ToListAsync();
-            return Ok(teams);
+            var leagues = await _context.Leagues.ToListAsync();
+            return Ok(leagues);
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<IActionResult> getTeam(int id)
+        public async Task<IActionResult> getLeague(int id)
         {
-            var team = await _context.Teams.FirstOrDefaultAsync(x => x.Id == id);
-            return Ok(team);
+            var league = await _context.Leagues.FirstOrDefaultAsync(x => x.Id == id);
+            return Ok(league);
         }
     }
 }

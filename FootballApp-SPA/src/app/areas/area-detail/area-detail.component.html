@@ -1,0 +1,8 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">{{area?.name}}</h2>
+  <div *ngFor="let league of leagues">
+    <div *ngIf="league.areaId == area.id">
+      <mat-card>{{league.name}}</mat-card>
+    </div>
+  </div>
+</div>

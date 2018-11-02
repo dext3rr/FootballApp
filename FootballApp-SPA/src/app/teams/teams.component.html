@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-lg-2 col-md-3 col-sm-6">
       <table mdbTable>
@@ -19,4 +19,11 @@
       <p *ngFor="let team of teams">{{team.name}}</p>
     </div>
   </div>
+</div> -->
+
+<div class="container">
+  <h2 class="text-center text-primary">Drużyny</h2>
+  <mat-card  *ngFor="let team of teams">
+    <mat-card-title>{{team.name}}</mat-card-title>
+  </mat-card>
 </div>

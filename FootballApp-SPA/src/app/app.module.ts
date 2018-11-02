@@ -21,6 +21,8 @@ import { FooterComponent } from './footer/footer.component';
 import { TeamService } from './_services/team.service';
 import { AreasComponent } from './areas/areas.component';
 import { AreaService } from './_services/area.service';
+import {MatCardModule} from '@angular/material/card';
+import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 
 
 
@@ -35,14 +37,16 @@ import { AreaService } from './_services/area.service';
       FeedComponent,
       FooterComponent,
       FooterComponent,
-      AreasComponent
+      AreasComponent,
+      AreaDetailComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      MatCardModule
    ],
    providers: [
       AuthService,

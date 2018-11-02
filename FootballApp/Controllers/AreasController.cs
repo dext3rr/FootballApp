@@ -13,7 +13,7 @@ namespace FootballApp.Controllers
     {
         private readonly DataContext _context;
 
-        public AreasController(DataContext context) 
+        public AreasController(DataContext context)
         {
             _context = context;
         }
@@ -27,7 +27,9 @@ namespace FootballApp.Controllers
             return Ok(areas);
         }
 
-          public async Task<IActionResult> getArea(int id)
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> getArea(int id)
         {
             var area = await _context.Areas.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(area);
