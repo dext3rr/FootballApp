@@ -23,6 +23,8 @@ import { AreasComponent } from './areas/areas.component';
 import { AreaService } from './_services/area.service';
 import {MatCardModule} from '@angular/material/card';
 import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
+import { TableComponent } from './table/table.component';
+import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 
 
 
@@ -38,7 +40,9 @@ import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
       FooterComponent,
       FooterComponent,
       AreasComponent,
-      AreaDetailComponent
+      AreaDetailComponent,
+      TableComponent,
+      TeamDetailComponent
    ],
    imports: [
       BrowserModule,

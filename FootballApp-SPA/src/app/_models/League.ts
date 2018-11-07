@@ -3,3 +3,6 @@ export interface League {
     name: string;
     areaId: number;
 }
+
+
+

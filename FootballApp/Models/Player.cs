@@ -12,5 +12,6 @@ namespace FootballApp.Models
         public string Status { get; set; }
         public int Number { get; set; }
         public int MinutesPlayed { get; set; }
+        public int TeamId { get; set; } 
     }
 }

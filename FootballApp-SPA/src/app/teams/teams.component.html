@@ -21,9 +21,9 @@
   </div>
 </div> -->
 
-<div class="container">
+<div class="container mt-5">
   <h2 class="text-center text-primary">Drużyny</h2>
   <mat-card  *ngFor="let team of teams">
-    <mat-card-title>{{team.name}}</mat-card-title>
+    <a [routerLink]="['/teams/', team.id]">{{team.name}}</a>
   </mat-card>
 </div>

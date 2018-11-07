@@ -26,4 +26,8 @@ constructor(private http: HttpClient) { }
     return this.http.get<League>(this.baseUrl + 'leagues/' + id, httpOptions);
   }
 
+  getAreaLeagues(id): Observable<League[]> {
+    return this.http.get<League[]>(this.baseUrl + 'leagues/arealeagues/' + id, httpOptions);
+
+  }
 }

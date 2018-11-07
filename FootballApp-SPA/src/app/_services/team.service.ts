@@ -3,12 +3,14 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Team } from '../_models/Team';
+import { Player } from '../_models/Player';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   })
 };
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,9 @@ constructor(private http: HttpClient) { }
 
  getTeam(id): Observable<Team> {
    return this.http.get<Team>(this.baseUrl + 'teams/' + id, httpOptions);
+ }
+
+  getPlayers(teamId): Observable<Player[]> {
+   return this.http.get<Player[]>(this.baseUrl + 'teams/' + teamId + '/players', httpOptions);
  }
 }

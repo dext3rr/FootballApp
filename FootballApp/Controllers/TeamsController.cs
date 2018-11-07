@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.Data;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +34,14 @@ namespace FootballApp.Controllers
         {
             var team = await _context.Teams.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(team);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}/players/")]
+         public async Task<IActionResult> getPlayers(int id)
+        {
+            var players = await _context.Players.Where(x => x.TeamId == id).ToListAsync();
+            return Ok(players);
         }
     }
 }

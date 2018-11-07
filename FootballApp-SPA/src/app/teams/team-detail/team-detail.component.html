@@ -1,0 +1,9 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">{{ team?.name }}</h2>
+  <p><strong>Adres klubu: </strong>{{ team?.adress }}</p>
+  <p><strong>Email: </strong>{{ team?.email }}</p>
+  <p><strong>Telefon: </strong>{{ team?.telephone }}</p>
+
+  <h3 class="text-primary">Zawodnicy</h3>
+  <mat-card *ngFor="let player of players">{{player.name}} {{player.surname}}</mat-card>
+</div>
