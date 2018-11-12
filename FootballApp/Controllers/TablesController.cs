@@ -20,12 +20,21 @@ namespace FootballApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{id}")]
+        [HttpGet("seasons/{leagueId}")]
 
-        public async Task<IActionResult> getLeagueTeams(int leagueId)
+        public async Task<IActionResult> getSeasons(int leagueId)
         {
-            var leagueTeams = await _context.Teams.ToListAsync();
-            return Ok(leagueTeams);
+            var seasons= await _context.Seasons.Where(x => x.LeagueId == leagueId).ToListAsync();
+            return Ok(seasons);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("seasonTeams/{seasonId}")]
+
+        public async Task<IActionResult> getSeasonTeams(int seasonId)
+        {
+            var seasonTeams = await _context.SeasonTeams.Where(x => x.SeasonId == seasonId).ToListAsync();
+            return Ok(seasonTeams);
         }
     }
 }

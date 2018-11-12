@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <h2 class="text-center text-primary">Ligi</h2>
   <mat-card  *ngFor="let league of leagues">
-    <a [routerLink]="['/teams/']">{{league.name}}</a>
+      <a [routerLink]="['/leagues/', league.id]">{{league.name}}</a>
   </mat-card>
 </div>

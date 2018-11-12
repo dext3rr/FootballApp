@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181029134340_NewTables2")]
-    partial class NewTables2
+    [Migration("20181112152043_Changed_SeasonTeams")]
+    partial class Changed_SeasonTeams
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,7 @@ namespace FootballApp.API.Migrations
 
                     b.Property<int>("AreaId");
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -140,6 +140,8 @@ namespace FootballApp.API.Migrations
                     b.Property<string>("Status");
 
                     b.Property<string>("Surname");
+
+                    b.Property<int>("TeamId");
 
                     b.HasKey("Id");
 
@@ -206,7 +208,7 @@ namespace FootballApp.API.Migrations
                     b.ToTable("Seasons");
                 });
 
-            modelBuilder.Entity("FootballApp.Models.SeasonTeam", b =>
+            modelBuilder.Entity("FootballApp.Models.SeasonsTeam", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -223,15 +225,17 @@ namespace FootballApp.API.Migrations
 
                     b.Property<int>("Points");
 
-                    b.Property<int>("SeasonId");
+                    b.Property<int>("RedCards");
 
-                    b.Property<string>("TeamName");
+                    b.Property<int>("TeamId");
 
                     b.Property<int>("Wins");
 
+                    b.Property<int>("YellowCards");
+
                     b.HasKey("Id");
 
-                    b.ToTable("SeasonTeams");
+                    b.ToTable("SeasonsTeams");
                 });
 
             modelBuilder.Entity("FootballApp.Models.StartingPlayer", b =>

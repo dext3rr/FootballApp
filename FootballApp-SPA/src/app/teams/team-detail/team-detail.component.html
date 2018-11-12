@@ -5,5 +5,7 @@
   <p><strong>Telefon: </strong>{{ team?.telephone }}</p>
 
   <h3 class="text-primary">Zawodnicy</h3>
-  <mat-card *ngFor="let player of players">{{player.name}} {{player.surname}}</mat-card>
+  <mat-card *ngFor="let player of players">
+    <a [routerLink]="['/players/', player.id]">{{player.name}} {{player.surname}}</a>
+  </mat-card>
 </div>

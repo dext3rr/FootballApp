@@ -21,10 +21,13 @@ import { FooterComponent } from './footer/footer.component';
 import { TeamService } from './_services/team.service';
 import { AreasComponent } from './areas/areas.component';
 import { AreaService } from './_services/area.service';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
+import { PlayerComponent } from './player/player.component';
 
 
 
@@ -42,7 +45,10 @@ import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
       AreasComponent,
       AreaDetailComponent,
       TableComponent,
-      TeamDetailComponent
+      TeamDetailComponent,
+      PlayerComponent,
+      PlayerComponent,
+      PlayerComponent
    ],
    imports: [
       BrowserModule,
@@ -50,7 +56,9 @@ import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
       FormsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
-      MatCardModule
+      MatCardModule,
+      MatSelectModule,
+      MatFormFieldModule
    ],
    providers: [
       AuthService,

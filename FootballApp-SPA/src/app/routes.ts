@@ -8,6 +8,7 @@ import { AreasComponent } from './areas/areas.component';
 import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
+import { PlayerComponent } from './player/player.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -24,6 +25,8 @@ export const appRoutes: Routes = [
             { path: 'areas/:id', component: AreaDetailComponent},
             { path: 'leagues', component: LeaguesComponent},
             { path: 'table', component: TableComponent},
+            { path: 'players/:id', component: PlayerComponent},
+            { path: 'leagues/:id', component: TableComponent},
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'},
