@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.Data;
+using FootballApp.Dtos;
+using FootballApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,10 +33,27 @@ namespace FootballApp.Controllers
         [AllowAnonymous]
         [HttpGet("seasonTeams/{seasonId}")]
 
-        public async Task<IActionResult> getSeasonTeams(int seasonId)
+        // public async Task<IActionResult> getSeasonTeams(int seasonId)
+        // {
+        //     var seasonTeams = await _context.SeasonTeams.Where(x => x.SeasonId == seasonId).ToListAsync();
+        //     return Ok(seasonTeams);
+        // }
+
+         public async Task<IActionResult> getSeasonTeams(int seasonId)
         {
-            var seasonTeams = await _context.SeasonTeams.Where(x => x.SeasonId == seasonId).ToListAsync();
+            var seasonTeams = await _context.SeasonTeams.Include(t => t.Team)
+            .Where(x => x.SeasonId == seasonId).ToListAsync();
             return Ok(seasonTeams);
         }
+
+
+        //  [AllowAnonymous]
+        // [HttpGet("teams/{leagueId}")]
+
+        // public async Task<IActionResult> getLeagueTeams(int leagueId)
+        // {
+        //     var teams = await _context.Teams.Where(x => x.LeagueId == leagueId).ToListAsync();
+        //     return Ok(teams);
+        // }
     }
 }

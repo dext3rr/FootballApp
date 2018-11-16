@@ -1,7 +1,10 @@
+import { Team } from './team';
+
 export interface SeasonTeam {
     id: number;
     seasonId: number;
     teamId: number;
+    team: Team;
     matches: number;
     wins: number;
     draws: number;

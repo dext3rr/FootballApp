@@ -6,7 +6,9 @@ import { LeagueService } from '../_services/league.service';
 import { ActivatedRoute } from '@angular/router';
 import { League } from '../_models/league';
 import { Season } from '../_models/Season';
-import {MatSelectModule} from '@angular/material/select';
+import { SeasonTeam } from '../_models/SeasonTeam';
+import { MatTableDataSource } from '@angular/material/table';
+import { TeamService } from '../_services/team.service';
 
 @Component({
   selector: 'app-table',
@@ -18,15 +20,25 @@ export class TableComponent implements OnInit {
   league: League;
   leagueId: number;
   teams: Team[];
+  team: Team;
   seasonId: number;
   seasons: Season[];
+  seasonTeams: SeasonTeam[];
+  seasonValue: string;
+  season: Season;
+  dataSource: any;
+  seasonTeamId: number;
 
-  constructor(private tableService: TableService, private leagueService: LeagueService,
+  displayedColumns: string[] = ['position', 'teamId', 'matches', 'wins', 'draws', 'losses', 'goalsScored', 'goalsConceded', 'points'];
+
+  constructor(private tableService: TableService, private teamService: TeamService, private leagueService: LeagueService,
     private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadLeague();
     this.loadSeasons();
+    this.loadSeasonTeams();
+
   }
 
 
@@ -40,7 +52,6 @@ export class TableComponent implements OnInit {
   }
 
   loadSeasons() {
-    this.leagueId = this.route.snapshot.params['id'];
     this.tableService.getSeasons(+this.leagueId).subscribe((seasons: Season[]) => {
       this.seasons = seasons;
     }, error => {
@@ -50,20 +61,20 @@ export class TableComponent implements OnInit {
 
 
   loadSeasonTeams() {
-    this.tableService.getSeasonTeams(1).subscribe((teams: Team[]) => {
-      this.teams = teams;
+    this.tableService.getSeasonTeams(1).subscribe((seasonTeams: SeasonTeam[]) => {
+      this.seasonTeams = seasonTeams;
+      this.dataSource = new MatTableDataSource(seasonTeams);
     }, error => {
       this.alertify.error(error);
     });
   }
 
-
-  // loadLeagueTeams() {
-  //   this.tableService.getLeagueTeams(this.leagueId).subscribe((teams: Team[]) => {
-  //     this.teams = teams;
-  //   }, error => {
-  //     this.alertify.error(error);
-  //   });
-  // }
-
+   loadSeasonTeam(seasonTeamId) {
+    this.teamService.getTeam(+seasonTeamId).subscribe((team: Team) => {
+      this.team = team;
+      return this.team.name;
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 }

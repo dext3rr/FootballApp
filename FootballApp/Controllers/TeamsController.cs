@@ -12,19 +12,20 @@ namespace FootballApp.Controllers
     [ApiController]
     public class TeamsController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly IFootballRepository _repo;
 
-        public TeamsController(DataContext context)
+        public TeamsController(IFootballRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         [AllowAnonymous]
         [HttpGet]
 
-        public async Task<IActionResult> getTeams()
+        public async Task<IActionResult> GetTeams()
         {
-            var teams = await _context.Teams.ToListAsync();
+            var teams = await _repo.GetTeams();
+
             return Ok(teams);
         }
 
@@ -32,16 +33,17 @@ namespace FootballApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> getTeam(int id)
         {
-            var team = await _context.Teams.FirstOrDefaultAsync(x => x.Id == id);
+            var team = await _repo.GetTeam(id);
+
             return Ok(team);
         }
 
-        [AllowAnonymous]
-        [HttpGet("{id}/players/")]
-         public async Task<IActionResult> getPlayers(int id)
-        {
-            var players = await _context.Players.Where(x => x.TeamId == id).ToListAsync();
-            return Ok(players);
-        }
+        // [AllowAnonymous]
+        // [HttpGet("{id}/players/")]
+        //  public async Task<IActionResult> getPlayers(int id)
+        // {
+        //     var players = await _repo.Players.Where(x => x.TeamId == id).ToListAsync();
+        //     return Ok(players);
+        // }
     }
 }

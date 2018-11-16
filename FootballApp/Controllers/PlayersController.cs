@@ -12,36 +12,40 @@ namespace FootballApp.Controllers
     [ApiController]
     public class PlayersController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly IFootballRepository _repo;
 
-        public PlayersController(DataContext context)
+        public PlayersController(IFootballRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
         
         [AllowAnonymous]
         [HttpGet]
 
-           public async Task<IActionResult> getPlayers()
+           public async Task<IActionResult> GetPlayers()
         {
-            var players = await _context.Players.ToListAsync();
+            var players = await _repo.GetPlayers();
+
             return Ok(players);
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<IActionResult> getPlayer(int id)
+        public async Task<IActionResult> GetPlayer(int id)
         {
-            var player = await _context.Players.FirstOrDefaultAsync(x => x.Id == id);
+            var player = await _repo.GetPlayer(id);
+
             return Ok(player);
         }
 
-        [AllowAnonymous]
-        [HttpGet("team/{playerId}")]
-        public async Task<IActionResult> getTeamPlayers(int playerId)
-        {
-            var players = await _context.Players.Where(x => x.TeamId == playerId).ToListAsync();
-            return Ok(players);
-        }
+        // [AllowAnonymous]
+        // [HttpGet("team/{playerId}")]
+        // public async Task<IActionResult> getTeamPlayers(int playerId)
+        // {
+        //     var players = await _context.Players.Where(x => x.TeamId == playerId).ToListAsync();
+        //     return Ok(players);
+        // }
+
+
     }
 }

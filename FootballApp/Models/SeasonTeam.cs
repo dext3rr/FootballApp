@@ -4,7 +4,9 @@ namespace FootballApp.Models
     {
         public int Id { get; set; }
         public int SeasonId { get; set; }
+        public Season Season { get; set; }
         public int TeamId { get; set; }
+        public Team Team { get; set; }
         public int Matches { get; set; }
         public int Wins { get; set; }
         public int Draws { get; set; }

@@ -24,10 +24,13 @@ import { AreaService } from './_services/area.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 import { PlayerComponent } from './player/player.component';
+
 
 
 
@@ -58,7 +61,9 @@ import { PlayerComponent } from './player/player.component';
       RouterModule.forRoot(appRoutes),
       MatCardModule,
       MatSelectModule,
-      MatFormFieldModule
+      MatFormFieldModule,
+      BrowserAnimationsModule,
+      MatTableModule
    ],
    providers: [
       AuthService,
