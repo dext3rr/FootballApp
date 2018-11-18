@@ -9,4 +9,5 @@ export interface Team {
     coachId: number;
     goalsId: number;
     cardsId: number;
+    photoUrl: string;
 }

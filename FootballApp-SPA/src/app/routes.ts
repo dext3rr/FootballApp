@@ -9,6 +9,12 @@ import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 import { PlayerComponent } from './player/player.component';
+import { PlayerDetailComponent } from './player/player-detail/player-detail.component';
+import { PlayerEditComponent } from './player/player-edit/player-edit.component';
+import { PlayerEditResolver } from './_resolvers/player-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
+import { PlayersResolver } from './_resolvers/players.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -25,7 +31,12 @@ export const appRoutes: Routes = [
             { path: 'areas/:id', component: AreaDetailComponent},
             { path: 'leagues', component: LeaguesComponent},
             { path: 'table', component: TableComponent},
-            { path: 'players/:id', component: PlayerComponent},
+            { path: 'players', component: PlayerComponent,
+            resolve: {players: PlayersResolver}},
+            { path: 'player/:id', component: PlayerDetailComponent,
+            resolve: {player: PlayerDetailResolver}},
+            { path: 'player/:id/edit', component: PlayerEditComponent,
+            resolve: {player: PlayerEditResolver}, canDeactivate: [PreventUnsavedChanges]},
             { path: 'leagues/:id', component: TableComponent},
         ]
     },

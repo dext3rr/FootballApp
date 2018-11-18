@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,13 @@ namespace FootballApp.Data
         public async Task<IEnumerable<Player>> GetPlayers()
         {
             var players = await _context.Players.ToListAsync();
+
+            return players;
+        }
+
+        public async Task<IEnumerable<Player>> GetTeamPlayers(int teamId)
+        {
+            var players = await _context.Players.Where(x => x.TeamId == teamId).ToListAsync();
 
             return players;
         }

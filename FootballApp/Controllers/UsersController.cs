@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FootballApp.Data;
+using FootballApp.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +17,12 @@ namespace FootballApp.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IFootballRepository _repo;
+        private readonly IMapper _mapper;
 
-        public UsersController(IFootballRepository repo)
+        public UsersController(IFootballRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +31,9 @@ namespace FootballApp.Controllers
         {
             var users = await _repo.GetUsers();
 
-            return Ok(users);
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+
+            return Ok(usersToReturn);
         }
 
         [HttpGet("{id}")]
@@ -35,7 +42,9 @@ namespace FootballApp.Controllers
         {
             var user = await _repo.GetUser(id);
 
-            return Ok(user);
+            var userToReturn = _mapper.Map<UserForListDto>(user);
+
+            return Ok(userToReturn);
         }
     }
 }

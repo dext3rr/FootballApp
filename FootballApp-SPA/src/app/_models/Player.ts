@@ -8,4 +8,5 @@ export interface Player {
     number: number;
     minutesPlayed: number;
     teamId: number;
+    photoUrl: string;
 }

@@ -1,18 +1,15 @@
 using System;
 
-namespace FootballApp.Models
+namespace FootballApp.Dtos
 {
-    public class Player
+    public class PlayerForUpdateDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Country { get; set; }
         public string Status { get; set; }
         public int Number { get; set; }
-        public int MinutesPlayed { get; set; }
         public int TeamId { get; set; }
-        public string PhotoUrl { get; set; }
     }
 }

@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">Edycja zawodnika</h2>
+    <div *ngIf="editForm.dirty" class="alert alert-info" style="width: 50%">
+    <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
+    </div>
+  <form #editForm="ngForm" (ngSubmit)="updatePlayer()">
+    <h4>Imię</h4>
+    <textarea style="width: 50%" name="name" rows="1" class="form-control" [(ngModel)]="player.name"></textarea>
+    <h4>Nazwisko</h4>
+    <textarea style="width: 50%" name="surname" rows="1" class="form-control" [(ngModel)]="player.surname"></textarea>
+    <h4>Kraj</h4>
+    <textarea style="width: 50%" name="country" rows="1" class="form-control" [(ngModel)]="player.country"></textarea>
+    <h4>Data urodzenia</h4>
+    <textarea style="width: 50%" name="dateOfBirth" rows="1" class="form-control" [(ngModel)]="player.dateOfBirth"></textarea>
+    <p>Drużyna: tu będzie dropdown drużyny</p>
+    <h4>Pozycja</h4>
+    <select style="width: 50%" class="form-control" [(ngModel)]="player.status" name="position">
+        <option value="Bramkarz"> Bramkarz </option>
+        <option value="Obrońca"> Obrońca </option>
+        <option value="Pomocnik"> Pomocnik </option>
+        <option value="Napastnik"> Napastnik </option>
+      </select>
+    <h4>Numer</h4>
+    <textarea style="width: 50%" name="number" rows="1" class="form-control" [(ngModel)]="player.number"></textarea>
+    <button [disabled]="!editForm.dirty" class="btn btn-success btn-lg mr-3" >Zapisz zmiany</button>
+  </form>
+
+
+</div>

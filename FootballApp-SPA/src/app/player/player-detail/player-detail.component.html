@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="{{ player?.photoUrl }}" alt="image">
+        <div class="card-body">
+          <div>
+            <strong>Drużyna: </strong>
+            <p>{{ team?.name }}</p>
+            <strong>Wiek: </strong>
+            <p>{{ player?.dateOfBirth }}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group d-flex">
+            <button class="btn btn-primary w-100">Obserwuj</button>
+          </div>
+            <div class="btn-group d-flex">
+            <button class="btn btn-primary w-100 mt-2" [routerLink]="['/player/', player.id, 'edit']" >Edytuj zawodnika</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="player-tabset">
+          <tab heading="Informacje">
+            <h4>Data urodzenia</h4>
+            <p>{{player?.dateOfBirth}}</p>
+            <h4>Pozycja</h4>
+            <p>{{player?.status}}</p>
+            <h4>Numer na koszulce</h4>
+            <p>{{player?.number}}</p>
+            <h4>Kraj</h4>
+            <p>{{player?.country}}</p>
+          </tab>
+          <tab heading="Statystyki">
+            <h4>Ilość rozegranych minut</h4>
+            <p>{{player?.minutesPlayed}}</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,13 +6,6 @@ import { Team } from '../_models/team';
 import { Season } from '../_models/Season';
 import { SeasonTeam } from '../_models/SeasonTeam';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('token')
-  })
-};
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,15 +15,15 @@ export class TableService {
 constructor(private http: HttpClient) { }
 
 getSeasons(leagueId): Observable<Season[]> {
-  return this.http.get<Season[]>(this.baseUrl + 'tables/seasons/' + leagueId, httpOptions);
+  return this.http.get<Season[]>(this.baseUrl + 'tables/seasons/' + leagueId);
 }
 
 getSeasonTeams(seasonId): Observable<SeasonTeam[]> {
-  return this.http.get<SeasonTeam[]>(this.baseUrl + 'tables/seasonTeams/' + seasonId, httpOptions);
+  return this.http.get<SeasonTeam[]>(this.baseUrl + 'tables/seasonTeams/' + seasonId);
 }
 
 getLeagueTeams(leagueId): Observable<Team[]> {
-  return this.http.get<Team[]>(this.baseUrl + 'tables/teams/' + leagueId, httpOptions);
+  return this.http.get<Team[]>(this.baseUrl + 'tables/teams/' + leagueId);
 }
 
 }

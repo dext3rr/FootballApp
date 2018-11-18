@@ -5,13 +5,6 @@ import { Observable } from 'rxjs';
 import { Team } from '../_models/Team';
 import { Player } from '../_models/Player';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('token')
-  })
-};
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,14 +14,14 @@ export class TeamService {
 constructor(private http: HttpClient) { }
 
  getTeams(): Observable<Team[]> {
-   return this.http.get<Team[]>(this.baseUrl + 'teams', httpOptions);
+   return this.http.get<Team[]>(this.baseUrl + 'teams');
  }
 
  getTeam(id): Observable<Team> {
-   return this.http.get<Team>(this.baseUrl + 'teams/' + id, httpOptions);
+   return this.http.get<Team>(this.baseUrl + 'teams/' + id);
  }
 
   getPlayers(teamId): Observable<Player[]> {
-   return this.http.get<Player[]>(this.baseUrl + 'teams/' + teamId + '/players', httpOptions);
+   return this.http.get<Player[]>(this.baseUrl + 'teams/' + teamId + '/players');
  }
 }

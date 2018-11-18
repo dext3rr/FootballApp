@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -30,9 +31,17 @@ import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 import { PlayerComponent } from './player/player.component';
+import { PlayerEditComponent } from './player/player-edit/player-edit.component';
+import { PlayerDetailComponent } from './player/player-detail/player-detail.component';
+import { PlayerEditResolver } from './_resolvers/player-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PlayerCardComponent } from './player/player-card/player-card.component';
+import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
+import { PlayersResolver } from './_resolvers/players.resolver';
 
-
-
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -50,8 +59,9 @@ import { PlayerComponent } from './player/player.component';
       TableComponent,
       TeamDetailComponent,
       PlayerComponent,
-      PlayerComponent,
-      PlayerComponent
+      PlayerDetailComponent,
+      PlayerEditComponent,
+      PlayerCardComponent
    ],
    imports: [
       BrowserModule,
@@ -63,7 +73,15 @@ import { PlayerComponent } from './player/player.component';
       MatSelectModule,
       MatFormFieldModule,
       BrowserAnimationsModule,
-      MatTableModule
+      MatTableModule,
+      TabsModule.forRoot(),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
    ],
    providers: [
       AuthService,
@@ -71,7 +89,11 @@ import { PlayerComponent } from './player/player.component';
       AlertifyService,
       AuthGuard,
       TeamService,
-      AreaService
+      AreaService,
+      PlayersResolver,
+      PlayerDetailResolver,
+      PlayerEditResolver,
+      PreventUnsavedChanges,
    ],
    bootstrap: [
       AppComponent

@@ -4,13 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Area } from '../_models/Area';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('token'),
-  })
-};
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,10 +13,10 @@ export class AreaService {
 constructor(private http: HttpClient) { }
 
 getAreas(): Observable<Area[]> {
-  return this.http.get<Area[]>(this.baseUrl + 'areas', httpOptions);
+  return this.http.get<Area[]>(this.baseUrl + 'areas');
 }
 
 getArea(id): Observable<Area> {
-  return this.http.get<Area>(this.baseUrl + 'areas/' + id, httpOptions);
+  return this.http.get<Area>(this.baseUrl + 'areas/' + id);
 }
 }

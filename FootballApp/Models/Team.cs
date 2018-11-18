@@ -12,5 +12,6 @@ namespace FootballApp.Models
         public int CoachId { get; set; }
         public int GoalsId { get; set; }
         public int CardsId { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

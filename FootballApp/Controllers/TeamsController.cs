@@ -38,12 +38,13 @@ namespace FootballApp.Controllers
             return Ok(team);
         }
 
-        // [AllowAnonymous]
-        // [HttpGet("{id}/players/")]
-        //  public async Task<IActionResult> getPlayers(int id)
-        // {
-        //     var players = await _repo.Players.Where(x => x.TeamId == id).ToListAsync();
-        //     return Ok(players);
-        // }
+        [AllowAnonymous]
+        [HttpGet("{teamId}/players/")]
+        public async Task<IActionResult> GetTeamPlayers(int teamId)
+        {
+            var players = await _repo.GetTeamPlayers(teamId);
+
+            return Ok(players);
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace FootballApp.Data
          Task<Team> GetTeam(int id);
          Task<IEnumerable<Player>> GetPlayers();
          Task<Player> GetPlayer(int id);
+         Task<IEnumerable<Player>> GetTeamPlayers(int teamId);
 
 
     }
