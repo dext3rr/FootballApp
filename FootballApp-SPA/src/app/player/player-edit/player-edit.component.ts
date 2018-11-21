@@ -4,6 +4,9 @@ import { Player } from 'src/app/_models/Player';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { PlayerService } from 'src/app/_services/player.service';
+import { Team } from 'src/app/_models/team';
+import { TeamService } from 'src/app/_services/team.service';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-player-edit',
@@ -12,6 +15,8 @@ import { PlayerService } from 'src/app/_services/player.service';
 })
 export class PlayerEditComponent implements OnInit {
   player: Player;
+  teams: Team[];
+  bsConfig: Partial<BsDatepickerConfig>;
   @ViewChild('editForm') editForm: NgForm;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -21,12 +26,16 @@ export class PlayerEditComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
-    private playerService: PlayerService) { }
+    private playerService: PlayerService, private teamService: TeamService) { }
 
   ngOnInit() {
+    this.bsConfig = {
+      containerClass: 'theme-red'
+    },
     this.route.data.subscribe(data => {
       this.player = data['player'];
     });
+    this.getTeams();
   }
 
   updatePlayer() {
@@ -38,4 +47,11 @@ export class PlayerEditComponent implements OnInit {
     });
   }
 
+  getTeams() {
+    this.teamService.getTeams().subscribe((teams: Team[]) => {
+      this.teams = teams;
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 }

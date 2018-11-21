@@ -1,9 +1,11 @@
 <div class="container mt-5">
   <h2 class="text-center text-primary">{{ league?.name }}</h2>
   <div class="container mt-2">
-    <select class="form-control" id="power" required>
-      <option *ngFor="let season of seasons" [value]="season.id">{{season.year}}</option>
-    </select>
+    <h3 clas="text-primary">Sezon 
+    <mat-select class="form-control" id="season" [(ngModel)]="seasonId" required>
+      <mat-option *ngFor="let season of seasons" [value]="season.id">{{season.year}}</mat-option>
+    </mat-select>
+  </h3>
     <!-- <div class="row">
       <div class="col-lg-2 col-md-3 col-sm-6">
         <table mdbTable>
@@ -80,6 +82,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <app-fixtures [seasonId]="seasonId"></app-fixtures>
       
 
   </div>

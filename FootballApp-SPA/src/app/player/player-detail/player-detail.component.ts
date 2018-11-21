@@ -35,5 +35,16 @@ export class PlayerDetailComponent implements OnInit {
       this.alertify.error(error);
     });
   }
+
+  deletePlayer() {
+    this.alertify.confirm('Czy na pewno chcesz usunąć zawodnika?', () => {
+      this.playerService.deletePlayer(this.player.id).subscribe(() => {
+        this.alertify.success('Zawodnik został usunięty.');
+        this.router.navigate(['/players']);
+      }, error => {
+        this.alertify.error('Nie udało się usunąć zawodnika.');
+    });
+  });
+  }
 }
 

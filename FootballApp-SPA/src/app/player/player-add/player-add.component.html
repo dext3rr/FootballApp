@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Nowy zawodnik</h2>
+  
+    <form #newPlayerForm="ngForm" id="newPlayerForm" style="width: 50%; margin: 0 auto;" (ngSubmit)="addPlayer()">
+      <div class="form-group">
+        <div *ngIf="newPlayerForm.dirty" class="alert alert-info">
+          <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
+        </div>
+        <label for="name">Imię</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="model.name" placeholder="Wpisz imię zawodnika"
+          required>
+        <label for="surname">Nazwisko</label>
+        <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="model.surname" placeholder="Wpisz nazwisko zawodnika"
+          required>
+        <label for="country">Kraj</label>
+        <input type="text" class="form-control" id="country" name="country" [(ngModel)]="model.country" placeholder="Wpisz kraj pochodzenia zawodnika"
+          required>
+        <label for="dateOfBirth">Data urodzenia</label>
+        <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth" name="dateOfBirth"
+          [(ngModel)]="model.dateOfBirth" placeholder="Wpisz datę urodzenia zawodnika" required>
+        <label for="team">Drużyna</label>
+        <mat-select class="form-control" id="team" name="team" [(ngModel)]="model.teamId" placeholder="Wybierz drużynę">
+          <mat-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</mat-option>
+        </mat-select>
+        <label for="position">Pozycja</label>
+        <mat-select class="form-control" [(ngModel)]="model.status" id="position" name="position" placeholder="Wybierz pozycję">
+          <mat-option value="Bramkarz"> Bramkarz </mat-option>
+          <mat-option value="Obrońca"> Obrońca </mat-option>
+          <mat-option value="Pomocnik"> Pomocnik </mat-option>
+          <mat-option value="Napastnik"> Napastnik </mat-option>
+        </mat-select>
+        <label for="number">Numer</label>
+        <input type="number" class="form-control" id="nummber" name="number" [(ngModel)]="model.number" placeholder="Wpisz numer zawodnika"
+          required>
+      </div>
+      <button type="submit" [disabled]="!newPlayerForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+      <small *ngIf="!newPlayerForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+    </form>
+  </div>

@@ -1,0 +1,10 @@
+<div class="card mb-4">
+    <div class="card-img-wrapper">
+      <img class="card-img-top" src="{{ team.photoUrl }}" alt="{{ team.name }}" [routerLink]="['/teams/', team.id]">
+    </div>
+    <div class="card-body p-2">
+      <h6 class="card-title text-center mb-1"><i class="fa"></i>
+        {{ team.name }}
+      </h6>
+    </div>
+  </div>

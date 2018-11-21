@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Area } from 'src/app/_models/area';
 import { AreaService } from 'src/app/_services/area.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class AreaDetailComponent implements OnInit {
 
 
   constructor(private areaService: AreaService, private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadArea();
@@ -31,6 +31,14 @@ export class AreaDetailComponent implements OnInit {
     });
   }
 
-
-
+  deleteArea() {
+    this.alertify.confirm('Czy na pewno chcesz usunąć okręg o nazwie \"' + this.area.name + '\" ?', () => {
+      this.areaService.deleteArea(this.areaId).subscribe(() => {
+        this.alertify.success('Okręg został usunięty.');
+        this.router.navigate(['/areas']);
+      }, error => {
+        this.alertify.error('Nie udało się usunąć okręgu.');
+    });
+  });
+  }
 }

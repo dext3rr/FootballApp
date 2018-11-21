@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">Kolejki</h2>
+  <h3 class="text-primary" *ngFor="let fixture of fixtures">Kolejka {{fixture.number}}
+    <button class="btn btn-info btn-sm" [routerLink]="['/fixtures/', fixture.id]">Szczegóły</button>
+  </h3>
+  <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj kolejkę</button>
+  
+  <div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
+      <div>
+          <form #addFixtureForm="ngForm" id="addFixtureForm" (ngSubmit)="addFixture()">
+            <div class="form-group">
+              <label for="fixtureNumber">Numer kolejki</label>
+              <input type="number" class="form-control" id="fixtureNumber" name="areaName" [(ngModel)]="model.number" placeholder="Wpisz numer kolejki" required>
+            </div>
+            <button type="submit" [disabled]="!addFixtureForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+            <small *ngIf="!addFixtureForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+          </form>
+      </div>
+</div>

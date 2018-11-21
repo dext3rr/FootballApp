@@ -20,6 +20,14 @@ getPlayers(): Observable<Player[]> {
   return this.http.get<Player[]>(this.baseUrl + 'players');
 }
 
+addPlayer(model: any) {
+  return this.http.post<Player>(this.baseUrl + 'players/addPlayer', model);
+}
+
+deletePlayer(id: number) {
+  return this.http.delete<Player>(this.baseUrl + 'players/' + id + '/deletePlayer');
+}
+
 updatePlayer(id: number, player: Player) {
   return this.http.put(this.baseUrl + 'players/' + id, player);
 }

@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.Data;
+using FootballApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +35,34 @@ namespace FootballApp.Controllers
         {
             var area = await _context.Areas.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(area);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("addArea")]
+        public async Task<IActionResult> AddArea(Area area)
+        {
+            await _context.Areas.AddAsync(area);
+            await _context.SaveChangesAsync();
+
+            return Ok(await _context.Areas.ToListAsync());
+        }
+
+        [HttpDelete("{id}/deleteArea")]
+        public async Task<IActionResult> DeleteArea(int id)
+        {
+            Area area = _context.Areas.Where(x => x.Id == id).Single<Area>();
+            _context.Areas.Remove(area); 
+
+            // var leagues = await _context.Leagues.Where(x => x.AreaId == id).ToListAsync();
+
+            // foreach(var league in leagues){
+            //     league.AreaId = 0;
+            // }
+
+
+            await _context.SaveChangesAsync();
+
+            return Ok(await _context.Areas.ToListAsync());
         }
     }
 }

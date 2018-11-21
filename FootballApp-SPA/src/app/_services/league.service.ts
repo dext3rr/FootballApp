@@ -22,6 +22,9 @@ constructor(private http: HttpClient) { }
 
   getAreaLeagues(id): Observable<League[]> {
     return this.http.get<League[]>(this.baseUrl + 'leagues/arealeagues/' + id);
+  }
 
+  addLeague(model: any) {
+    return this.http.post<League>(this.baseUrl + 'leagues/addLeague', model);
   }
 }

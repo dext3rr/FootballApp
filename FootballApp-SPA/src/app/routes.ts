@@ -15,6 +15,10 @@ import { PlayerEditResolver } from './_resolvers/player-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
 import { PlayersResolver } from './_resolvers/players.resolver';
+import { TeamsResolver } from './_resolvers/teams.resolver';
+import { PlayerAddComponent } from './player/player-add/player-add.component';
+import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail.component';
+import { MatchesComponent } from './matches/matches.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -24,7 +28,8 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'leagues', component: LeaguesComponent},
-            { path: 'teams', component: TeamsComponent},
+            { path: 'teams', component: TeamsComponent,
+            resolve: {teams: TeamsResolver}},
             { path: 'teams/:id', component: TeamDetailComponent},
             { path: 'feed', component: FeedComponent},
             { path: 'areas', component: AreasComponent},
@@ -35,9 +40,12 @@ export const appRoutes: Routes = [
             resolve: {players: PlayersResolver}},
             { path: 'player/:id', component: PlayerDetailComponent,
             resolve: {player: PlayerDetailResolver}},
+            { path: 'players/addPlayer', component: PlayerAddComponent},
             { path: 'player/:id/edit', component: PlayerEditComponent,
             resolve: {player: PlayerEditResolver}, canDeactivate: [PreventUnsavedChanges]},
             { path: 'leagues/:id', component: TableComponent},
+            { path: 'fixtures/:id', component: FixtureDetailComponent },
+            { path: 'matches/:id', component: MatchesComponent}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'},

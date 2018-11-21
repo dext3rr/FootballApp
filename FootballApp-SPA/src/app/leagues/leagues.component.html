@@ -3,4 +3,23 @@
   <mat-card  *ngFor="let league of leagues">
       <a [routerLink]="['/leagues/', league.id]">{{league.name}}</a>
   </mat-card>
+
+  <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj ligę</button>
+  
+  <div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
+      <div>
+          <form #addLeagueForm="ngForm" id="addLeagueForm" (ngSubmit)="addLeague()">
+            <div class="form-group">
+              <label for="leagueName">Nazwa ligi</label>
+              <input type="text" class="form-control" id="leagueName" name="leagueName" [(ngModel)]="model.name" placeholder="Wpisz nazwę ligi" required>
+              <label for="area">Okręg</label>
+              <select class="form-control" id="area" name="area" ng-init="Lala" [(ngModel)]="model.areaId" required>
+                <option selected>Wybierz okręg</option>
+                <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
+              </select>
+            </div>
+            <button type="submit" [disabled]="!addLeagueForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+            <small *ngIf="!addLeagueForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+          </form>
+      </div>
 </div>

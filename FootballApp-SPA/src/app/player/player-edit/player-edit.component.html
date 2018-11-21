@@ -1,29 +1,39 @@
 <div class="container mt-5">
   <h2 class="text-center text-primary">Edycja zawodnika</h2>
-    <div *ngIf="editForm.dirty" class="alert alert-info" style="width: 50%">
-    <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
-    </div>
-  <form #editForm="ngForm" (ngSubmit)="updatePlayer()">
-    <h4>Imię</h4>
-    <textarea style="width: 50%" name="name" rows="1" class="form-control" [(ngModel)]="player.name"></textarea>
-    <h4>Nazwisko</h4>
-    <textarea style="width: 50%" name="surname" rows="1" class="form-control" [(ngModel)]="player.surname"></textarea>
-    <h4>Kraj</h4>
-    <textarea style="width: 50%" name="country" rows="1" class="form-control" [(ngModel)]="player.country"></textarea>
-    <h4>Data urodzenia</h4>
-    <textarea style="width: 50%" name="dateOfBirth" rows="1" class="form-control" [(ngModel)]="player.dateOfBirth"></textarea>
-    <p>Drużyna: tu będzie dropdown drużyny</p>
-    <h4>Pozycja</h4>
-    <select style="width: 50%" class="form-control" [(ngModel)]="player.status" name="position">
+
+  <form #editForm="ngForm" id="editForm" style="width: 50%; margin: 0 auto;" (ngSubmit)="updatePlayer()">
+    <div class="form-group">
+      <div *ngIf="editForm.dirty" class="alert alert-info">
+        <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
+      </div>
+      <label for="name">Imię</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="player.name" placeholder="Wpisz imię zawodnika"
+        required>
+      <label for="surname">Nazwisko</label>
+      <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="player.surname" placeholder="Wpisz nazwisko zawodnika"
+        required>
+      <label for="country">Kraj</label>
+      <input type="text" class="form-control" id="country" name="country" [(ngModel)]="player.country" placeholder="Wpisz kraj pochodzenia zawodnika"
+        required>
+      <label for="dateOfBirth">Data urodzenia</label>
+      <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth" name="dateOfBirth"
+        [(ngModel)]="player.dateOfBirth" placeholder="Wpisz datę urodzenia zawodnika" required>
+      <label for="team">Drużyna</label>
+      <select class="form-control" id="team" name="team" [(ngModel)]="player.teamId">
+        <option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</option>
+      </select>
+      <label for="position">Pozycja</label>
+      <select class="form-control" [(ngModel)]="player.status" id="position" name="position">
         <option value="Bramkarz"> Bramkarz </option>
         <option value="Obrońca"> Obrońca </option>
         <option value="Pomocnik"> Pomocnik </option>
         <option value="Napastnik"> Napastnik </option>
       </select>
-    <h4>Numer</h4>
-    <textarea style="width: 50%" name="number" rows="1" class="form-control" [(ngModel)]="player.number"></textarea>
-    <button [disabled]="!editForm.dirty" class="btn btn-success btn-lg mr-3" >Zapisz zmiany</button>
+      <label for="number">Numer</label>
+      <input type="number" class="form-control" id="nummber" name="number" [(ngModel)]="player.number" placeholder="Wpisz numer zawodnika"
+        required>
+    </div>
+    <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+    <small *ngIf="!editForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
   </form>
-
-
 </div>

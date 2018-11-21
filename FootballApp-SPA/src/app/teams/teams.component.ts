@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from '../_models/team';
 import { TeamService } from '../_services/team.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-teams',
@@ -11,17 +12,12 @@ import { AlertifyService } from '../_services/alertify.service';
 export class TeamsComponent implements OnInit {
   teams: Team[];
 
-  constructor(private teamService: TeamService, private alertify: AlertifyService) { }
+  constructor(private teamService: TeamService, private alertify: AlertifyService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadTeams();
-  }
-
-  loadTeams() {
-    this.teamService.getTeams().subscribe((teams: Team[]) => {
-      this.teams = teams;
-    }, error => {
-      this.alertify.error(error);
+    this.route.data.subscribe(data => {
+      this.teams = data['teams'];
     });
   }
 }

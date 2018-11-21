@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.Data;
+using FootballApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,16 @@ namespace FootballApp.Controllers
         {
             var areaLeagues = await _context.Leagues.Where(x => x.AreaId == id).ToListAsync();
             return Ok(areaLeagues);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("addLeague")]
+        public async Task<IActionResult> AddLeague(League league)
+        {
+            await _context.Leagues.AddAsync(league);
+            await _context.SaveChangesAsync();
+
+            return Ok(await _context.Leagues.ToListAsync());
         }
     }
 }

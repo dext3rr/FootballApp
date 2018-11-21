@@ -1,11 +1,42 @@
-<div class="container mt-5">
-  <h2 class="text-center text-primary">{{ team?.name }}</h2>
-  <p><strong>Adres klubu: </strong>{{ team?.adress }}</p>
-  <p><strong>Email: </strong>{{ team?.email }}</p>
-  <p><strong>Telefon: </strong>{{ team?.telephone }}</p>
-
-  <h3 class="text-primary">Zawodnicy</h3>
-  <mat-card *ngFor="let player of players">
-    <a [routerLink]="['/player/', player.id]">{{player.name}} {{player.surname}}</a>
-  </mat-card>
-</div>
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+          <img class="card-img-top img-thumbnail" src="{{ team?.photoUrl }}" alt="image">
+          <div class="card-body">
+            <div>
+              <h4 style="text-align: center;">{{team.name}}</h4>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="btn-group d-flex">
+              <button class="btn btn-primary w-100">Obserwuj</button>
+            </div>
+              <div class="btn-group d-flex">
+              <button class="btn btn-primary w-100 mt-2" [routerLink]="['/teams/', team.id, 'edit']" >Edytuj drużynę</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="tab-panel">
+          <tabset class="team-tabset">
+            <tab heading="Informacje">
+              <h4>Adres</h4>
+              <p>{{team?.adress}}</p>
+              <h4>Email</h4>
+              <p>{{team?.email}}</p>
+              <h4>Telefon</h4>
+              <p>{{team?.telephone}}</p>
+            </tab>
+            <tab heading="Zawodnicy">
+                <h3 class="text-primary">Zawodnicy</h3>
+                <mat-card *ngFor="let player of players">
+                  <a [routerLink]="['/player/', player.id]">{{player.name}} {{player.surname}}</a>
+                </mat-card>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>

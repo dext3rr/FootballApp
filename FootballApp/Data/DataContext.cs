@@ -12,6 +12,7 @@ namespace FootballApp.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<League> Leagues { get; set; }
+        public DbSet<Fixture> Fixtures { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Goal> Goals { get; set; }

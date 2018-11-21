@@ -1,0 +1,99 @@
+<div class="container mt-5">
+  <mat-card>
+    <div>
+      <p style="text-align: center; margin-bottom: 0px">Kolejka nr: ?</p>
+      <p style="text-align: center; margin-bottom: 0px">Data spotkania: {{ match?.dateOfMatch | date: 'dd/MM/yy' }} </p>
+      <p style="text-align: center;" *ngIf="!match?.hasEnded" else matchEnded>Status: NIEROZPOCZĘTY </p>
+      <p style="text-align: center;" *ngIf="match?.hasEnded" else matchEnded>Status: ZAKOŃCZONY </p>
+    </div>
+    <div class="mt-5" style="margin: 0 auto;">
+
+      <div class="row">
+        <div class="col-sm-5">
+          <h2 class="text-center text-primary">{{ match?.homeTeam.name }}</h2>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <h2 class="text-center text-primary">{{ match?.awayTeam.name }}</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="text-center mt-5">
+            <img src="{{ match?.homeTeam.photoUrl }}" alt="homeBadge">
+          </div>
+        </div>
+        <div class="col-sm-2" style="text-align: center; margin: auto;">
+          <p class="text-primary" style="font-size: 70px;">{{ match?.homeGoals }}:{{ match?.awayGoals }}</p>
+        </div>
+        <div class="col-sm-5">
+          <div class="text-center mt-5">
+            <img src="{{ match?.homeTeam.photoUrl }}" alt="homeBadge">
+          </div>
+        </div>
+      </div>
+
+      <h4 class="text-center text-primary">Statystki meczowe</h4>
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4">
+          <div>
+            Brameczka
+          </div>
+          </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <div style="text-align: right;">
+                Brameczka
+              </div>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+  </mat-card>
+
+  <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj bramkę</button>
+  
+  <div *ngIf="formActive">
+    <mat-card class="mt-2">
+        <form>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="goalMinute" class="col-sm-2 col-form-label">Minuta</label>
+              <div class="col-sm-10">
+                  <input type="number" class="form-control" id="inputEmail3" placeholder="Email">
+              </div>
+            </div>
+            <fieldset class="form-group">
+              <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Typ bramki</legend>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                      First radio
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label class="form-check-label" for="gridRadios2">
+                      Second radio
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+              </div>
+            </div>
+          </form>
+    </mat-card>
+  </div>

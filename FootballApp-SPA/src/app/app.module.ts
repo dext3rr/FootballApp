@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -38,6 +39,12 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PlayerCardComponent } from './player/player-card/player-card.component';
 import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
 import { PlayersResolver } from './_resolvers/players.resolver';
+import { TeamsResolver } from './_resolvers/teams.resolver';
+import { TeamCardComponent } from './teams/team-card/team-card.component';
+import { PlayerAddComponent } from './player/player-add/player-add.component';
+import { FixturesComponent } from './fixtures/fixtures.component';
+import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail.component';
+import { MatchesComponent } from './matches/matches.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -51,6 +58,7 @@ export function tokenGetter() {
       RegisterComponent,
       LeaguesComponent,
       TeamsComponent,
+      TeamCardComponent,
       FeedComponent,
       FooterComponent,
       FooterComponent,
@@ -60,18 +68,24 @@ export function tokenGetter() {
       TeamDetailComponent,
       PlayerComponent,
       PlayerDetailComponent,
+      PlayerAddComponent,
       PlayerEditComponent,
-      PlayerCardComponent
+      PlayerCardComponent,
+      FixturesComponent,
+      FixtureDetailComponent,
+      MatchesComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot(),
+      BsDatepickerModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       MatCardModule,
       MatSelectModule,
       MatFormFieldModule,
+      MatButtonModule,
       BrowserAnimationsModule,
       MatTableModule,
       TabsModule.forRoot(),
@@ -82,7 +96,7 @@ export function tokenGetter() {
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
       })
-   ],
+],
    providers: [
       AuthService,
       ErrorInterceptorProvider,
@@ -90,6 +104,7 @@ export function tokenGetter() {
       AuthGuard,
       TeamService,
       AreaService,
+      TeamsResolver,
       PlayersResolver,
       PlayerDetailResolver,
       PlayerEditResolver,

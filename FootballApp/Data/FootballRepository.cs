@@ -59,10 +59,26 @@ namespace FootballApp.Data
             return players;
         }
 
+
+        public async Task AddPlayer(Player player)
+        {
+            await _context.Players.AddAsync(player);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeletePlayer(int id)
+        {
+            {
+                Player player = _context.Players.Where(x => x.Id == id).Single<Player>();
+                _context.Players.Remove(player);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<Team> GetTeam(int id)
         {
-             var team = await _context.Teams.FirstOrDefaultAsync(t => t.Id == id);
-            
+            var team = await _context.Teams.FirstOrDefaultAsync(t => t.Id == id);
+
             return team;
         }
 
@@ -72,6 +88,8 @@ namespace FootballApp.Data
 
             return teams;
         }
+
+        
 
         public async Task<bool> SaveAll()
         {
