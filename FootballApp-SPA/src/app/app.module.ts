@@ -45,6 +45,7 @@ import { PlayerAddComponent } from './player/player-add/player-add.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
 import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail.component';
 import { MatchesComponent } from './matches/matches.component';
+import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -73,7 +74,8 @@ export function tokenGetter() {
       PlayerCardComponent,
       FixturesComponent,
       FixtureDetailComponent,
-      MatchesComponent
+      MatchesComponent,
+      MatchEditComponent
    ],
    imports: [
       BrowserModule,

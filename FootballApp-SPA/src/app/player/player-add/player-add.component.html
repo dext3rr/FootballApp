@@ -19,11 +19,11 @@
         <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth" name="dateOfBirth"
           [(ngModel)]="model.dateOfBirth" placeholder="Wpisz datę urodzenia zawodnika" required>
         <label for="team">Drużyna</label>
-        <mat-select class="form-control" id="team" name="team" [(ngModel)]="model.teamId" placeholder="Wybierz drużynę">
+        <mat-select class="form-control" id="team" name="team" [(ngModel)]="model.teamId" placeholder="Wybierz drużynę" required>
           <mat-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</mat-option>
         </mat-select>
         <label for="position">Pozycja</label>
-        <mat-select class="form-control" [(ngModel)]="model.status" id="position" name="position" placeholder="Wybierz pozycję">
+        <mat-select class="form-control" [(ngModel)]="model.status" id="position" name="position" placeholder="Wybierz pozycję" required>
           <mat-option value="Bramkarz"> Bramkarz </mat-option>
           <mat-option value="Obrońca"> Obrońca </mat-option>
           <mat-option value="Pomocnik"> Pomocnik </mat-option>

@@ -1,3 +1,5 @@
+import { Team } from './team';
+
 export interface Player {
     id: number;
     name: string;
@@ -8,5 +10,6 @@ export interface Player {
     number: number;
     minutesPlayed: number;
     teamId: number;
+    team: Team;
     photoUrl: string;
 }

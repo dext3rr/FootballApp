@@ -1,0 +1,145 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">Edycja meczu</h2>
+
+
+
+  <mat-card>
+      <h4 class="text-center text-primary">Bramki</h4>
+      <div style="margin: 0 auto;">
+          <div class="row">
+              <div class="col-sm-2 text-center text-primary">Drużyna</div>
+              <div class="col-sm-3 text-center text-primary">Zawodnik</div>
+              <div class="col-sm-1 text-center text-primary">Minuta</div>
+              <div class="col-sm-2 text-center text-primary">Gol samobójczy</div>
+              <div class="col-sm-2 text-center text-primary">Rzut karny</div>
+              <div class="col-sm-2 text-center text-primary"></div>
+              
+          </div>
+          <div class="row mt-2" *ngFor="let goal of goals">
+              <div class="col-sm-2 text-center">{{ goal?.player.team.name }}</div>
+              <div class="col-sm-3 text-center">{{ goal?.player.name }} {{ goal?.player.surname }}</div>
+              <div class="col-sm-1 text-center">{{ goal?.minute }}'</div>
+              <div class="col-sm-2 text-center">
+                <div *ngIf="!goal?.ownGoal">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </div>
+                <div *ngIf="goal?.ownGoal">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col-sm-2 text-center">
+                  <div *ngIf="!goal?.penalty">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf="goal?.penalty">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="text-align: center; margin: auto;">
+                    <button mat-raised-button class="btn-danger w-10" (click)="deleteGoal(goal?.id)">Usuń</button>
+                  </div>
+          </div>
+        </div>
+  </mat-card>
+
+  <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj bramkę</button>
+
+  <div *ngIf="formActive">
+    <mat-card class="mt-2">
+      <form #addGoalForm="ngForm" id="addGoalForm" (ngSubmit)="addGoal()">
+        <div class="form-group row">
+          <label for="team" class="col-sm-2 col-form-label">Drużyna</label>
+          <div class="col-sm-10">
+
+            <mat-select class="form-control" [(ngModel)]="model.teamId" id="team" name="team" placeholder="Wybierz drużynę"
+              (ngModelChange)="loadTeamPlayers(model.teamId)" required>
+              <mat-option value="" disabled>Wybierz drużynę</mat-option>
+              <mat-option value="{{match?.homeTeamId}}">{{ match?.homeTeam.name }}</mat-option>
+              <mat-option value="{{match?.awayTeamId}}">{{ match?.awayTeam.name }}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <div *ngIf="teamSelected">
+          <div class="form-group row">
+            <label for="goalScorer" class="col-sm-2 col-form-label">Strzelec</label>
+            <div class="col-sm-10">
+              <mat-select class="form-control" id="goalScorer" name="goalScorer" [(ngModel)]="model.playerId"
+                placeholder="Wybierz strzelca" required>
+                <mat-option value="" disabled>Wybierz strzelca</mat-option>
+                <mat-option *ngFor="let player of players" value="{{player.id}}">{{player.name}} {{ player.surname}}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="goalMinute" class="col-sm-2 col-form-label">Minuta</label>
+            <div class="col-sm-10">
+              <input type="numer" class="form-control" id="goalMinute" name="goalMinute" placeholder="Wybierz minutę strzelenia bramki"
+                [(ngModel)]="model.minute" required>
+            </div>
+          </div>
+          <fieldset class="form-group">
+            <div class="row">
+              <legend class="col-form-label col-sm-2 pt-0">Typ bramki</legend>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="goalOwn" id="goalOwn" [(ngModel)]="model.ownGoal"
+                    value="true">
+                  <label class="form-check-label" for="goalOwn">
+                    Gol samobójczy
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="goalPenalty" id="goalPenalty" [(ngModel)]="model.penalty"
+                    value="true">
+                  <label class="form-check-label" for="goalPenalty">
+                    Rzut karny
+                  </label>
+                </div>
+                <small *ngIf="model.ownGoal && model.penalty" class="form-text text-muted">Nie można strzelić samobója
+                  z rzutu
+                  karnego!</small>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2">
+            <button type="submit" [disabled]="!addGoalForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+          </div>
+        </div>
+        <small *ngIf="!addGoalForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+      </form>
+    </mat-card>
+  </div>
+
+  <mat-card class="mt-5">
+      <h4 class="text-center text-primary">Kartki</h4>
+      <div style="margin: 0 auto;">
+          <div class="row">
+              <div class="col-sm-2 text-center text-primary">Drużyna</div>
+              <div class="col-sm-2 text-center text-primary">Zawodnik</div>
+              <div class="col-sm-4 text-center text-primary">Komentarz</div>
+              <div class="col-sm-1 text-center text-primary">Minuta</div>
+              <div class="col-sm-1 text-center text-primary">Kartka</div>
+              <div class="col-sm-2 text-center text-primary">Usuń</div>
+          </div>
+          <div class="row" *ngFor="let card of cards">
+              <div class="col-sm-2 text-center">{{ card?.player.team.name }}</div>
+              <div class="col-sm-2 text-center">{{ card?.player.name }} {{ card?.player.surname }}</div>
+              <div class="col-sm-4 text-center">{{ card?.comment}}</div>
+              <div class="col-sm-1 text-center">{{ card?.minute}}</div>
+              <div class="col-sm-1 text-center">
+                <div *ngIf="card?.isYellow">
+                    <i class="fa fa-square" style="color:yellow; border: 2px solid black" aria-hidden="true"></i>
+                </div>
+                <div *ngIf="card?.isRed">
+                    <i class="fa fa-square" style="color:red" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col-sm-2" style="text-align: center; margin: auto;">
+                  <button mat-raised-button class="btn-danger w-10" (click)="deleteCard(card?.id)">Usuń</button>
+                </div>
+          </div>
+        </div>
+  </mat-card>
+</div>

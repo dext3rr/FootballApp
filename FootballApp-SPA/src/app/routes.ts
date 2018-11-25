@@ -19,6 +19,7 @@ import { TeamsResolver } from './_resolvers/teams.resolver';
 import { PlayerAddComponent } from './player/player-add/player-add.component';
 import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail.component';
 import { MatchesComponent } from './matches/matches.component';
+import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -45,7 +46,8 @@ export const appRoutes: Routes = [
             resolve: {player: PlayerEditResolver}, canDeactivate: [PreventUnsavedChanges]},
             { path: 'leagues/:id', component: TableComponent},
             { path: 'fixtures/:id', component: FixtureDetailComponent },
-            { path: 'matches/:id', component: MatchesComponent}
+            { path: 'matches/:id', component: MatchesComponent},
+            { path: 'matches/:id/edit', component: MatchEditComponent}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'},

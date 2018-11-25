@@ -13,6 +13,7 @@ namespace FootballApp.Models
         public int Number { get; set; }
         public int MinutesPlayed { get; set; }
         public int TeamId { get; set; }
+        public Team team { get; set; }
         public string PhotoUrl { get; set; }
     }
 }

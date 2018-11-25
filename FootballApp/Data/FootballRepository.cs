@@ -40,7 +40,9 @@ namespace FootballApp.Data
 
         public async Task<Player> GetPlayer(int id)
         {
-            var player = await _context.Players.FirstOrDefaultAsync(p => p.Id == id);
+            var player = await _context.Players
+            .Include(t => t.team)
+            .FirstOrDefaultAsync(p => p.Id == id);
 
             return player;
         }
