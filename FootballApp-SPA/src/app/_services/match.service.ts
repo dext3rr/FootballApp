@@ -12,7 +12,7 @@ export class MatchService {
 
 constructor(private http: HttpClient) { }
 
-  getFixtureMatches(id): Observable<Match[]>{
+  getFixtureMatches(id): Observable<Match[]> {
     return this.http.get<Match[]>(this.baseUrl + 'matches/' + id);
   }
 
@@ -26,6 +26,10 @@ constructor(private http: HttpClient) { }
 
   deleteMatch(id: number) {
     return this.http.delete<Match>(this.baseUrl + 'matches/' + id + '/deleteMatch');
+  }
+
+  updateMatch(id: number, match: Match) {
+    return this.http.put(this.baseUrl + 'matches/' + id, match);
   }
 
 }

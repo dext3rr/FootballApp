@@ -17,9 +17,11 @@ namespace FootballApp.Controllers
     public class MatchesController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public MatchesController(DataContext context)
+        public MatchesController(DataContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
@@ -64,5 +66,34 @@ namespace FootballApp.Controllers
 
             return Ok(await _context.Matches.ToListAsync());
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMatch(int id, Match match) {
+
+            var matchToUpdate = _context.Matches.Find(id);
+
+            if (match == null){
+                return NotFound();
+            }
+
+            matchToUpdate.HomeGoals = match.HomeGoals;
+            matchToUpdate.AwayGoals = match.AwayGoals;
+
+            _context.Matches.Update(matchToUpdate);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
+            // var matchToUpdate = await getMatch(id);
+
+            // _mapper.Map(match, matchToUpdate);
+
+            // await _context.SaveChangesAsync();
+
+            // return Ok(await _context.Matches.ToListAsync());
+            
+            // //throw new Exception($"Nie udało się zaktualizować danych zawodnika o id {id}.");
+        }
+
     }
 }

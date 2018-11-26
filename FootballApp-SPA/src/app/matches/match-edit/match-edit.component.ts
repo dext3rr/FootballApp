@@ -21,7 +21,9 @@ export class MatchEditComponent implements OnInit {
   @ViewChild('addGoalForm') addGoalForm: NgForm;
   match: Match;
   matchId: number;
-  formActive: boolean;
+  teamId: number;
+  goalFormActive: boolean;
+  cardFormActive: boolean;
   model: any = {};
   players: Player[];
   teamSelected: boolean;
@@ -39,8 +41,12 @@ export class MatchEditComponent implements OnInit {
     this.loadMatchCards();
   }
 
-  toggleForm() {
-    this.formActive = !this.formActive;
+  toggleGoalForm() {
+    this.goalFormActive = !this.goalFormActive;
+  }
+
+  toggleCardForm() {
+    this.cardFormActive = !this.cardFormActive;
   }
 
   loadMatch() {
@@ -49,6 +55,25 @@ export class MatchEditComponent implements OnInit {
       this.match = match;
     }, error => {
       this.alertify.error(error);
+    });
+  }
+
+  updateMatch() {
+    let homeGoals = 0;
+    let awayGoals = 0;
+    this.goals.forEach(goal => {
+      if (goal.teamId === this.match.homeTeamId) {
+        homeGoals++;
+      } else {
+        awayGoals++;
+      }
+      this.match.homeGoals = homeGoals;
+      this.match.awayGoals = awayGoals;
+      this.matchService.updateMatch(+this.matchId, this.match).subscribe(next => {
+        this.alertify.success('Zaktualizowano mecz.');
+      }, error => {
+        this.alertify.error(error);
+      });
     });
   }
 
