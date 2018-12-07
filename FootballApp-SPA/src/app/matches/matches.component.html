@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <mat-card>
     <div>
-      <p style="text-align: center; margin-bottom: 0px">Kolejka nr: ?</p>
+      <p style="text-align: center; margin-bottom: 0px">Kolejka nr: {{ match?.fixture.number }}</p>
       <p style="text-align: center; margin-bottom: 0px">Data spotkania: {{ match?.dateOfMatch | date: 'dd/MM/yy' }} </p>
       <p style="text-align: center;" *ngIf="!match?.hasEnded" else matchEnded>Status: NIEROZPOCZĘTY </p>
       <p style="text-align: center;" *ngIf="match?.hasEnded" else matchEnded>Status: ZAKOŃCZONY </p>
@@ -34,23 +34,92 @@
         </div>
       </div>
 
-      <h4 class="text-center text-primary">Statystki meczowe</h4>
-      <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-4">
-          <div>
-            
-          </div>
-          </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4">
-            <div style="text-align: right;">
-                Brameczka
+      <h4 class="text-center text-primary mt-5 mb-5">Bramki</h4>
+
+      <div class="row mt-1" *ngFor="let goal of goals">
+          <div class="col-sm-1"></div>
+        <div class="col-sm-1">
+            <div *ngIf="goal.player.teamId === homeTeamId">
+                <div *ngIf="goal?.penalty">
+                  <i class="fa fa-bullseye mr-3" aria-hidden="true"></i>{{ goal?.minute }}'
+                </div>
+                <div *ngIf="goal?.ownGoal">
+                  <i class="fa fa-futbol-o mr-3" style="color:red;" aria-hidden="true"></i>{{ goal?.minute }}'
+                </div>
+                <div *ngIf="!goal?.penalty && !goal?.ownGoal">
+                  <i class="fa fa-futbol-o mr-3" aria-hidden="true"></i>{{ goal?.minute }}'
+                </div>
               </div>
+        </div>
+        <div class="col-sm-3">
+            <div *ngIf="goal.player.teamId === homeTeamId">
+                {{ goal?.player.name }} {{ goal?.player.surname }}
+              </div>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3">
+          <div style="text-align: right" *ngIf="goal.player.teamId === awayTeamId">
+            {{ goal?.player.name }} {{ goal?.player.surname }}
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div *ngIf="goal.player.teamId === awayTeamId">
+            <div *ngIf="goal?.penalty">
+              <i class="fa fa-bullseye mr-3" aria-hidden="true"></i>{{ goal?.minute }}'
+            </div>
+            <div *ngIf="goal?.ownGoal">
+              <i class="fa fa-futbol-o mr-3" style="color:red;" aria-hidden="true"></i>{{ goal?.minute }}'
+            </div>
+            <div *ngIf="!goal?.penalty && !goal?.ownGoal">
+              <i class="fa fa-futbol-o mr-3" aria-hidden="true"></i>{{ goal?.minute }}'
+            </div>
+          </div>
         </div>
         <div class="col-sm-1"></div>
       </div>
+
+      <h4 class="text-center text-primary mt-5 mb-5">Kartki</h4>
+
+      <div class="row mt-1" *ngFor="let card of cards">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-1">
+              <div *ngIf="card.player.teamId === homeTeamId">
+                  <div *ngIf="card?.isYellow">
+                      <i class="fa fa-square mr-3" style="color: #e5c062" aria-hidden="true"></i>{{ card?.minute }}'
+                  </div>
+                  <div *ngIf="card?.isRed">
+                      <i class="fa fa-square mr-3" style="color: red" aria-hidden="true"></i>{{ card?.minute }}'
+                  </div>
+                </div>
+          </div>
+          <div class="col-sm-3">
+              <div *ngIf="card.player.teamId === homeTeamId">
+                  {{ card?.player.name }} {{ card?.player.surname }}
+                </div>
+          </div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-3">
+            <div style="text-align: right" *ngIf="card.player.teamId === awayTeamId">
+              {{ card?.player.name }} {{ card?.player.surname }}
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div *ngIf="card.player.teamId === awayTeamId">
+              <div *ngIf="card?.isYellow">
+                  <i class="fa fa-square mr-3" style="color: #e5c062" aria-hidden="true"></i>{{ card?.minute }}'
+              </div>
+              <div *ngIf="card?.isRed">
+                  <i class="fa fa-square mr-3" style="color: red" aria-hidden="true"></i>{{ card?.minute }}'
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-1"></div>
+        </div>
+
+
     </div>
   </mat-card>
 
+  <div *ngIf="!matchEnded">
   <button class="btn btn-primary w-10 mt-3" [routerLink]="['/matches/',matchId,'edit']">Edytuj mecz</button>
+  </div>

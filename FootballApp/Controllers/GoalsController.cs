@@ -32,8 +32,7 @@ namespace FootballApp.Controllers
            public async Task<IActionResult> getMatchGoals(int id)
         {
             var goals = await _context.Goals
-            .Include(t => t.team)
-            .Include(p => p.player)
+            .Include(p => p.Player)
             .Where(x => x.MatchId == id)
             .OrderBy( m => m.Minute).ToListAsync();
             return Ok(goals);

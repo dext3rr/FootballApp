@@ -6,7 +6,6 @@ namespace FootballApp.Data
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DbSet<Value> Values { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
@@ -18,10 +17,6 @@ namespace FootballApp.Data
         public DbSet<Goal> Goals { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<SeasonTeam> SeasonTeams { get; set; }
-        public DbSet<StartingPlayer> StartingPlayers { get; set; }
-        public DbSet<Substitution> Substitutions { get; set; }
-        public DbSet<MatchDetails> MatchDetails { get; set; }
-        public DbSet<PlayersMatchDetails> PlayersMatchDetails { get; set; }
-        public DbSet<PlayersSeasonDetails> PlayersSeasonDetails { get; set; }
+
     }
 }

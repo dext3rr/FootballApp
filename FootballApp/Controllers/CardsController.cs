@@ -33,7 +33,7 @@ namespace FootballApp.Controllers
         {
             var cards = await _context.Cards
             .Include(p => p.player)
-            .ThenInclude(t => t.team)
+            .ThenInclude(t => t.Team)
             .Where(x => x.MatchId == id)
             .OrderBy(m => m.Minute).ToListAsync();
             return Ok(cards);

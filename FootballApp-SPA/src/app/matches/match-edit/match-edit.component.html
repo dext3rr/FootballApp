@@ -142,7 +142,7 @@
             <i class="fa fa-square" style="color: #e5c062" aria-hidden="true"></i>
           </div>
           <div *ngIf="card?.isRed">
-            <i class="fa fa-square" style="color:red; " aria-hidden="true"></i>
+            <i class="fa fa-square" style="color:red;" aria-hidden="true"></i>
           </div>
         </div>
         <div class="col-sm-2" style="text-align: center; margin: auto;">
@@ -240,4 +240,8 @@
   <div style="width: 50%; margin: 0 auto; margin-top: 30px;">
   <button class="btn btn-primary btn-block" (click)="updateMatch()">Zaktualizuj mecz</button>
   </div>
+  <div style="width: 50%; margin: 0 auto; margin-top: 5px;">
+      <button [disabled]="!matchUpdated" class="btn btn-primary btn-block" (click)="updateTeamsToTable()">Zatwierdź mecz</button>
+      <small *ngIf="!matchUpdated" class="form-text text-muted">Zaktualizuj mecz przed jego zatwierdzeniem.</small>
+      </div>
 </div>

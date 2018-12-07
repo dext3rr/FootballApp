@@ -1,5 +1,6 @@
 <div class="container mt-5">
-  <h2 class="text-center text-primary">Ligi</h2>
+    <button class="btn btn-danger w-10 mt-2" (click)="deleteArea()">Usuń okręg</button>
+  <h2 class="text-center text-primary mb-5">Ligi w {{ area?.name }}</h2>
   <mat-card  *ngFor="let league of leagues">
       <a [routerLink]="['/leagues/', league.id]">{{league.name}}</a>
   </mat-card>
@@ -12,11 +13,6 @@
             <div class="form-group">
               <label for="leagueName">Nazwa ligi</label>
               <input type="text" class="form-control" id="leagueName" name="leagueName" [(ngModel)]="model.name" placeholder="Wpisz nazwę ligi" required>
-              <label for="area">Okręg</label>
-              <select class="form-control" id="area" name="area" ng-init="Lala" [(ngModel)]="model.areaId" required>
-                <option selected>Wybierz okręg</option>
-                <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
-              </select>
             </div>
             <button type="submit" [disabled]="!addLeagueForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
             <small *ngIf="!addLeagueForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>

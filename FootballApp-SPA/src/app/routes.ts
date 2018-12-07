@@ -5,7 +5,6 @@ import { TeamsComponent } from './teams/teams.component';
 import { FeedComponent } from './feed/feed.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AreasComponent } from './areas/areas.component';
-import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 import { PlayerComponent } from './player/player.component';
@@ -34,7 +33,7 @@ export const appRoutes: Routes = [
             { path: 'teams/:id', component: TeamDetailComponent},
             { path: 'feed', component: FeedComponent},
             { path: 'areas', component: AreasComponent},
-            { path: 'areas/:id', component: AreaDetailComponent},
+            { path: 'areas/:id', component: LeaguesComponent},
             { path: 'leagues', component: LeaguesComponent},
             { path: 'table', component: TableComponent},
             { path: 'players', component: PlayerComponent,

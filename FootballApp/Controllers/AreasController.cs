@@ -53,13 +53,6 @@ namespace FootballApp.Controllers
             Area area = _context.Areas.Where(x => x.Id == id).Single<Area>();
             _context.Areas.Remove(area); 
 
-            // var leagues = await _context.Leagues.Where(x => x.AreaId == id).ToListAsync();
-
-            // foreach(var league in leagues){
-            //     league.AreaId = 0;
-            // }
-
-
             await _context.SaveChangesAsync();
 
             return Ok(await _context.Areas.ToListAsync());

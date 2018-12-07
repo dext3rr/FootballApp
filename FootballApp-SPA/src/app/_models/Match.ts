@@ -1,4 +1,5 @@
 import { Team } from './team';
+import { Fixture } from './Fixture';
 
 export interface Match {
     id: number;
@@ -7,8 +8,10 @@ export interface Match {
     awayTeamId: number;
     awayTeam: Team;
     dateOfMatch: Date;
-    hasEnded: boolean;
+    timeOfMatch: Date;
     homeGoals: number;
     awayGoals: number;
     fixtureId: number;
+    fixture: Fixture;
+    hasEnded: boolean;
 }

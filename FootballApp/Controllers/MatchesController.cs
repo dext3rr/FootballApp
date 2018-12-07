@@ -40,9 +40,10 @@ namespace FootballApp.Controllers
 
         public async Task<IActionResult> getMatch(int id)
         {
-            var match = await _context.Matches.
-            Include(home => home.HomeTeam)
+            var match = await _context.Matches
+            .Include(home => home.HomeTeam)
             .Include(away => away.AwayTeam)
+            .Include(fixture => fixture.Fixture)
             .FirstOrDefaultAsync(x => x.Id == id);
             return Ok(match);
         }
@@ -78,6 +79,7 @@ namespace FootballApp.Controllers
 
             matchToUpdate.HomeGoals = match.HomeGoals;
             matchToUpdate.AwayGoals = match.AwayGoals;
+            matchToUpdate.HasEnded = match.HasEnded;
 
             _context.Matches.Update(matchToUpdate);
             await _context.SaveChangesAsync();

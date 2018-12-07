@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { League } from '../_models/league';
 import { LeagueService } from '../_services/league.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Area } from '../_models/area';
 import { AreaService } from '../_services/area.service';
 
@@ -13,40 +13,33 @@ import { AreaService } from '../_services/area.service';
 })
 export class LeaguesComponent implements OnInit {
 
-  @Input() areaId: number;
   leagues: League[];
   model: any = {};
   formActive: boolean;
-  areas: Area[];
+  area: Area;
+  areaId: number;
 
   constructor(private leagueService: LeagueService, private areaService: AreaService, private alertify: AlertifyService,
-    private router: Router) { }
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadLeagues();
-    this.loadAreas();
+    this.loadArea();
     this.formActive = false;
   }
 
   loadLeagues() {
-    if (this.areaId != null) {
+    this.areaId = this.route.snapshot.params['id'];
     this.leagueService.getAreaLeagues(this.areaId).subscribe((leagues: League[]) => {
       this.leagues = leagues;
     }, error => {
       this.alertify.error(error);
     });
-  } else {
-    this.leagueService.getLeagues().subscribe((leagues: League[]) => {
-      this.leagues = leagues;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
   }
 
-  loadAreas() {
-    this.areaService.getAreas().subscribe((areas: Area[]) => {
-      this.areas = areas;
+  loadArea() {
+    this.areaService.getArea(+this.areaId).subscribe((area: Area) => {
+      this.area = area;
     }, error => {
       this.alertify.error(error);
     });
@@ -58,12 +51,24 @@ export class LeaguesComponent implements OnInit {
 
   addLeague() {
     if (this.model.name) {
+      this.model.areaId = this.areaId;
       this.leagueService.addLeague(this.model).subscribe(() => {
         this.alertify.success('Pomyślnie dodano nową ligę.');
-        this.router.navigate(['/leagues']);
+        this.loadLeagues();
       }, error => {
         this.alertify.error(error);
       });
     }
+  }
+
+  deleteArea() {
+    this.alertify.confirm('Czy na pewno chcesz usunąć okręg o nazwie \"' + this.area.name + '\" ?', () => {
+      this.areaService.deleteArea(this.areaId).subscribe(() => {
+        this.alertify.success('Okręg został usunięty.');
+        this.router.navigate(['/areas']);
+      }, error => {
+        this.alertify.error('Nie udało się usunąć okręgu.');
+    });
+  });
   }
 }

@@ -5,5 +5,6 @@ namespace FootballApp.Models
         public int Id { get; set; }
         public string Year { get; set; }
         public int LeagueId { get; set; }
+        public League League { get; set; }
     }
 }

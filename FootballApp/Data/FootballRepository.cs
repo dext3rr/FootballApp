@@ -41,7 +41,7 @@ namespace FootballApp.Data
         public async Task<Player> GetPlayer(int id)
         {
             var player = await _context.Players
-            .Include(t => t.team)
+            .Include(t => t.Team)
             .FirstOrDefaultAsync(p => p.Id == id);
 
             return player;
@@ -56,7 +56,7 @@ namespace FootballApp.Data
 
         public async Task<IEnumerable<Player>> GetTeamPlayers(int teamId)
         {
-            var players = await _context.Players.Where(x => x.TeamId == teamId).ToListAsync();
+            var players = await _context.Players.Where(x => x.Team.Id == teamId).ToListAsync();
 
             return players;
         }

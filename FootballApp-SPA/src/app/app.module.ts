@@ -28,7 +28,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AreaDetailComponent } from './areas/area-detail/area-detail.component';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 import { PlayerComponent } from './player/player.component';
@@ -64,7 +63,6 @@ export function tokenGetter() {
       FooterComponent,
       FooterComponent,
       AreasComponent,
-      AreaDetailComponent,
       TableComponent,
       TeamDetailComponent,
       PlayerComponent,

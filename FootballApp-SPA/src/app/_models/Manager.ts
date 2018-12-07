@@ -1,13 +1,12 @@
 import { Team } from './team';
 
-export interface Player {
+export interface Manager {
     id: number;
     name: string;
     surname: string;
     dateOfBirth: Date;
     country: string;
-    position: string;
-    number: number;
+    license: string;
     teamId: number;
     team: Team;
     photoUrl: string;

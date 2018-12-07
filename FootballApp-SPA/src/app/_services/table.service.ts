@@ -12,18 +12,25 @@ import { SeasonTeam } from '../_models/SeasonTeam';
 export class TableService {
   baseUrl = environment.apiUrl;
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-getSeasons(leagueId): Observable<Season[]> {
-  return this.http.get<Season[]>(this.baseUrl + 'tables/seasons/' + leagueId);
-}
+  getSeasons(leagueId): Observable<Season[]> {
+    return this.http.get<Season[]>(this.baseUrl + 'tables/seasons/' + leagueId);
+  }
 
-getSeasonTeams(seasonId): Observable<SeasonTeam[]> {
-  return this.http.get<SeasonTeam[]>(this.baseUrl + 'tables/seasonTeams/' + seasonId);
-}
+  getSeasonTeams(seasonId): Observable<SeasonTeam[]> {
+    return this.http.get<SeasonTeam[]>(this.baseUrl + 'tables/seasonTeams/' + seasonId);
+  }
 
-getLeagueTeams(leagueId): Observable<Team[]> {
-  return this.http.get<Team[]>(this.baseUrl + 'tables/teams/' + leagueId);
-}
+  getSeasonTeam(seasonId, teamId): Observable<SeasonTeam> {
+    return this.http.get<SeasonTeam>(this.baseUrl + 'tables/season/' + seasonId + '/team/' + teamId);
+  }
 
+  getLeagueTeams(leagueId): Observable<Team[]> {
+    return this.http.get<Team[]>(this.baseUrl + 'tables/teams/' + leagueId);
+  }
+
+  updateSeasonTeam(id: number, seasonTeam: SeasonTeam) {
+    return this.http.put(this.baseUrl + 'tables/team/' + id, seasonTeam);
+  }
 }

@@ -1,13 +1,15 @@
+import { Manager } from './Manager';
+import { League } from './league';
+
 export interface Team {
     id: number;
     name: string;
-    badgeImagePath: string;
     adress: string;
     email: string;
     telephone: string;
-    playerId: number;
-    coachId: number;
-    goalsId: number;
-    cardsId: number;
+    managerId: number;
+    manager: Manager;
     photoUrl: string;
+    leagueId: number;
+    league: League;
 }

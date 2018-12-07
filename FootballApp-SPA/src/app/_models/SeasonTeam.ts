@@ -1,8 +1,10 @@
 import { Team } from './team';
+import { Season } from './Season';
 
 export interface SeasonTeam {
     id: number;
     seasonId: number;
+    season: Season;
     teamId: number;
     team: Team;
     matches: number;

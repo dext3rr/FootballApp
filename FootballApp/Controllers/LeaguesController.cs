@@ -25,7 +25,8 @@ namespace FootballApp.Controllers
 
         public async Task<IActionResult> getLeagues()
         {
-            var leagues = await _context.Leagues.ToListAsync();
+            var leagues = await _context.Leagues
+            .ToListAsync();
             return Ok(leagues);
         }
 
@@ -39,7 +40,7 @@ namespace FootballApp.Controllers
 
         [AllowAnonymous]
         [HttpGet("arealeagues/{id}")]
-        public async Task<IActionResult> AreaLeagues(int id)
+        public async Task<IActionResult> getAreaLeagues(int id)
         {
             var areaLeagues = await _context.Leagues.Where(x => x.AreaId == id).ToListAsync();
             return Ok(areaLeagues);

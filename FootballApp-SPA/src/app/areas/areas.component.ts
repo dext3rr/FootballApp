@@ -38,7 +38,7 @@ export class AreasComponent implements OnInit {
     if (this.model.name) {
       this.areaService.addArea(this.model).subscribe(() => {
         this.alertify.success('Pomyślnie dodano nowy okręg.');
-        this.router.navigate(['/areas']);
+        this.loadAreas();
       }, error => {
         this.alertify.error(error);
       });
