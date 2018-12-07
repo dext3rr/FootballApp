@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181207025416_Initial")]
+    [Migration("20181207212547_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,22 +121,20 @@ namespace FootballApp.API.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<string>("License");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("PhotoUrl");
 
                     b.Property<string>("Surname");
 
-                    b.Property<int>("TeamId");
+                    b.Property<int?>("TeamId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TeamId")
                         .IsUnique();
 
-                    b.ToTable("Manager");
+                    b.ToTable("Managers");
                 });
 
             modelBuilder.Entity("FootballApp.Models.Match", b =>
@@ -182,11 +180,9 @@ namespace FootballApp.API.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Number");
-
                     b.Property<string>("PhotoUrl");
 
-                    b.Property<string>("Position");
+                    b.Property<int>("PositionId");
 
                     b.Property<string>("Surname");
 
@@ -194,9 +190,35 @@ namespace FootballApp.API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PositionId");
+
                     b.HasIndex("TeamId");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("FootballApp.Models.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("FootballApp.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("FootballApp.Models.Season", b =>
@@ -256,13 +278,13 @@ namespace FootballApp.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Adress");
+                    b.Property<string>("Address");
 
                     b.Property<string>("Email");
 
                     b.Property<int>("LeagueId");
 
-                    b.Property<int>("MangerId");
+                    b.Property<int>("ManagerId");
 
                     b.Property<string>("Name");
 
@@ -295,6 +317,19 @@ namespace FootballApp.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("FootballApp.Models.UserRole", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("FootballApp.Models.Card", b =>
@@ -344,7 +379,7 @@ namespace FootballApp.API.Migrations
                     b.HasOne("FootballApp.Models.Team", "Team")
                         .WithOne("Manager")
                         .HasForeignKey("FootballApp.Models.Manager", "TeamId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("FootballApp.Models.Match", b =>
@@ -367,9 +402,15 @@ namespace FootballApp.API.Migrations
 
             modelBuilder.Entity("FootballApp.Models.Player", b =>
                 {
-                    b.HasOne("FootballApp.Models.Team", "Team")
+                    b.HasOne("FootballApp.Models.Position", "Position")
                         .WithMany()
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FootballApp.Models.Team", "Team")
+                        .WithMany("Players")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("FootballApp.Models.Season", b =>
@@ -398,6 +439,19 @@ namespace FootballApp.API.Migrations
                     b.HasOne("FootballApp.Models.League", "League")
                         .WithMany()
                         .HasForeignKey("LeagueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("FootballApp.Models.UserRole", b =>
+                {
+                    b.HasOne("FootballApp.Models.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FootballApp.Models.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -42,7 +42,9 @@ namespace FootballApp.API
                     = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
             services.AddCors();
+            Mapper.Reset();
             services.AddAutoMapper();
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IFootballRepository, FootballRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
@@ -54,10 +56,17 @@ namespace FootballApp.API
                    ValidateAudience = false
                 };
             });
+
+            services.AddAuthorization(options => 
+            {
+                options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Administrator"));
+                options.AddPolicy("RequireModerator", policy => policy.RequireRole("Admin","Moderator"));
+                options.AddPolicy("RequireUser", policy => policy.RequireRole("Użytkownik"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -80,6 +89,7 @@ namespace FootballApp.API
             }
 
             //app.UseHttpsRedirection();
+            //seeder.SeedData();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

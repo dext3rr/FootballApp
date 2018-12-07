@@ -14,6 +14,9 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/feed']">Tablica</a>
       </li>
+      <li *appHasRole="['Administrator']" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/admin']">Panel administracyjny</a>
+      </li>
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>

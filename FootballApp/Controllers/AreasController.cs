@@ -37,7 +37,7 @@ namespace FootballApp.Controllers
             return Ok(area);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Użytkownik")]
         [HttpPost("addArea")]
         public async Task<IActionResult> AddArea(Area area)
         {

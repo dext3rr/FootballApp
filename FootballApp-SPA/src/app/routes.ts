@@ -19,6 +19,7 @@ import { PlayerAddComponent } from './player/player-add/player-add.component';
 import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail.component';
 import { MatchesComponent } from './matches/matches.component';
 import { MatchEditComponent } from './matches/match-edit/match-edit.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -27,6 +28,8 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
+            { path: 'admin', component: AdminPanelComponent,
+            data: {roles: ['Administrator', 'Moderator']}},
             { path: 'leagues', component: LeaguesComponent},
             { path: 'teams', component: TeamsComponent,
             resolve: {teams: TeamsResolver}},

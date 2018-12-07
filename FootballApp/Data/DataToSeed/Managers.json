@@ -1,0 +1,130 @@
+[
+    {
+        "name": "Moran",
+        "surname": "Wade",
+        "dateOfBirth": "1997-03-14",
+        "country": "Laos",
+        "teamId": 1,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Kelley",
+        "surname": "Becker",
+        "dateOfBirth": "1981-04-05",
+        "country": "Nepal",
+        "teamId": 2,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Fischer",
+        "surname": "Bond",
+        "dateOfBirth": "1991-03-23",
+        "country": "Israel",
+        "teamId": 3,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Valarie",
+        "surname": "Harmon",
+        "dateOfBirth": "1995-08-15",
+        "country": "France, Metropolitan",
+        "teamId": 4,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Ochoa",
+        "surname": "Santiago",
+        "dateOfBirth": "1994-05-05",
+        "country": "Martinique",
+        "teamId": 5,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Lorie",
+        "surname": "Ryan",
+        "dateOfBirth": "1990-01-09",
+        "country": "Japan",
+        "teamId": 6,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Guadalupe",
+        "surname": "Vargas",
+        "dateOfBirth": "1981-02-16",
+        "country": "Jordan",
+        "teamId": 7,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Lela",
+        "surname": "Clements",
+        "dateOfBirth": "1980-06-16",
+        "country": "Andorra",
+        "teamId": 8,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Warner",
+        "surname": "Christensen",
+        "dateOfBirth": "1981-11-02",
+        "country": "Nicaragua",
+        "teamId": 9,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Araceli",
+        "surname": "Rios",
+        "dateOfBirth": "1983-08-20",
+        "country": "Singapore",
+        "teamId": 10,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Antonia",
+        "surname": "Hebert",
+        "dateOfBirth": "1999-07-12",
+        "country": "Morocco",
+        "teamId": 11,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Reyes",
+        "surname": "Russell",
+        "dateOfBirth": "1996-01-09",
+        "country": "Iraq",
+        "teamId": 12,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Alfreda",
+        "surname": "Colon",
+        "dateOfBirth": "1987-01-04",
+        "country": "Northern Mariana Islands",
+        "teamId": 13,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Isabella",
+        "surname": "Wyatt",
+        "dateOfBirth": "1989-12-21",
+        "country": "Uzbekistan",
+        "teamId": 14,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Autumn",
+        "surname": "Munoz",
+        "dateOfBirth": "1994-06-24",
+        "country": "Heard and McDonald Islands",
+        "teamId": 15,
+        "photoUrl": "assets/photos/user.png"
+    },
+    {
+        "name": "Sheree",
+        "surname": "Walton",
+        "dateOfBirth": "1980-11-30",
+        "country": "Azerbaijan",
+        "teamId": 16,
+        "photoUrl": "assets/photos/user.png"
+    }
+]

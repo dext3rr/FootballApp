@@ -11,5 +11,6 @@ namespace FootballApp.Models
         public byte[] PasswordSalt { get; set; }
         public string Email { get; set; }
         public DateTime AccountCreationDate { get; set; } 
+        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

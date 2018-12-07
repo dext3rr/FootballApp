@@ -6,7 +6,6 @@ export interface Manager {
     surname: string;
     dateOfBirth: Date;
     country: string;
-    license: string;
     teamId: number;
     team: Team;
     photoUrl: string;

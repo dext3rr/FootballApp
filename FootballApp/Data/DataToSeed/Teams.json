@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Extro Futurity",
+        "address": "Kossuth Place 572 ",
+        "email": "delacruzarnold@futurity.com",
+        "telephone": "(842) 506-3257",
+        "managerId": 1,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Geekfarm Recrisys",
+        "address": "Stewart Street 737 ",
+        "email": "delacruzarnold@recrisys.com",
+        "telephone": "(984) 461-2136",
+        "managerId": 2,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Quantasis Lyria",
+        "address": "Rapelye Street 166 ",
+        "email": "delacruzarnold@lyria.com",
+        "telephone": "(869) 538-3948",
+        "managerId": 3,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Skinserve Norali",
+        "address": "Dewey Place 958 ",
+        "email": "delacruzarnold@norali.com",
+        "telephone": "(998) 497-3662",
+        "managerId": 4,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Izzby Farmage",
+        "address": "School Lane 970 ",
+        "email": "delacruzarnold@farmage.com",
+        "telephone": "(918) 488-3693",
+        "managerId": 5,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Miracula Terascape",
+        "address": "Madoc Avenue 980 ",
+        "email": "delacruzarnold@terascape.com",
+        "telephone": "(972) 519-2702",
+        "managerId": 6,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Interodeo Lunchpod",
+        "address": "Pine Street 764 ",
+        "email": "delacruzarnold@lunchpod.com",
+        "telephone": "(994) 580-2049",
+        "managerId": 7,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Furnitech Techade",
+        "address": "Bond Street 195 ",
+        "email": "delacruzarnold@techade.com",
+        "telephone": "(847) 510-3523",
+        "managerId": 8,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 1
+    },
+    {
+        "name": "Lyria Eternis",
+        "address": "Newel Street 839 ",
+        "email": "beachbarlow@eternis.com",
+        "telephone": "(934) 521-3824",
+        "managerId": 9,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    },
+    {
+        "name": "Medifax Exospace",
+        "address": "Elliott Walk 977 ",
+        "email": "beachbarlow@exospace.com",
+        "telephone": "(808) 548-2039",
+        "managerId": 10,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    },
+    {
+        "name": "Delphide Cablam",
+        "address": "Ridgecrest Terrace 971 ",
+        "email": "beachbarlow@cablam.com",
+        "telephone": "(843) 541-2053",
+        "managerId": 11,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    },
+    {
+        "name": "Skybold Parcoe",
+        "address": "Colonial Road 779 ",
+        "email": "beachbarlow@parcoe.com",
+        "telephone": "(859) 465-3882",
+        "managerId": 12,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    },
+    {
+        "name": "Enquility Dragbot",
+        "address": "Hart Place 955 ",
+        "email": "beachbarlow@dragbot.com",
+        "telephone": "(828) 419-2699",
+        "managerId": 13,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    },
+    {
+        "name": "Songlines Emergent",
+        "address": "Ryder Avenue 490 ",
+        "email": "beachbarlow@emergent.com",
+        "telephone": "(896) 460-2652",
+        "managerId": 14,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    },
+    {
+        "name": "Kraggle Peticular",
+        "address": "Lake Street 439 ",
+        "email": "beachbarlow@peticular.com",
+        "telephone": "(977) 475-3259",
+        "managerId": 15,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    },
+    {
+        "name": "Multron Accel",
+        "address": "Emmons Avenue 233 ",
+        "email": "beachbarlow@accel.com",
+        "telephone": "(869) 448-2722",
+        "managerId": 16,
+        "photoUrl": "assets/photos/badge.png",
+        "leagueId": 2
+    }
+]

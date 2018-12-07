@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.Data;
+using FootballApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,22 @@ namespace FootballApp.Controllers
             var players = await _repo.GetTeamPlayers(teamId);
 
             return Ok(players);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("addTeam")]
+        public async Task<IActionResult> AddTeam(Team team)
+        {
+            await _repo.AddTeam(team);
+
+            return StatusCode(201);
+        }
+
+        [HttpDelete("{id}/deleteTeam")]
+        public async Task<IActionResult> DeleteTeam(int id){
+
+            await _repo.DeleteTeam(id);
+            return Ok();
         }
     }
 }

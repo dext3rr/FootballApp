@@ -37,11 +37,32 @@ namespace FootballApp.Data
             return users;
         }
 
+        public User GetUserByUsername(string username)
+        {
+            username = username.ToLower();
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+            return user;
+        }
+
+
+        public List<Role> GetUserRoles(int userId)
+        {
+            var userRoles = _context.Roles
+            .Include(r => r.UserRoles).
+            Where(r => r.UserRoles.
+            Any(u => u.UserId == userId)).
+            ToList();
+
+            return userRoles;
+        }
+
 
         public async Task<Player> GetPlayer(int id)
         {
             var player = await _context.Players
             .Include(t => t.Team)
+            .Include(p => p.Position)
             .FirstOrDefaultAsync(p => p.Id == id);
 
             return player;
@@ -89,6 +110,21 @@ namespace FootballApp.Data
             var teams = await _context.Teams.ToListAsync();
 
             return teams;
+        }
+
+          public async Task AddTeam(Team team)
+        {
+            await _context.Teams.AddAsync(team);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTeam(int id)
+        {
+            {
+                Team team = _context.Teams.Where(x => x.Id == id).Single<Team>();
+                _context.Teams.Remove(team);
+                await _context.SaveChangesAsync();
+            }
         }
 
         

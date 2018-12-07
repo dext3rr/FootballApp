@@ -1,4 +1,5 @@
 import { Team } from './team';
+import { Position } from './Position';
 
 export interface Player {
     id: number;
@@ -6,7 +7,8 @@ export interface Player {
     surname: string;
     dateOfBirth: Date;
     country: string;
-    position: string;
+    positionId: number;
+    position: Position;
     number: number;
     teamId: number;
     team: Team;

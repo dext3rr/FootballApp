@@ -43,6 +43,10 @@ export class PlayerAddComponent implements OnInit {
     });
   }
 
+  getPositions() {
+    
+  }
+
   addPlayer() {
     if (this.model.name) {
       this.playerService.addPlayer(this.model).subscribe(() => {

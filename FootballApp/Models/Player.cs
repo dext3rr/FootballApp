@@ -9,8 +9,9 @@ namespace FootballApp.Models
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Country { get; set; }
-        public string Position { get; set; }
-        public int Number { get; set; }
+        public int PositionId { get; set; }
+        public Position Position { get; set; }
+        public int? TeamId { get; set; }
         public Team Team { get; set; }
         public string PhotoUrl { get; set; }
     }

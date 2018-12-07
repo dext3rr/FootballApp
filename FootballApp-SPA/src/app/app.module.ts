@@ -45,6 +45,8 @@ import { FixturesComponent } from './fixtures/fixtures.component';
 import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail.component';
 import { MatchesComponent } from './matches/matches.component';
 import { MatchEditComponent } from './matches/match-edit/match-edit.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -73,7 +75,9 @@ export function tokenGetter() {
       FixturesComponent,
       FixtureDetailComponent,
       MatchesComponent,
-      MatchEditComponent
+      MatchEditComponent,
+      AdminPanelComponent,
+      HasRoleDirective
    ],
    imports: [
       BrowserModule,
