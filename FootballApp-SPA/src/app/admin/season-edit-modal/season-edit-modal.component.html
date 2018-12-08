@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Edycja ligi</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #seasonEditForm="ngForm" id="seasonEditForm">
+    <label for="seasonYear">Okres</label>
+    <select class="form-control" id="yearSelect" name="yearSelect" [(ngModel)]="season.year" required>
+      <option value="2016/2017">2016/2017</option>
+      <option value="2017/2018">2017/2018</option>
+      <option value="2018/2019">2018/2019</option>
+      <option value="2019/2020">2019/2020</option>
+    </select>
+    <label for="seasonYear">Liga</label>
+    <select class="form-control" id="leagueSelect" name="leagueSelect" [(ngModel)]="season.leagueId" required>
+      <option *ngFor="let league of leagues" value="{{league.id}}">{{league.name}}</option>
+    </select>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Anuluj</button>
+  <button type="button" class="btn btn-success" form="seasonEditForm" [disabled]="!seasonEditForm.valid" (click)="updateSeason()">Zatwierdź</button>
+</div>

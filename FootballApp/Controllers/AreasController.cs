@@ -20,7 +20,6 @@ namespace FootballApp.Controllers
             _context = context;
         }
 
-        [AllowAnonymous]
         [HttpGet]
 
         public async Task<IActionResult> getAreas()
@@ -29,7 +28,6 @@ namespace FootballApp.Controllers
             return Ok(areas);
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> getArea(int id)
         {
@@ -37,7 +35,7 @@ namespace FootballApp.Controllers
             return Ok(area);
         }
 
-        [Authorize(Roles = "Użytkownik")]
+        [Authorize(Roles = "Administrator")]
         [HttpPost("addArea")]
         public async Task<IActionResult> AddArea(Area area)
         {
@@ -47,6 +45,24 @@ namespace FootballApp.Controllers
             return Ok(await _context.Areas.ToListAsync());
         }
 
+        [Authorize(Roles = "Administrator")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditArea(int id, Area area)
+        {
+            var areaToUpdate = _context.Areas.Find(id);
+
+            if (area == null) {
+                return NotFound();
+            }
+
+            areaToUpdate.Name = area.Name;
+            _context.Areas.Update(areaToUpdate);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}/deleteArea")]
         public async Task<IActionResult> DeleteArea(int id)
         {

@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Dodaj okręg</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <form #areaAddForm="ngForm" id="areaForm">
+      <label for="areaName">Nazwa okręgu</label>
+      <input type="text" class="form-control" id="areaName" name="areaName" 
+      [(ngModel)]="model.name" placeholder="Wpisz nazwę okręgu" required>
+   </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Anuluj</button>
+    <button type="button" class="btn btn-success" form="areaAddForm" [disabled]="!areaAddForm.valid" (click)="addArea()">Zatwierdź</button>
+  </div>

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatButtonModule } from '@angular/material/button';
@@ -47,6 +47,20 @@ import { MatchesComponent } from './matches/matches.component';
 import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { AdminService } from './_services/admin.service';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { AreaManagementComponent } from './admin/area-management/area-management.component';
+import { AreaEditModalComponent } from './admin/area-edit-modal/area-edit-modal.component';
+import { AreaAddModalComponent } from './admin/area-add-modal/area-add-modal.component';
+import { LeagueManagementComponent } from './admin/league-management/league-management.component';
+import { LeagueAddModalComponent } from './admin/league-add-modal/league-add-modal.component';
+import { LeagueEditModalComponent } from './admin/league-edit-modal/league-edit-modal.component';
+import { SeasonAddModalComponent } from './admin/season-add-modal/season-add-modal.component';
+import { SeasonManagementComponent } from './admin/season-management/season-management.component';
+import { SeasonEditModalComponent } from './admin/season-edit-modal/season-edit-modal.component';
+import { SeasonService } from './_services/season.service';
+import { SeasonTeamsService } from './_services/seasonTeams.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -77,7 +91,19 @@ export function tokenGetter() {
       MatchesComponent,
       MatchEditComponent,
       AdminPanelComponent,
-      HasRoleDirective
+      HasRoleDirective,
+      UserManagementComponent,
+      AreaManagementComponent,
+      LeagueManagementComponent,
+      RolesModalComponent,
+      AreaAddModalComponent,
+      AreaEditModalComponent,
+      LeagueAddModalComponent,
+      LeagueEditModalComponent,
+      SeasonManagementComponent,
+      SeasonAddModalComponent,
+      SeasonEditModalComponent
+
    ],
    imports: [
       BrowserModule,
@@ -86,6 +112,7 @@ export function tokenGetter() {
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
       RouterModule.forRoot(appRoutes),
+      ModalModule.forRoot(),
       MatCardModule,
       MatSelectModule,
       MatFormFieldModule,
@@ -108,11 +135,23 @@ export function tokenGetter() {
       AuthGuard,
       TeamService,
       AreaService,
+      SeasonService,
+      SeasonTeamsService,
       TeamsResolver,
       PlayersResolver,
       PlayerDetailResolver,
       PlayerEditResolver,
       PreventUnsavedChanges,
+      AdminService
+   ],
+   entryComponents: [
+      RolesModalComponent,
+      AreaAddModalComponent,
+      AreaEditModalComponent,
+      LeagueAddModalComponent,
+      LeagueEditModalComponent,
+      SeasonAddModalComponent,
+      SeasonEditModalComponent
    ],
    bootstrap: [
       AppComponent

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181207212547_Initial")]
+    [Migration("20181208225047_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,6 +225,8 @@ namespace FootballApp.API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("HasTeams");
 
                     b.Property<int>("LeagueId");
 

@@ -1,0 +1,19 @@
+<div class="row">
+    <table class="table">
+      <tr>
+        <th style="width: 10%">ID</th>
+        <th style="width: 30%">Okręg</th>
+        <th style="width: 30%">Nazwa ligi</th>
+        <th style="width: 10%"></th>
+        <th style="width: 10%"></th>
+      </tr>
+      <tr *ngFor="let league of leagues">
+        <td>{{ league.id }}</td>
+        <td>{{ league.area.name }}</td>
+        <td>{{ league.name }}</td>
+        <td><button class="btn btn-info" (click)="editLeagueModal(league, areas)">Edytuj lige</button></td>
+        <td><button class="btn btn-danger" (click)="deleteLeague(league.id, league.name)">Usuń ligę</button></td>
+      </tr>
+    </table>
+    <button class="btn btn-primary w-10 mt-3" (click)="addLeagueModal(areas)">Dodaj ligę</button>
+    </div>

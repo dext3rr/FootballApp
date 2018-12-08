@@ -224,6 +224,8 @@ namespace FootballApp.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("HasTeams");
+
                     b.Property<int>("LeagueId");
 
                     b.Property<string>("Year");

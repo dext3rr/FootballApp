@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Edycja ligi</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <form #leagueEditForm="ngForm" id="leagueEditForm">
+      <label for="leagueName">Nazwa ligi</label>
+      <input type="text" class="form-control" id="leagueName" name="leagueName" 
+      [(ngModel)]="league.name" placeholder="Wpisz nazwę ligi" required>
+      <label for="areaSelect">Okręg</label>
+      <select class="form-control" id="areaSelect" name="areaSelect" [(ngModel)]="league.areaId" required>
+        <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
+      </select>
+   </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Anuluj</button>
+    <button type="button" class="btn btn-success" form="leagueEditForm" [disabled]="!leagueEditForm.valid" (click)="updateLeague()">Zatwierdź</button>
+  </div>

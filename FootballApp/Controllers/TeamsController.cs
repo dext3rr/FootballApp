@@ -31,6 +31,18 @@ namespace FootballApp.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("league/{leagueId}")]
+
+        public async Task<IActionResult> GetLeagueTeams(int leagueId)
+        {
+            var teams = await _repo.GetLeagueTeams(leagueId);
+
+            return Ok(teams);
+        }
+
+
+
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> getTeam(int id)
         {

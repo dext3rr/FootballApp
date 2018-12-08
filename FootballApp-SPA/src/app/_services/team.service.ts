@@ -17,6 +17,10 @@ constructor(private http: HttpClient) { }
    return this.http.get<Team[]>(this.baseUrl + 'teams');
  }
 
+ getLeagueTeams(leagueId): Observable<Team[]> {
+  return this.http.get<Team[]>(this.baseUrl + 'teams/league/' + leagueId);
+}
+
  getTeam(id): Observable<Team> {
    return this.http.get<Team>(this.baseUrl + 'teams/' + id);
  }

@@ -1,0 +1,17 @@
+<div class="row">
+    <table class="table">
+      <tr>
+        <th style="width: 10%">ID</th>
+        <th style="width: 40%">Nazwa okręgu</th>
+        <th style="width: 10%"></th>
+        <th style="width: 10%"></th>
+      </tr>
+      <tr *ngFor="let area of areas">
+        <td>{{ area.id }}</td>
+        <td>{{ area.name }}</td>
+        <td><button class="btn btn-info" (click)="editAreaModal(area)">Edytuj okręg</button></td>
+        <td><button class="btn btn-danger" (click)="deleteArea(area.id, area.name)">Usuń okręg</button></td>
+      </tr>
+    </table>
+    <button class="btn btn-primary w-10 mt-3" (click)="addAreaModal()">Dodaj okręg</button>
+    </div>

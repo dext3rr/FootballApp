@@ -112,6 +112,15 @@ namespace FootballApp.Data
             return teams;
         }
 
+         public async Task<IEnumerable<Team>> GetLeagueTeams(int leagueId)
+        {
+            var teams = await _context.Teams
+            .Where(l => l.LeagueId == leagueId)
+            .ToListAsync();
+
+            return teams;
+        }
+
           public async Task AddTeam(Team team)
         {
             await _context.Teams.AddAsync(team);
@@ -126,8 +135,6 @@ namespace FootballApp.Data
                 await _context.SaveChangesAsync();
             }
         }
-
-        
 
         public async Task<bool> SaveAll()
         {

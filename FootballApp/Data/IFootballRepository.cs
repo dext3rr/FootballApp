@@ -15,6 +15,7 @@ namespace FootballApp.Data
          User GetUserByUsername(string username);
          List<Role> GetUserRoles(int userId);
          Task<IEnumerable<Team>> GetTeams();
+         Task<IEnumerable<Team>> GetLeagueTeams(int leagueId);
          Task<Team> GetTeam(int id);
          Task AddTeam(Team team);
          Task DeleteTeam(int id);

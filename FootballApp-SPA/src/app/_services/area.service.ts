@@ -24,6 +24,10 @@ addArea(model: any) {
   return this.http.post<Area>(this.baseUrl + 'areas/addArea', model);
 }
 
+editArea(id: number, area: Area) {
+  return this.http.put<Area>(this.baseUrl + 'areas/' + id, area);
+}
+
 deleteArea(id: number) {
   return this.http.delete<Area>(this.baseUrl + 'areas/' + id + '/deleteArea');
 }

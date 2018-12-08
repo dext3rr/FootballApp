@@ -114,6 +114,7 @@ namespace FootballApp.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Year = table.Column<string>(nullable: true),
+                    HasTeams = table.Column<bool>(nullable: false),
                     LeagueId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

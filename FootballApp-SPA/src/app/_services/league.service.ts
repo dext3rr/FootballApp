@@ -10,7 +10,7 @@ import { League } from '../_models/League';
 export class LeagueService {
   baseUrl = environment.apiUrl;
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getLeagues(): Observable<League[]> {
     return this.http.get<League[]>(this.baseUrl + 'leagues');
@@ -26,5 +26,13 @@ constructor(private http: HttpClient) { }
 
   addLeague(model: any) {
     return this.http.post<League>(this.baseUrl + 'leagues/addLeague', model);
+  }
+
+  editLeague(id: number, league: League) {
+    return this.http.put<League>(this.baseUrl + 'leagues/' + id, league);
+  }
+
+  deleteLeague(id: number) {
+    return this.http.delete<League>(this.baseUrl + 'leagues/' + id + '/deleteLeague');
   }
 }

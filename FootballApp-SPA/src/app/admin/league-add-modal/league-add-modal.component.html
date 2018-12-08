@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Dodaj ligę</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <form #leagueAddForm="ngForm" id="leagueAddForm">
+      <label for="leagueName">Nazwa ligi</label>
+      <input type="text" class="form-control" id="leagueName" name="leagueName" 
+      [(ngModel)]="model.name" placeholder="Wpisz nazwę ligi" required>
+      <label for="leagueSelect">Okręg</label>
+      <select class="form-control" id="leagueSelect" name="leagueSelect" [(ngModel)]="model.areaId" required>
+        <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
+      </select>
+   </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Anuluj</button>
+    <button type="button" class="btn btn-success" form="leagueAddForm" [disabled]="!leagueAddForm.valid" (click)="addLeague()">Zatwierdź</button>
+  </div>
