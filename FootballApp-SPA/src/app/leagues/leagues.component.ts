@@ -12,10 +12,7 @@ import { AreaService } from '../_services/area.service';
   styleUrls: ['./leagues.component.css']
 })
 export class LeaguesComponent implements OnInit {
-
   leagues: League[];
-  model: any = {};
-  formActive: boolean;
   area: Area;
   areaId: number;
 
@@ -25,7 +22,6 @@ export class LeaguesComponent implements OnInit {
   ngOnInit() {
     this.loadLeagues();
     this.loadArea();
-    this.formActive = false;
   }
 
   loadLeagues() {
@@ -43,32 +39,5 @@ export class LeaguesComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-  }
-
-  toggleForm() {
-    this.formActive = !this.formActive;
-  }
-
-  addLeague() {
-    if (this.model.name) {
-      this.model.areaId = this.areaId;
-      this.leagueService.addLeague(this.model).subscribe(() => {
-        this.alertify.success('Pomyślnie dodano nową ligę.');
-        this.loadLeagues();
-      }, error => {
-        this.alertify.error(error);
-      });
-    }
-  }
-
-  deleteArea() {
-    this.alertify.confirm('Czy na pewno chcesz usunąć okręg o nazwie \"' + this.area.name + '\" ?', () => {
-      this.areaService.deleteArea(this.areaId).subscribe(() => {
-        this.alertify.success('Okręg został usunięty.');
-        this.router.navigate(['/areas']);
-      }, error => {
-        this.alertify.error('Nie udało się usunąć okręgu.');
-    });
-  });
   }
 }

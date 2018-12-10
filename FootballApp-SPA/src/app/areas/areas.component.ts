@@ -12,14 +12,11 @@ import { Router } from '@angular/router';
 export class AreasComponent implements OnInit {
   areas: Area[];
   model: any = {};
-  formActive: boolean;
 
-  constructor(private areaService: AreaService, private alertify: AlertifyService,
-    private router: Router) { }
+  constructor(private areaService: AreaService, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.loadAreas();
-    this.formActive = false;
   }
 
   loadAreas() {
@@ -29,27 +26,4 @@ export class AreasComponent implements OnInit {
       this.alertify.error(error);
     });
   }
-
-  toggleForm() {
-    this.formActive = !this.formActive;
-  }
-
-  addArea() {
-    if (this.model.name) {
-      this.areaService.addArea(this.model).subscribe(() => {
-        this.alertify.success('Pomyślnie dodano nowy okręg.');
-        this.loadAreas();
-      }, error => {
-        this.alertify.error(error);
-      });
-    }
-  }
-
-  // addArea() {
-  //   this.areaService.addArea(this.area).subscribe(() => {
-  //     this.alertify.success('Pomyślnie dodano nowy okręg.');
-  //   }, error => {
-  //     this.alertify.error(error);
-  //   });
-  // }
 }

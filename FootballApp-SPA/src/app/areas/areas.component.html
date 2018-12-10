@@ -3,17 +3,3 @@
   <mat-card *ngFor="let area of areas">
     <a [routerLink]="['/areas/', area.id]">{{area.name}}</a>
   </mat-card>
-  <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj okręg</button>
-  
-  <div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
-      <div>
-          <form #addAreaForm="ngForm" id="addAreaForm" (ngSubmit)="addArea()">
-            <div class="form-group">
-              <label for="areaName">Nazwa okręgu</label>
-              <input type="text" class="form-control" id="areaName" name="areaName" [(ngModel)]="model.name" placeholder="Wpisz nazwę okręgu" required>
-            </div>
-            <button type="submit" [disabled]="!addAreaForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
-            <small *ngIf="!addAreaForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
-          </form>
-      </div>
-</div>
