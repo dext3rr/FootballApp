@@ -2,18 +2,15 @@
   <div class="container">
     <a class="navbar-brand" [routerLink]="['/home']">eFutbol</a>
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/areas']">Okręgi</a>
+      <li *appHasRole="['Użytkownik','Moderator','Administrator']" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/areas']">Sezony</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li *appHasRole="['Użytkownik','Moderator','Administrator']" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/teams']">Drużyny</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li *appHasRole="['Użytkownik','Moderator','Administrator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/players']">Zawodnicy</a>
         </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/feed']">Tablica</a>
-      </li>
       <li *appHasRole="['Administrator']" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/admin']">Panel administracyjny</a>
       </li>

@@ -8,8 +8,7 @@ namespace FootballApp.Dtos
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Country { get; set; }
-        public string Status { get; set; }
-        public int Number { get; set; }
         public int TeamId { get; set; }
+        public int PositionId { get; set; }
     }
 }

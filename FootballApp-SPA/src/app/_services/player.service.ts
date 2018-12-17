@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Player } from '../_models/Player';
+import { Position } from '../_models/Position';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ getPlayer(id): Observable<Player> {
 
 getPlayers(): Observable<Player[]> {
   return this.http.get<Player[]>(this.baseUrl + 'players');
+}
+
+getPositions(): Observable<Position[]> {
+  return this.http.get<Position[]>(this.baseUrl + 'players/positions');
 }
 
 addPlayer(model: any) {

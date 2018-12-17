@@ -43,6 +43,14 @@ namespace FootballApp.Controllers
             return Ok(player);
         }
 
+        [HttpGet("positions")]
+        public async Task<IActionResult> GetPositions() 
+        {
+            var positions = await _repo.GetPositions();
+
+            return Ok(positions);
+        }
+
         [HttpGet("teams/{teamId}")]
         public async Task<IActionResult> GetTeamPlayers(int teamId)
         {

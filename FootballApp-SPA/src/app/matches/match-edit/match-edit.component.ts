@@ -78,13 +78,13 @@ export class MatchEditComponent implements OnInit {
     let awayGoals = 0;
     this.goals.forEach(goal => {
       if (goal.player.teamId === this.match.homeTeamId) {
-        if (goal.ownGoal) {
+        if (goal.isOwnGoal) {
           awayGoals++;
         } else {
           homeGoals++;
         }
       } else if (goal.player.teamId === this.match.awayTeamId) {
-        if (goal.ownGoal) {
+        if (goal.isOwnGoal) {
           homeGoals++;
         } else {
           awayGoals++;
@@ -93,7 +93,6 @@ export class MatchEditComponent implements OnInit {
     });
     this.match.homeGoals = homeGoals;
     this.match.awayGoals = awayGoals;
-    this.match.hasEnded = true;
     this.matchService.updateMatch(+this.matchId, this.match).subscribe(next => {
       this.alertify.success('Zaktualizowano mecz.');
     }, error => {

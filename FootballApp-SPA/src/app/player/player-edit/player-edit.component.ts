@@ -7,6 +7,7 @@ import { PlayerService } from 'src/app/_services/player.service';
 import { Team } from 'src/app/_models/team';
 import { TeamService } from 'src/app/_services/team.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { Position } from 'src/app/_models/Position';
 
 @Component({
   selector: 'app-player-edit',
@@ -16,6 +17,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap';
 export class PlayerEditComponent implements OnInit {
   player: Player;
   teams: Team[];
+  positions: Position[];
   bsConfig: Partial<BsDatepickerConfig>;
   @ViewChild('editForm') editForm: NgForm;
   @HostListener('window:beforeunload', ['$event'])
@@ -26,7 +28,7 @@ export class PlayerEditComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
-    private playerService: PlayerService, private teamService: TeamService) { }
+    private playerService: PlayerService, private teamService: TeamService, private router: Router) { }
 
   ngOnInit() {
     this.bsConfig = {
@@ -36,12 +38,14 @@ export class PlayerEditComponent implements OnInit {
       this.player = data['player'];
     });
     this.getTeams();
+    this.getPositions();
   }
 
   updatePlayer() {
     this.playerService.updatePlayer(this.player.id, this.player).subscribe(next => {
       this.alertify.success('Zaktualizowano zawodnika');
       this.editForm.reset(this.player);
+      this.router.navigate(['/player/' + this.player.id]);
     }, error => {
       this.alertify.error(error);
     });
@@ -50,6 +54,14 @@ export class PlayerEditComponent implements OnInit {
   getTeams() {
     this.teamService.getTeams().subscribe((teams: Team[]) => {
       this.teams = teams;
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  getPositions() {
+    this.playerService.getPositions().subscribe((positions: Position[]) => {
+      this.positions = positions;
     }, error => {
       this.alertify.error(error);
     });

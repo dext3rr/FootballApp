@@ -1,77 +1,89 @@
 <div class="container mt-5">
-  <h2 class="text-center text-primary">{{ league?.name }}</h2>
+  <h2 class="text-center text-primary mb-5">{{ league?.name }} ({{ league?.area.name }})</h2>
   <div class="container mt-2">
-    <h3 clas="text-primary">Sezon
-      <div class="row">
-      <div class="col-sm-5">
-        <mat-select class="form-control" id="season" [(ngModel)]="seasonId" required>
+    <form class="form-inline ml-2 mb-4">
+      <div class="form-group mb-2">
+        <label style="font-size: 20px; margin-right: 20px;">Wybierz sezon</label>
+        <mat-select class="form-control" id="season" name="season" [(ngModel)]="seasonId" required>
           <mat-option *ngFor="let season of seasons" [value]="season.id">{{season.year}}</mat-option>
         </mat-select>
       </div>
-      <div class="col-sm-3" style="font-size: 20px">Edytuj sezon</div>
-      <div class="col-sm-3" style="font-size: 20px">Usuń sezon</div>
+      <button type="submit" class="btn btn-primary mb-2" (click)="loadSeason(seasonId)">Zatwierdź</button>
+    </form>
+
+    <div *ngIf="seasonChosen">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>Poz.</th>
+          <td mat-cell *matCellDef="let i = index">
+            <div class="row">
+              <div class="label"></div>
+              <p style="margin-left: 20px; margin-top: 12px;">{{ i + 1 }}</p>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="teamId">
+          <th mat-header-cell *matHeaderCellDef> Drużyna </th>
+          <td mat-cell *matCellDef="let seasonTeams"><a [routerLink]="['/teams/', seasonTeams.teamId]">{{
+              seasonTeams.team.name }}</a></td>
+        </ng-container>
+
+        <ng-container matColumnDef="matches">
+          <th mat-header-cell *matHeaderCellDef> Mecze </th>
+          <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.matches }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="wins">
+          <th mat-header-cell *matHeaderCellDef> Wygrane </th>
+          <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.wins }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="draws">
+          <th mat-header-cell *matHeaderCellDef> Remisy </th>
+          <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.draws }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="losses">
+          <th mat-header-cell *matHeaderCellDef> Porażki </th>
+          <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.losses }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="goalsScored">
+          <th mat-header-cell *matHeaderCellDef> ZB </th>
+          <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.goalsScored }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="goalsConceded">
+          <th mat-header-cell *matHeaderCellDef> SB </th>
+          <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.goalsConceded }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="points">
+          <th mat-header-cell *matHeaderCellDef> PKT </th>
+          <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.points }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div class="legend mt-3">
+        <p>Legenda:</p>
+        <div class="row">
+          <div class="label-info" style="background-color: lightgreen"></div>
+          <p>Awans do wyższej ligi</p>
+          <div class="label-info" style="background-color: red"></div>
+          <p>Spadek do niższej ligi</p>
+        </div>
+        <div class="row ml-1">
+          <p><strong>ZB</strong> - zdobyte bramki</p>
+          <p><strong>SB</strong> - stracone bramki</p>
+          <p><strong>PKT</strong> - punkty</p>
+        </div>
+      </div>
+      <app-fixtures [seasonId]="seasonId"></app-fixtures>
     </div>
-    </h3>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-      <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef>Poz.</th>
-        <td mat-cell *matCellDef="let i = index">{{ i + 1 }}</td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="teamId">
-        <th mat-header-cell *matHeaderCellDef> Drużyna </th>
-        <td mat-cell *matCellDef="let seasonTeams"><a [routerLink]="['/teams/', seasonTeams.teamId]">{{
-            seasonTeams.team.name }}</a></td>
-      </ng-container>
-      <!-- Weight Column -->
-      <ng-container matColumnDef="matches">
-        <th mat-header-cell *matHeaderCellDef> Mecze </th>
-        <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.matches }} </td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="wins">
-        <th mat-header-cell *matHeaderCellDef> Wygrane </th>
-        <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.wins }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="draws">
-        <th mat-header-cell *matHeaderCellDef> Remisy </th>
-        <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.draws }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="losses">
-        <th mat-header-cell *matHeaderCellDef> Porażki </th>
-        <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.losses }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="goalsScored">
-        <th mat-header-cell *matHeaderCellDef> ZB </th>
-        <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.goalsScored }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="goalsConceded">
-        <th mat-header-cell *matHeaderCellDef> SB </th>
-        <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.goalsConceded }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="points">
-        <th mat-header-cell *matHeaderCellDef> PKT </th>
-        <td mat-cell *matCellDef="let seasonTeams"> {{ seasonTeams.points }} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-    <app-fixtures [seasonId]="seasonId"></app-fixtures>
-
-
   </div>
 </div>

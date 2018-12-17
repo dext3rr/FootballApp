@@ -78,6 +78,7 @@ export class FixtureDetailComponent implements OnInit {
       this.matchService.addMatch(this.model).subscribe(() => {
         this.alertify.success('Pomyślnie dodano nowy mecz.');
         this.loadFixureMatches();
+        this.toggleForm();
       }, error => {
         this.alertify.error(error);
       });

@@ -44,7 +44,8 @@ namespace FootballApp.Controllers
             var seasonTeams = await _context.SeasonTeams
             .Include(t => t.Team)
             .Where(x => x.SeasonId == seasonId)
-            .OrderByDescending(p => p.Points).ToListAsync();
+            .OrderByDescending(p => p.Points)
+            .ToListAsync();
             return Ok(seasonTeams);
         }
 
@@ -84,16 +85,5 @@ namespace FootballApp.Controllers
 
             return Ok();
         }
-        
-
-
-        //  [AllowAnonymous]
-        // [HttpGet("teams/{leagueId}")]
-
-        // public async Task<IActionResult> getLeagueTeams(int leagueId)
-        // {
-        //     var teams = await _context.Teams.Where(x => x.LeagueId == leagueId).ToListAsync();
-        //     return Ok(teams);
-        // }
     }
 }

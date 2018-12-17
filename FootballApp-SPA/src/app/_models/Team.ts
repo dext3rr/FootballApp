@@ -4,7 +4,7 @@ import { League } from './league';
 export interface Team {
     id: number;
     name: string;
-    adress: string;
+    address: string;
     email: string;
     telephone: string;
     managerId: number;

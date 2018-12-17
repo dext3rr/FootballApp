@@ -1,19 +1,33 @@
-<div class="container mt-5">
-  <h2 class="text-center text-primary">Kolejki</h2>
-  <h3 class="text-primary" *ngFor="let fixture of fixtures">Kolejka {{fixture.number}}
-    <button class="btn btn-info btn-sm" [routerLink]="['/fixtures/', fixture.id]">Szczegóły</button>
-  </h3>
-  <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj kolejkę</button>
-  
-  <div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
-      <div>
-          <form #addFixtureForm="ngForm" id="addFixtureForm" (ngSubmit)="addFixture()">
-            <div class="form-group">
-              <label for="fixtureNumber">Numer kolejki</label>
-              <input type="number" class="form-control" id="fixtureNumber" name="areaName" [(ngModel)]="model.number" placeholder="Wpisz numer kolejki" required>
-            </div>
-            <button type="submit" [disabled]="!addFixtureForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
-            <small *ngIf="!addFixtureForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
-          </form>
+<h2 class="text-primary mt-3">Kolejki</h2>
+<div *ngIf="fixtures?.length > 0; else noFixtures">
+  <mat-card style="width:50%" class="mt-1" *ngFor="let fixture of fixtures">
+      <div class="row">
+        <div class="col-sm-3" style="text-align: center; margin: auto;">Kolejka {{fixture.number}}</div>
+        <div class="col-sm-2" style="text-align: center; margin: auto;">
+          <button mat-raised-button class="btn-primary w-5" [routerLink]="['/fixtures/', fixture.id]">Szczegóły</button>
+        </div>
+        <div class="col-sm-2" style="text-align: center; margin: auto;">
+          <button mat-raised-button class="btn-danger w-5" (click)="deleteFixture(fixture.id);">Usuń</button>
+        </div>
       </div>
+  </mat-card>
+</div>
+<ng-template #noFixtures>
+  <p>Brak dostępnych kolejek.</p>
+</ng-template>
+
+<button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj kolejkę</button>
+
+<div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
+  <div>
+    <form #addFixtureForm="ngForm" id="addFixtureForm" (ngSubmit)="addFixture()">
+      <div class="form-group">
+        <label for="fixtureNumber">Numer kolejki</label>
+        <input type="number" class="form-control" id="fixtureNumber" name="areaName" [(ngModel)]="model.number"
+          placeholder="Wpisz numer kolejki" focus-scroll required>
+      </div>
+      <button type="submit" [disabled]="!addFixtureForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+      <small *ngIf="!addFixtureForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+    </form>
+  </div>
 </div>

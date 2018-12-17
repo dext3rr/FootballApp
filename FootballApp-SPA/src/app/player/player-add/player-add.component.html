@@ -23,15 +23,9 @@
           <mat-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</mat-option>
         </mat-select>
         <label for="position">Pozycja</label>
-        <mat-select class="form-control" [(ngModel)]="model.status" id="position" name="position" placeholder="Wybierz pozycję" required>
-          <mat-option value="Bramkarz"> Bramkarz </mat-option>
-          <mat-option value="Obrońca"> Obrońca </mat-option>
-          <mat-option value="Pomocnik"> Pomocnik </mat-option>
-          <mat-option value="Napastnik"> Napastnik </mat-option>
+        <mat-select class="form-control" [(ngModel)]="model.positionId" id="position" name="position" placeholder="Wybierz pozycję" required>
+          <mat-option *ngFor="let position of positions" value="{{position.id}}">{{position.name}}</mat-option>
         </mat-select>
-        <label for="number">Numer</label>
-        <input type="number" class="form-control" id="nummber" name="number" [(ngModel)]="model.number" placeholder="Wpisz numer zawodnika"
-          required>
       </div>
       <button type="submit" [disabled]="!newPlayerForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
       <small *ngIf="!newPlayerForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { NgForm } from '@angular/forms';
 import { Team } from 'src/app/_models/team';
+import { Position } from 'src/app/_models/Position';
 import { TeamService } from 'src/app/_services/team.service';
 
 @Component({
@@ -15,6 +16,7 @@ import { TeamService } from 'src/app/_services/team.service';
 
 export class PlayerAddComponent implements OnInit {
   teams: Team[];
+  positions: Position[];
   model: any = {};
   bsConfig: Partial<BsDatepickerConfig>;
   @ViewChild('newPlayerForm') newPlayerForm: NgForm;
@@ -33,6 +35,7 @@ export class PlayerAddComponent implements OnInit {
       containerClass: 'theme-red'
     },
     this.getTeams();
+    this.getPositions();
   }
 
   getTeams() {
@@ -43,8 +46,14 @@ export class PlayerAddComponent implements OnInit {
     });
   }
 
+
+
   getPositions() {
-    
+    this.playerService.getPositions().subscribe((positions: Position[]) => {
+      this.positions = positions;
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
   addPlayer() {

@@ -23,7 +23,10 @@ namespace FootballApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> getGoal(int id)
         {
-            var goal = await _context.Goals.FirstOrDefaultAsync(x => x.Id == id);
+            var goal = await _context.Goals
+            .Include(p => p.Player)
+            .ThenInclude(t => t.Team)
+            .FirstOrDefaultAsync(x => x.Id == id);
             return Ok(goal);
         }
      
@@ -33,6 +36,7 @@ namespace FootballApp.Controllers
         {
             var goals = await _context.Goals
             .Include(p => p.Player)
+            .ThenInclude(t => t.Team)
             .Where(x => x.MatchId == id)
             .OrderBy( m => m.Minute).ToListAsync();
             return Ok(goals);

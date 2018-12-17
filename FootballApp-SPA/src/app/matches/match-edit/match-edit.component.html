@@ -20,18 +20,18 @@
         <div class="col-sm-3 text-center" style="margin: auto;">{{ goal?.player.name }} {{ goal?.player.surname }}</div>
         <div class="col-sm-1 text-center" style="margin: auto;">{{ goal?.minute }}'</div>
         <div class="col-sm-2 text-center" style="margin: auto;">
-          <div *ngIf="!goal?.ownGoal">
+          <div *ngIf="!goal?.isOwnGoal">
             <i class="fa fa-times" aria-hidden="true"></i>
           </div>
-          <div *ngIf="goal?.ownGoal">
+          <div *ngIf="goal?.isOwnGoal">
             <i class="fa fa-check" aria-hidden="true"></i>
           </div>
         </div>
         <div class="col-sm-2 text-center" style="margin: auto;">
-          <div *ngIf="!goal?.penalty">
+          <div *ngIf="!goal?.isPenalty">
             <i class="fa fa-times" aria-hidden="true"></i>
           </div>
-          <div *ngIf="goal?.penalty">
+          <div *ngIf="goal?.isPenalty">
             <i class="fa fa-check" aria-hidden="true"></i>
           </div>
         </div>
@@ -82,12 +82,12 @@
               <legend class="col-form-label col-sm-2 pt-0">Typ bramki</legend>
               <div class="col-sm-10">
                 <div class="form-check">
-                  <div *ngIf="model.penalty;else notPenalty">
-                    <input class="form-check-input" type="checkbox" name="goalOwn" id="goalOwn" [(ngModel)]="model.ownGoal"
+                  <div *ngIf="model.isPenalty;else notPenalty">
+                    <input class="form-check-input" type="checkbox" name="goalOwn" id="goalOwn" [(ngModel)]="model.isOwnGoal"
                       value="false" disabled>
                   </div>
                   <ng-template #notPenalty>
-                    <input class="form-check-input" type="checkbox" name="goalOwn" id="goalOwn" [(ngModel)]="model.ownGoal"
+                    <input class="form-check-input" type="checkbox" name="goalOwn" id="goalOwn" [(ngModel)]="model.isOwnGoal"
                       value="true">
                   </ng-template>
                   <label class="form-check-label" for="goalOwn">
@@ -95,12 +95,12 @@
                   </label>
                 </div>
                 <div class="form-check">
-                  <div *ngIf="model.ownGoal;else notOwnGoal">
-                    <input class="form-check-input" type="checkbox" name="goalPenalty" id="goalPenalty" [(ngModel)]="model.penalty"
+                  <div *ngIf="model.isOwnGoal;else notOwnGoal">
+                    <input class="form-check-input" type="checkbox" name="goalPenalty" id="goalPenalty" [(ngModel)]="model.isPenalty"
                       value="false" disabled>
                   </div>
                   <ng-template #notOwnGoal>
-                    <input class="form-check-input" type="checkbox" name="goalPenalty" id="goalPenalty" [(ngModel)]="model.penalty"
+                    <input class="form-check-input" type="checkbox" name="goalPenalty" id="goalPenalty" [(ngModel)]="model.isPenalty"
                       value="true">
                   </ng-template>
                   <label class="form-check-label" for="goalPenalty">

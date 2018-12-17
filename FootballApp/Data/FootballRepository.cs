@@ -70,7 +70,7 @@ namespace FootballApp.Data
 
         public async Task<IEnumerable<Player>> GetPlayers()
         {
-            var players = await _context.Players.ToListAsync();
+            var players = await _context.Players.OrderBy(x => x.Surname).ToListAsync();
 
             return players;
         }
@@ -98,9 +98,20 @@ namespace FootballApp.Data
             }
         }
 
+        public async Task<IEnumerable<Position>> GetPositions()
+        {
+            var positions = await _context.Positions.ToListAsync();
+
+            return positions;
+        }
+        
+
         public async Task<Team> GetTeam(int id)
         {
-            var team = await _context.Teams.FirstOrDefaultAsync(t => t.Id == id);
+            var team = await _context.Teams
+            .Include(l => l.League)
+            .ThenInclude(a => a.Area)
+            .FirstOrDefaultAsync(t => t.Id == id);
 
             return team;
         }

@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h2 class="text-center text-primary">Okręgi</h2>
-  <mat-card *ngFor="let area of areas">
-    <a [routerLink]="['/areas/', area.id]">{{area.name}}</a>
+  <h2 class="text-center text-primary mb-5">Wybierz okręg</h2>
+  <mat-card class="text-center mb-2" style="width: 30%; margin: 0 auto;" *ngFor="let area of areas">
+    <a style="font-size: 18px;" [routerLink]="['/areas/', area.id]">{{area.name}}</a>
   </mat-card>

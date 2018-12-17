@@ -35,7 +35,9 @@ namespace FootballApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> getLeague(int id)
         {
-            var league = await _context.Leagues.FirstOrDefaultAsync(x => x.Id == id);
+            var league = await _context.Leagues
+            .Include(a => a.Area)
+            .FirstOrDefaultAsync(x => x.Id == id);
             return Ok(league);
         }
 

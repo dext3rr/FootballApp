@@ -1,49 +1,53 @@
 <div class="container mt-5">
-    <h2 class="text-center text-primary mb-5">Kolejka {{ fixture?.number}}</h2>
+  <h2 class="text-center text-primary mb-5">Kolejka {{ fixture?.number}}</h2>
+  <div *ngIf="matches?.length > 0; else noMatches">
     <mat-card class="mt-1" *ngFor="let match of matches">
-    <div style="margin: 0 auto;">
-      <div class="row">
-        <div class="col-sm-2" style="text-align: center; margin: auto;">{{ match.dateOfMatch | date: 'dd/MM/yy' }}</div>
-        <div class="col-sm-3">
-          <img class="img-thumbnail" style="margin-right: 10px;" src="{{ match.homeTeam.photoUrl }}" alt="image">
-          {{ match.homeTeam.name }}</div>
-        <div class="col-sm-2" style="text-align: center; margin: auto;">{{ match.homeGoals }}:{{ match.awayGoals }}</div>
-        <div class="col-sm-3" style="text-align: right; margin: auto">
-          {{ match.awayTeam.name }}
-          <img class="img-thumbnail" style="margin-left: 10px;" src="{{ match.homeTeam.photoUrl }}" alt="image">
-        </div>
-        <div class="col-sm-2" style="text-align: center; margin: auto;">
-          <button mat-raised-button class="btn-primary w-10" [routerLink]="['/matches/', match.id]">Szczegóły</button>
+      <div style="margin: 0 auto;">
+        <div class="row">
+          <div class="col-sm-2" style="text-align: center; margin: auto;">{{ match.dateOfMatch | date: 'dd/MM/yy' }}</div>
+          <div class="col-sm-3">
+            <img class="img-thumbnail" style="margin-right: 10px;" src="{{ match.homeTeam.photoUrl }}" alt="image">
+            {{ match.homeTeam.name }}</div>
+          <div class="col-sm-2" style="text-align: center; margin: auto;">{{ match.homeGoals }}:{{ match.awayGoals }}</div>
+          <div class="col-sm-3" style="text-align: right; margin: auto">
+            {{ match.awayTeam.name }}
+            <img class="img-thumbnail" style="margin-left: 10px;" src="{{ match.homeTeam.photoUrl }}" alt="image">
+          </div>
+          <div class="col-sm-2" style="text-align: center; margin: auto;">
+            <button mat-raised-button class="btn-primary w-10" [routerLink]="['/matches/', match.id]">Szczegóły</button>
+          </div>
         </div>
       </div>
-    </div>
     </mat-card>
+  </div>
+  <ng-template #noMatches>
+    <p>Brak dostępnych meczów w wybranej kolejce.</p>
+  </ng-template>
 
-    <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj mecz</button>
-    <div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
-      <div>
-        <form #addMatchForm="ngForm" id="addMatchForm" (ngSubmit)="addMatch()">
-          <div class="form-group">
-            <label for="team">Gospodarz</label>
-            <mat-select class="form-control" id="team" name="team" [(ngModel)]="model.homeTeamId" placeholder="Wybierz gospodarza">
-              <mat-option *ngFor="let seasonTeam of seasonTeams" value="{{seasonTeam.team.id}}">{{seasonTeam.team.name}}</mat-option>
-            </mat-select>
-          </div>
-          <div class="form-group">
+  <button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj mecz</button>
+  <div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
+    <div>
+      <form #addMatchForm="ngForm" id="addMatchForm" (ngSubmit)="addMatch()">
+        <div class="form-group">
+          <label for="team">Gospodarz</label>
+          <mat-select class="form-control" id="team" name="team" [(ngModel)]="model.homeTeamId" placeholder="Wybierz gospodarza">
+            <mat-option *ngFor="let seasonTeam of seasonTeams" value="{{seasonTeam.team.id}}">{{seasonTeam.team.name}}</mat-option>
+          </mat-select>
+        </div>
+        <div class="form-group">
           <label for="team">Gość</label>
           <mat-select class="form-control" id="team" name="team" [(ngModel)]="model.awayTeamId" placeholder="Wybierz gościa">
             <mat-option *ngFor="let seasonTeam of seasonTeams" value="{{seasonTeam.team.id}}">{{seasonTeam.team.name}}</mat-option>
           </mat-select>
-          </div>
-          <div class="form-group">
+        </div>
+        <div class="form-group">
           <label for="dateOfBirth">Data spotkania</label>
-          <input type="text" autocomplete="off" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth" name="dateOfBirth"
-            [(ngModel)]="model.dateOfMatch" placeholder="Wybierz datę spotkania" required>
-          </div>
-          <button type="submit" [disabled]="!addMatchForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
-          <small *ngIf="!addMatchForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
-        </form>
-      </div>
+          <input type="text" autocomplete="off" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth"
+            name="dateOfBirth" [(ngModel)]="model.dateOfMatch" placeholder="Wybierz datę spotkania" required>
+        </div>
+        <button type="submit" [disabled]="!addMatchForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+        <small *ngIf="!addMatchForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+      </form>
     </div>
+  </div>
 </div>
-  

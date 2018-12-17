@@ -24,6 +24,7 @@ namespace FootballApp.Data
          Task<IEnumerable<Player>> GetTeamPlayers(int teamId);
          Task AddPlayer(Player player);
          Task DeletePlayer(int id);
+         Task<IEnumerable<Position>> GetPositions();
 
 
     }

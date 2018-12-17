@@ -19,19 +19,13 @@
       <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth" name="dateOfBirth"
         [(ngModel)]="player.dateOfBirth" placeholder="Wpisz datę urodzenia zawodnika" required>
       <label for="team">Drużyna</label>
-      <select class="form-control" id="team" name="team" [(ngModel)]="player.teamId">
-        <option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</option>
-      </select>
+      <mat-select class="form-control" id="team" name="team" [(ngModel)]="player.teamId" placeholder="{{player.team.name}}">
+        <mat-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</mat-option>
+      </mat-select>
       <label for="position">Pozycja</label>
-      <select class="form-control" [(ngModel)]="player.status" id="position" name="position">
-        <option value="Bramkarz"> Bramkarz </option>
-        <option value="Obrońca"> Obrońca </option>
-        <option value="Pomocnik"> Pomocnik </option>
-        <option value="Napastnik"> Napastnik </option>
-      </select>
-      <label for="number">Numer</label>
-      <input type="number" class="form-control" id="nummber" name="number" [(ngModel)]="player.number" placeholder="Wpisz numer zawodnika"
-        required>
+      <mat-select class="form-control" [(ngModel)]="player.positionId" id="position" name="position" placeholder="{{player.position.name}}" required>
+        <mat-option *ngFor="let position of positions" value="{{position.id}}">{{position.name}}</mat-option>
+      </mat-select>
     </div>
     <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
     <small *ngIf="!editForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>

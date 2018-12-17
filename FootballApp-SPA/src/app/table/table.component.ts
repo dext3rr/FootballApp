@@ -16,7 +16,6 @@ import { TeamService } from '../_services/team.service';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-
   league: League;
   leagueId: number;
   teams: Team[];
@@ -28,6 +27,7 @@ export class TableComponent implements OnInit {
   season: Season;
   dataSource: any;
   seasonTeamId: number;
+  seasonChosen: boolean;
 
   displayedColumns: string[] = ['position', 'teamId', 'matches', 'wins', 'draws', 'losses', 'goalsScored', 'goalsConceded', 'points'];
 
@@ -37,10 +37,9 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.loadLeague();
     this.loadSeasons();
-    this.loadSeasonTeams();
-
+    this.loadSeasonTeams(1);
+    this.seasonChosen = false;
   }
-
 
   loadLeague() {
     this.leagueId = this.route.snapshot.params['id'];
@@ -59,9 +58,14 @@ export class TableComponent implements OnInit {
     });
   }
 
+  loadSeason(id: number) {
+    this.seasonChosen = true;
+    this.loadSeasonTeams(id);
+  }
 
-  loadSeasonTeams() {
-    this.tableService.getSeasonTeams(1).subscribe((seasonTeams: SeasonTeam[]) => {
+
+  loadSeasonTeams(id: number) {
+    this.tableService.getSeasonTeams(id).subscribe((seasonTeams: SeasonTeam[]) => {
       this.seasonTeams = seasonTeams;
       this.dataSource = new MatTableDataSource(seasonTeams);
     }, error => {
