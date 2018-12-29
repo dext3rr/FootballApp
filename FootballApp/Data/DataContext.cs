@@ -22,6 +22,8 @@ namespace FootballApp.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<SeasonStatus> SesonStatuses { get; set; }
+        public DbSet<PlayerLike> PlayerLikes { get; set; }
+        public DbSet<TeamLike> TeamLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,6 +52,24 @@ namespace FootballApp.Data
             .HasOne(p => p.Team)
             .WithMany(p => p.Players)
             .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<PlayerLike>()
+                .HasKey(pl => new {pl.UserLikerId, pl.PlayerLikedId});
+
+            modelBuilder.Entity<PlayerLike>()
+                .HasOne(u => u.PlayerLiked)
+                .WithMany(u => u.LikedUsers)
+                .HasForeignKey(u => u.PlayerLikedId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TeamLike>()
+                .HasKey(tl => new {tl.UserLikerId, tl.TeamLikedId});
+
+            modelBuilder.Entity<TeamLike>()
+                .HasOne(u => u.TeamLiked)
+                .WithMany(u => u.LikedUsers)
+                .HasForeignKey(u => u.TeamLikedId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
           

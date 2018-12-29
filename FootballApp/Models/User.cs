@@ -12,5 +12,7 @@ namespace FootballApp.Models
         public string Email { get; set; }
         public DateTime AccountCreationDate { get; set; } 
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<PlayerLike> PlayerLikes { get; set; }
+        public ICollection<TeamLike> TeamLikes { get; set; }
     }
 }

@@ -1,6 +1,9 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FootballApp.Data;
+using FootballApp.Dtos;
 using FootballApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +17,12 @@ namespace FootballApp.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly IFootballRepository _repo;
+        private readonly IMapper _mapper;
 
-        public TeamsController(IFootballRepository repo)
+        public TeamsController(IFootballRepository repo, IMapper mapper)
         {
             _repo = repo;
+             _mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -67,6 +72,19 @@ namespace FootballApp.Controllers
             await _repo.AddTeam(team);
 
             return StatusCode(201);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTeam(int id, TeamForUpdateDto teamForUpdateDto) {
+
+            var teamFromRepo = await _repo.GetTeam(id);
+
+            _mapper.Map(teamForUpdateDto, teamFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+            
+            throw new Exception($"Nie udało się zaktualizować danych drużyny o id {id}.");
         }
 
         [HttpDelete("{id}/deleteTeam")]

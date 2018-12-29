@@ -27,6 +27,8 @@ namespace FootballApp.Data
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
+           // var teamsLiked = await GetUserLikedTeams
+
             return user;
         }
 
@@ -150,6 +152,37 @@ namespace FootballApp.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+
+        public async Task<PlayerLike> GetPlayerLike(int userId, int playerId){
+            return await _context.PlayerLikes
+            .FirstOrDefaultAsync(u => u.UserLikerId == userId && u.PlayerLikedId == playerId);
+        }
+
+        public async Task<TeamLike> GetTeamLike(int userId, int teamId){
+            return await _context.TeamLikes
+            .FirstOrDefaultAsync(u => u.UserLikerId == userId && u.TeamLikedId == teamId);
+        }
+
+         public async Task<IEnumerable<PlayerLike>> GetUserLikedPlayers(int userId)
+        {
+            var players = await _context.PlayerLikes
+            .Where(x => x.UserLikerId == userId)
+            .Include(p => p.PlayerLiked)
+            .ToListAsync();
+
+            return players;
+        }
+
+           public async Task<IEnumerable<TeamLike>> GetUserLikedTeams(int userId)
+        {
+            var teams = await _context.TeamLikes
+            .Where(x => x.UserLikerId == userId)
+            .Include(p => p.TeamLiked)
+            .ToListAsync();
+
+            return teams;
         }
     }
 }

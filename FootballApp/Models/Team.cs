@@ -15,5 +15,6 @@ namespace FootballApp.Models
         public int LeagueId { get; set; }
         public League League { get; set; }
         public ICollection<Player> Players { get; set; }
+        public ICollection<TeamLike> LikedUsers { get; set; }
     }
 }

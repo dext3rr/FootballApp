@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace FootballApp.Models
 {
@@ -14,5 +15,6 @@ namespace FootballApp.Models
         public int? TeamId { get; set; }
         public Team Team { get; set; }
         public string PhotoUrl { get; set; }
+        public ICollection<PlayerLike> LikedUsers { get; set; }
     }
 }

@@ -25,7 +25,9 @@ namespace FootballApp.Data
          Task AddPlayer(Player player);
          Task DeletePlayer(int id);
          Task<IEnumerable<Position>> GetPositions();
-
-
+         Task<PlayerLike> GetPlayerLike(int userId, int playerId);
+         Task<TeamLike> GetTeamLike(int userId, int teamId);
+         Task<IEnumerable<PlayerLike>> GetUserLikedPlayers(int userId);
+         Task<IEnumerable<TeamLike>> GetUserLikedTeams(int userId);
     }
 }

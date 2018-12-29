@@ -20,6 +20,13 @@ import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail
 import { MatchesComponent } from './matches/matches.component';
 import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { FavouriteTeamsComponent } from './favourite-teams/favourite-teams.component';
+import { FavouritePlayersComponent } from './favourite-players/favourite-players.component';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { TeamEditResolver } from './_resolvers/team-edit-resolver';
+import { TeamDetailResolver } from './_resolvers/team-detail-resolver';
+import { TeamAddComponent } from './teams/team-add/team-add.component';
+
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -33,7 +40,11 @@ export const appRoutes: Routes = [
             { path: 'leagues', component: LeaguesComponent},
             { path: 'teams', component: TeamsComponent,
             resolve: {teams: TeamsResolver}},
-            { path: 'teams/:id', component: TeamDetailComponent},
+            { path: 'teams/:id', component: TeamDetailComponent,
+            resolve: {team: TeamDetailResolver}},
+            { path: 'teams/addTeam', component: TeamAddComponent},
+            { path: 'teams/:id/edit', component: TeamEditComponent,
+            resolve: {player: TeamEditResolver}, canDeactivate: [PreventUnsavedChanges]},
             { path: 'feed', component: FeedComponent},
             { path: 'areas', component: AreasComponent},
             { path: 'areas/:id', component: LeaguesComponent},
@@ -49,7 +60,9 @@ export const appRoutes: Routes = [
             { path: 'leagues/:id', component: TableComponent},
             { path: 'fixtures/:id', component: FixtureDetailComponent },
             { path: 'matches/:id', component: MatchesComponent},
-            { path: 'matches/:id/edit', component: MatchEditComponent}
+            { path: 'matches/:id/edit', component: MatchEditComponent},
+            { path: 'favouriteTeams', component: FavouriteTeamsComponent},
+            { path: 'favouritePlayers', component: FavouritePlayersComponent}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'},

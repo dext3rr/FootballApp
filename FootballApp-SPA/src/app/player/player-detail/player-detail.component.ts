@@ -1,10 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from '../../_models/Player';
 import { PlayerService } from '../../_services/player.service';
 import { Team } from '../../_models/team';
 import { TeamService } from '../../_services/team.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-player-detail',
@@ -17,7 +18,8 @@ export class PlayerDetailComponent implements OnInit {
   team: Team;
   teamId: number;
 
-  constructor(private playerService: PlayerService, private teamService: TeamService, private alertify: AlertifyService,
+  constructor(private authService: AuthService, private playerService: PlayerService,
+    private teamService: TeamService, private alertify: AlertifyService,
     private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -36,6 +38,14 @@ export class PlayerDetailComponent implements OnInit {
     });
   }
 
+  likePlayer(playerId: number) {
+    this.playerService.likePlayer(this.authService.decodedToken.nameid, playerId).subscribe(data => {
+      this.alertify.success('Dodano zawodnika do ulubionych.');
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
   deletePlayer() {
     this.alertify.confirm('Czy na pewno chcesz usunąć zawodnika?', () => {
       this.playerService.deletePlayer(this.player.id).subscribe(() => {
@@ -43,8 +53,8 @@ export class PlayerDetailComponent implements OnInit {
         this.router.navigate(['/players']);
       }, error => {
         this.alertify.error('Nie udało się usunąć zawodnika.');
+      });
     });
-  });
   }
 }
 

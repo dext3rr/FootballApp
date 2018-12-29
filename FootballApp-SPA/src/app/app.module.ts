@@ -40,7 +40,6 @@ import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
 import { PlayersResolver } from './_resolvers/players.resolver';
 import { TeamsResolver } from './_resolvers/teams.resolver';
 import { TeamCardComponent } from './teams/team-card/team-card.component';
-import { PlayerAddComponent } from './player/player-add/player-add.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
 import { FixtureDetailComponent } from './fixtures/fixture-detail/fixture-detail.component';
 import { MatchesComponent } from './matches/matches.component';
@@ -61,6 +60,13 @@ import { SeasonManagementComponent } from './admin/season-management/season-mana
 import { SeasonEditModalComponent } from './admin/season-edit-modal/season-edit-modal.component';
 import { SeasonService } from './_services/season.service';
 import { SeasonTeamsService } from './_services/seasonTeams.service';
+import { FavouriteTeamsComponent } from './favourite-teams/favourite-teams.component';
+import { FavouritePlayersComponent } from './favourite-players/favourite-players.component';
+import { TeamAddComponent } from './teams/team-add/team-add.component';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { TeamEditResolver } from './_resolvers/team-edit-resolver';
+import { TeamDetailResolver } from './_resolvers/team-detail-resolver';
+import { PlayerAddComponent } from './player/player-add/player-add.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -74,6 +80,8 @@ export function tokenGetter() {
       RegisterComponent,
       LeaguesComponent,
       TeamsComponent,
+      TeamAddComponent,
+      TeamEditComponent,
       TeamCardComponent,
       FeedComponent,
       FooterComponent,
@@ -83,7 +91,6 @@ export function tokenGetter() {
       TeamDetailComponent,
       PlayerComponent,
       PlayerDetailComponent,
-      PlayerAddComponent,
       PlayerEditComponent,
       PlayerCardComponent,
       FixturesComponent,
@@ -102,8 +109,10 @@ export function tokenGetter() {
       LeagueEditModalComponent,
       SeasonManagementComponent,
       SeasonAddModalComponent,
-      SeasonEditModalComponent
-
+      SeasonEditModalComponent,
+      FavouriteTeamsComponent,
+      FavouritePlayersComponent,
+      PlayerAddComponent
    ],
    imports: [
       BrowserModule,
@@ -138,6 +147,8 @@ export function tokenGetter() {
       SeasonService,
       SeasonTeamsService,
       TeamsResolver,
+      TeamEditResolver,
+      TeamDetailResolver,
       PlayersResolver,
       PlayerDetailResolver,
       PlayerEditResolver,

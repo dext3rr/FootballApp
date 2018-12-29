@@ -1,0 +1,14 @@
+using System;
+
+namespace FootballApp.Dtos
+{
+    public class TeamForUpdateDto
+    {
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string Telephone { get; set; }
+        public int ManagerId { get; set; }
+        public int LeagueId { get; set; }
+    }
+}

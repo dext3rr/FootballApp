@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from 'src/app/_models/team';
 import { TeamService } from 'src/app/_services/team.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from 'src/app/_models/Player';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-team-detail',
@@ -15,8 +16,8 @@ export class TeamDetailComponent implements OnInit {
   teamId: number;
   players: Player[];
 
-  constructor(private teamService: TeamService, private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private teamService: TeamService, private alertify: AlertifyService,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadTeam();
@@ -37,6 +38,25 @@ export class TeamDetailComponent implements OnInit {
       this.players = players;
     }, error => {
       this.alertify.error(error);
+    });
+  }
+
+  likeTeam(teamId: number) {
+    this.teamService.likeTeam(this.authService.decodedToken.nameid, teamId).subscribe(data => {
+      this.alertify.success('Dodano drużynę do ulubionych.');
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  deleteTeam() {
+    this.alertify.confirm('Czy na pewno chcesz usunąć drużynę?', () => {
+      this.teamService.deleteTeam(this.team.id).subscribe(() => {
+        this.alertify.success('Drużyna została usunięta.');
+        this.router.navigate(['/teams']);
+      }, error => {
+        this.alertify.error('Nie udało się usunąć drużyny.');
+      });
     });
   }
 }

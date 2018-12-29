@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">Nowa drużyna</h2>
+
+  <form #newTeamForm="ngForm" id="newTeamForm" style="width: 50%; margin: 0 auto;" (ngSubmit)="addTeam()">
+    <div class="form-group">
+      <div *ngIf="newTeamForm.dirty" class="alert alert-info">
+        <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
+      </div>
+      <label for="name">Nazwa drużyny</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="model.name" placeholder="Wpisz nazwę drużyny"
+        required>
+      <label for="address">Adres</label>
+      <input type="text" class="form-control" id="address" name="address" [(ngModel)]="model.address" placeholder="Wpisz adres"
+        required>
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" placeholder="Wpisz email"
+        required>
+      <label for="telephone">Telefon</label>
+      <input type="text" class="form-control" id="telephone" name="telephone"
+        [(ngModel)]="model.telephone" placeholder="Wpisz numer telefonu" required>
+      <label for="manager">Trener</label>
+      <mat-select class="form-control" id="manager" name="manager" [(ngModel)]="model.managerId" placeholder="Wybierz trenera">
+        <mat-option *ngFor="let manager of managers" value="{{manager.id}}">{{manager.name}} {{manager.surname}} </mat-option>
+      </mat-select>
+      <label for="league">Liga</label>
+      <mat-select class="form-control" [(ngModel)]="model.leagueId" id="league" name="league" placeholder="Wybierz lige" required>
+        <mat-option *ngFor="let league of leagues" value="{{league.id}}">{{league.name}}</mat-option>
+      </mat-select>
+    </div>
+    <button type="submit" [disabled]="!newTeamForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+    <small *ngIf="!newTeamForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+  </form>
+</div>

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181208225047_Initial")]
+    [Migration("20181229160329_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,6 +197,19 @@ namespace FootballApp.API.Migrations
                     b.ToTable("Players");
                 });
 
+            modelBuilder.Entity("FootballApp.Models.PlayerLike", b =>
+                {
+                    b.Property<int>("UserLikerId");
+
+                    b.Property<int>("PlayerLikedId");
+
+                    b.HasKey("UserLikerId", "PlayerLikedId");
+
+                    b.HasIndex("PlayerLikedId");
+
+                    b.ToTable("PlayerLikes");
+                });
+
             modelBuilder.Entity("FootballApp.Models.Position", b =>
                 {
                     b.Property<int>("Id")
@@ -230,13 +243,29 @@ namespace FootballApp.API.Migrations
 
                     b.Property<int>("LeagueId");
 
+                    b.Property<int>("SeasonStatusId");
+
                     b.Property<string>("Year");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LeagueId");
 
+                    b.HasIndex("SeasonStatusId");
+
                     b.ToTable("Seasons");
+                });
+
+            modelBuilder.Entity("FootballApp.Models.SeasonStatus", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("name");
+
+                    b.HasKey("id");
+
+                    b.ToTable("SesonStatuses");
                 });
 
             modelBuilder.Entity("FootballApp.Models.SeasonTeam", b =>
@@ -299,6 +328,19 @@ namespace FootballApp.API.Migrations
                     b.HasIndex("LeagueId");
 
                     b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("FootballApp.Models.TeamLike", b =>
+                {
+                    b.Property<int>("UserLikerId");
+
+                    b.Property<int>("TeamLikedId");
+
+                    b.HasKey("UserLikerId", "TeamLikedId");
+
+                    b.HasIndex("TeamLikedId");
+
+                    b.ToTable("TeamLikes");
                 });
 
             modelBuilder.Entity("FootballApp.Models.User", b =>
@@ -415,11 +457,29 @@ namespace FootballApp.API.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
+            modelBuilder.Entity("FootballApp.Models.PlayerLike", b =>
+                {
+                    b.HasOne("FootballApp.Models.Player", "PlayerLiked")
+                        .WithMany("LikedUsers")
+                        .HasForeignKey("PlayerLikedId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FootballApp.Models.User", "UserLiker")
+                        .WithMany("PlayerLikes")
+                        .HasForeignKey("UserLikerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("FootballApp.Models.Season", b =>
                 {
                     b.HasOne("FootballApp.Models.League", "League")
                         .WithMany()
                         .HasForeignKey("LeagueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FootballApp.Models.SeasonStatus", "SeasonStatus")
+                        .WithMany()
+                        .HasForeignKey("SeasonStatusId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -441,6 +501,19 @@ namespace FootballApp.API.Migrations
                     b.HasOne("FootballApp.Models.League", "League")
                         .WithMany()
                         .HasForeignKey("LeagueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("FootballApp.Models.TeamLike", b =>
+                {
+                    b.HasOne("FootballApp.Models.Team", "TeamLiked")
+                        .WithMany("LikedUsers")
+                        .HasForeignKey("TeamLikedId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FootballApp.Models.User", "UserLiker")
+                        .WithMany("TeamLikes")
+                        .HasForeignKey("UserLikerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

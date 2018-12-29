@@ -1,0 +1,8 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary mb-5">Ulubieni zawodnicy</h2>
+  <mat-card class="text-center mb-2" style="width: 50%; margin: 0 auto;" *ngFor="let favouritePlayer of favouritePlayers">
+    <a style="font-size: 18px;" 
+    [routerLink]="['/player/', favouritePlayer.playerLikedId]">
+    {{favouritePlayer.playerLiked.name}}   {{favouritePlayer.playerLiked.surname}}
+  </a>
+  </mat-card>

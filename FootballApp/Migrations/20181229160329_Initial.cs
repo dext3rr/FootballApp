@@ -47,6 +47,19 @@ namespace FootballApp.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SesonStatuses",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SesonStatuses", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -114,6 +127,7 @@ namespace FootballApp.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Year = table.Column<string>(nullable: true),
+                    SeasonStatusId = table.Column<int>(nullable: false),
                     HasTeams = table.Column<bool>(nullable: false),
                     LeagueId = table.Column<int>(nullable: false)
                 },
@@ -125,6 +139,12 @@ namespace FootballApp.API.Migrations
                         column: x => x.LeagueId,
                         principalTable: "Leagues",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Seasons_SesonStatuses_SeasonStatusId",
+                        column: x => x.SeasonStatusId,
+                        principalTable: "SesonStatuses",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -264,6 +284,30 @@ namespace FootballApp.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TeamLikes",
+                columns: table => new
+                {
+                    UserLikerId = table.Column<int>(nullable: false),
+                    TeamLikedId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamLikes", x => new { x.UserLikerId, x.TeamLikedId });
+                    table.ForeignKey(
+                        name: "FK_TeamLikes_Teams_TeamLikedId",
+                        column: x => x.TeamLikedId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TeamLikes_Users_UserLikerId",
+                        column: x => x.UserLikerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Matches",
                 columns: table => new
                 {
@@ -297,6 +341,30 @@ namespace FootballApp.API.Migrations
                         name: "FK_Matches_Teams_HomeTeamId",
                         column: x => x.HomeTeamId,
                         principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PlayerLikes",
+                columns: table => new
+                {
+                    UserLikerId = table.Column<int>(nullable: false),
+                    PlayerLikedId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlayerLikes", x => new { x.UserLikerId, x.PlayerLikedId });
+                    table.ForeignKey(
+                        name: "FK_PlayerLikes_Players_PlayerLikedId",
+                        column: x => x.PlayerLikedId,
+                        principalTable: "Players",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PlayerLikes_Users_UserLikerId",
+                        column: x => x.UserLikerId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -412,6 +480,11 @@ namespace FootballApp.API.Migrations
                 column: "HomeTeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PlayerLikes_PlayerLikedId",
+                table: "PlayerLikes",
+                column: "PlayerLikedId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Players_PositionId",
                 table: "Players",
                 column: "PositionId");
@@ -427,6 +500,11 @@ namespace FootballApp.API.Migrations
                 column: "LeagueId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Seasons_SeasonStatusId",
+                table: "Seasons",
+                column: "SeasonStatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SeasonTeams_SeasonId",
                 table: "SeasonTeams",
                 column: "SeasonId");
@@ -435,6 +513,11 @@ namespace FootballApp.API.Migrations
                 name: "IX_SeasonTeams_TeamId",
                 table: "SeasonTeams",
                 column: "TeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamLikes_TeamLikedId",
+                table: "TeamLikes",
+                column: "TeamLikedId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teams_LeagueId",
@@ -459,7 +542,13 @@ namespace FootballApp.API.Migrations
                 name: "Managers");
 
             migrationBuilder.DropTable(
+                name: "PlayerLikes");
+
+            migrationBuilder.DropTable(
                 name: "SeasonTeams");
+
+            migrationBuilder.DropTable(
+                name: "TeamLikes");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");
@@ -490,6 +579,9 @@ namespace FootballApp.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Leagues");
+
+            migrationBuilder.DropTable(
+                name: "SesonStatuses");
 
             migrationBuilder.DropTable(
                 name: "Areas");
