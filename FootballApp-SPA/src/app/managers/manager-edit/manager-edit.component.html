@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary">Edycja trenera</h2>
+
+  <form #editForm="ngForm" id="editForm" style="width: 50%; margin: 0 auto;" (ngSubmit)="updateManager()">
+    <div class="form-group">
+      <div *ngIf="editForm.dirty" class="alert alert-info">
+        <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
+      </div>
+      <label for="name">Imię</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="manager.name" placeholder="Wpisz imię trenera"
+        required>
+      <label for="surname">Nazwisko</label>
+      <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="manager.surname" placeholder="Wpisz nazwisko trenera"
+        required>
+      <label for="country">Kraj</label>
+      <input type="text" class="form-control" id="country" name="country" [(ngModel)]="manager.country" placeholder="Wpisz kraj pochodzenia trenera"
+        required>
+      <label for="dateOfBirth">Data urodzenia</label>
+      <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth" name="dateOfBirth"
+        [(ngModel)]="manager.dateOfBirth" placeholder="Wpisz datę urodzenia trenera" required>
+      <label for="team">Drużyna</label>
+      <mat-select class="form-control" id="team" name="team" [(ngModel)]="manager.teamId" placeholder="{{manager.team.name}}">
+        <mat-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</mat-option>
+      </mat-select>
+    </div>
+    <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+    <small *ngIf="!editForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
+  </form>
+</div>

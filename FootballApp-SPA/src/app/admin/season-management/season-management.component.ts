@@ -115,10 +115,10 @@ export class SeasonManagementComponent implements OnInit {
   deleteSeason(id, seasonYear) {
     this.alertify.confirm('Czy na pewno chcesz usunąć sezon \"' + seasonYear + '\" ?', () => {
       this.seasonService.deleteSeason(id).subscribe(() => {
-        this.alertify.success('Sezon została usunięta.');
+        this.alertify.success('Sezon został usunięty');
         this.getSeasons();
       }, error => {
-        this.alertify.error('Nie udało się usunąć sezonu.');
+        this.alertify.error('Nie udało się usunąć sezonu');
     });
   });
   }

@@ -19,6 +19,10 @@ namespace FootballApp.Data
          Task<Team> GetTeam(int id);
          Task AddTeam(Team team);
          Task DeleteTeam(int id);
+         Task<IEnumerable<Manager>> GetManagers();
+         Task<Manager> GetManager(int id);
+         Task AddManager(Manager manager);
+         Task DeleteManager(int id);
          Task<IEnumerable<Player>> GetPlayers();
          Task<Player> GetPlayer(int id);
          Task<IEnumerable<Player>> GetTeamPlayers(int teamId);

@@ -9,6 +9,9 @@
         <a class="nav-link" [routerLink]="['/teams']">Drużyny</a>
       </li>
       <li *appHasRole="['Użytkownik','Moderator','Administrator']" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/managers']">Trenerzy</a>
+      </li>
+      <li *appHasRole="['Użytkownik','Moderator','Administrator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/players']">Zawodnicy</a>
         </li>
       <li *appHasRole="['Administrator']" class="nav-item" routerLinkActive="active">

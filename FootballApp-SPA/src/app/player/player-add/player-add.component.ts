@@ -3,7 +3,7 @@ import { PlayerService } from 'src/app/_services/player.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Team } from 'src/app/_models/team';
 import { Position } from 'src/app/_models/Position';
 import { TeamService } from 'src/app/_services/team.service';
@@ -19,7 +19,7 @@ export class PlayerAddComponent implements OnInit {
   positions: Position[];
   model: any = {};
   bsConfig: Partial<BsDatepickerConfig>;
-  @ViewChild('newPlayerForm') newPlayerForm: NgForm;
+  @ViewChild('newPlayerForm') newPlayerForm: FormGroup;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     if (this.newPlayerForm.dirty) {
@@ -28,14 +28,27 @@ export class PlayerAddComponent implements OnInit {
   }
 
   constructor(private playerService: PlayerService, private teamService: TeamService,
-     private alertify: AlertifyService, private router: Router) { }
+    private formBuilder: FormBuilder, private alertify: AlertifyService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.createNewPlayerForm();
     this.bsConfig = {
       containerClass: 'theme-red'
     },
     this.getTeams();
     this.getPositions();
+  }
+
+  createNewPlayerForm() {
+    this.newPlayerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      country: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      teamId: ['', Validators.required],
+      positionId: ['', Validators.required],
+    });
   }
 
   getTeams() {
@@ -46,8 +59,6 @@ export class PlayerAddComponent implements OnInit {
     });
   }
 
-
-
   getPositions() {
     this.playerService.getPositions().subscribe((positions: Position[]) => {
       this.positions = positions;
@@ -57,7 +68,8 @@ export class PlayerAddComponent implements OnInit {
   }
 
   addPlayer() {
-    if (this.model.name) {
+    if (this.newPlayerForm.valid) {
+      this.model = Object.assign({}, this.newPlayerForm.value);
       this.playerService.addPlayer(this.model).subscribe(() => {
         this.alertify.success('Pomyślnie dodano nowego zawodnika.');
         this.router.navigate(['/players']);

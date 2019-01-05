@@ -47,16 +47,16 @@ namespace FootballApp.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SesonStatuses",
+                name: "SeasonStatuses",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SesonStatuses", x => x.id);
+                    table.PrimaryKey("PK_SeasonStatuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,10 +141,10 @@ namespace FootballApp.API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Seasons_SesonStatuses_SeasonStatusId",
+                        name: "FK_Seasons_SeasonStatuses_SeasonStatusId",
                         column: x => x.SeasonStatusId,
-                        principalTable: "SesonStatuses",
-                        principalColumn: "id",
+                        principalTable: "SeasonStatuses",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -581,7 +581,7 @@ namespace FootballApp.API.Migrations
                 name: "Leagues");
 
             migrationBuilder.DropTable(
-                name: "SesonStatuses");
+                name: "SeasonStatuses");
 
             migrationBuilder.DropTable(
                 name: "Areas");

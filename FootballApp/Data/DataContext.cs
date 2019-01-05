@@ -21,7 +21,7 @@ namespace FootballApp.Data
         public DbSet<SeasonTeam> SeasonTeams { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<SeasonStatus> SesonStatuses { get; set; }
+        public DbSet<SeasonStatus> SeasonStatuses { get; set; }
         public DbSet<PlayerLike> PlayerLikes { get; set; }
         public DbSet<TeamLike> TeamLikes { get; set; }
 

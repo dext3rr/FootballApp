@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181229160329_Initial")]
+    [Migration("20190105155740_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,14 +258,14 @@ namespace FootballApp.API.Migrations
 
             modelBuilder.Entity("FootballApp.Models.SeasonStatus", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("SesonStatuses");
+                    b.ToTable("SeasonStatuses");
                 });
 
             modelBuilder.Entity("FootballApp.Models.SeasonTeam", b =>

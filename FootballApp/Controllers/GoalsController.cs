@@ -32,13 +32,14 @@ namespace FootballApp.Controllers
      
 
         [HttpGet("matchGoals/{id}")]
-           public async Task<IActionResult> getMatchGoals(int id)
+        public async Task<IActionResult> getMatchGoals(int id)
         {
             var goals = await _context.Goals
             .Include(p => p.Player)
             .ThenInclude(t => t.Team)
             .Where(x => x.MatchId == id)
             .OrderBy( m => m.Minute).ToListAsync();
+            
             return Ok(goals);
         }
 

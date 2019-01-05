@@ -9,6 +9,7 @@ import { Season } from '../_models/Season';
 import { SeasonTeam } from '../_models/SeasonTeam';
 import { MatTableDataSource } from '@angular/material/table';
 import { TeamService } from '../_services/team.service';
+import { SeasonService } from '../_services/season.service';
 
 @Component({
   selector: 'app-table',
@@ -31,7 +32,8 @@ export class TableComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'teamId', 'matches', 'wins', 'draws', 'losses', 'goalsScored', 'goalsConceded', 'points'];
 
-  constructor(private tableService: TableService, private teamService: TeamService, private leagueService: LeagueService,
+  constructor(private tableService: TableService, private seasonService: SeasonService,
+    private teamService: TeamService, private leagueService: LeagueService,
     private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -59,6 +61,11 @@ export class TableComponent implements OnInit {
   }
 
   loadSeason(id: number) {
+    this.seasonService.getSeason(+id).subscribe((season: Season) => {
+      this.season = season;
+    }, error => {
+      this.alertify.error(error);
+    });
     this.seasonChosen = true;
     this.loadSeasonTeams(id);
   }

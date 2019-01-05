@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BsDropdownModule, TabsModule, BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -67,6 +67,13 @@ import { TeamEditComponent } from './teams/team-edit/team-edit.component';
 import { TeamEditResolver } from './_resolvers/team-edit-resolver';
 import { TeamDetailResolver } from './_resolvers/team-detail-resolver';
 import { PlayerAddComponent } from './player/player-add/player-add.component';
+import { ManagersComponent } from './managers/managers.component';
+import { ManagerAddComponent } from './managers/manager-add/manager-add.component';
+import { ManagerCardComponent } from './managers/manager-card/manager-card.component';
+import { ManagerDetailComponent } from './managers/manager-detail/manager-detail.component';
+import { ManagerEditComponent } from './managers/manager-edit/manager-edit.component';
+import { ManagersResolver } from './_resolvers/managers.resolver';
+import { ManagerDetailResolver } from './_resolvers/manager-detail.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -112,12 +119,18 @@ export function tokenGetter() {
       SeasonEditModalComponent,
       FavouriteTeamsComponent,
       FavouritePlayersComponent,
-      PlayerAddComponent
+      PlayerAddComponent,
+      ManagersComponent,
+      ManagerAddComponent,
+      ManagerCardComponent,
+      ManagerDetailComponent,
+      ManagerEditComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
+      ReactiveFormsModule,
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
       RouterModule.forRoot(appRoutes),
@@ -146,6 +159,8 @@ export function tokenGetter() {
       AreaService,
       SeasonService,
       SeasonTeamsService,
+      ManagersResolver,
+      ManagerDetailResolver,
       TeamsResolver,
       TeamEditResolver,
       TeamDetailResolver,

@@ -28,7 +28,7 @@ namespace FootballApp.Controllers
         
         [HttpGet]
 
-           public async Task<IActionResult> GetPlayers()
+        public async Task<IActionResult> GetPlayers()
         {
             var players = await _repo.GetPlayers();
 
@@ -58,7 +58,6 @@ namespace FootballApp.Controllers
             return Ok(players);
         }
 
-        [AllowAnonymous]
         [HttpPost("addPlayer")]
         public async Task<IActionResult> AddPlayer(Player player)
         {

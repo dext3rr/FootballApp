@@ -26,6 +26,12 @@ import { TeamEditComponent } from './teams/team-edit/team-edit.component';
 import { TeamEditResolver } from './_resolvers/team-edit-resolver';
 import { TeamDetailResolver } from './_resolvers/team-detail-resolver';
 import { TeamAddComponent } from './teams/team-add/team-add.component';
+import { ManagersComponent } from './managers/managers.component';
+import { ManagerDetailComponent } from './managers/manager-detail/manager-detail.component';
+import { ManagerAddComponent } from './managers/manager-add/manager-add.component';
+import { ManagerEditComponent } from './managers/manager-edit/manager-edit.component';
+import { ManagersResolver } from './_resolvers/managers.resolver';
+import { ManagerDetailResolver } from './_resolvers/manager-detail.resolver';
 
 
 export const appRoutes: Routes = [
@@ -45,7 +51,12 @@ export const appRoutes: Routes = [
             { path: 'teams/addTeam', component: TeamAddComponent},
             { path: 'teams/:id/edit', component: TeamEditComponent,
             resolve: {player: TeamEditResolver}, canDeactivate: [PreventUnsavedChanges]},
-            { path: 'feed', component: FeedComponent},
+            { path: 'managers', component: ManagersComponent,
+            resolve: {managers: ManagersResolver}},
+            { path: 'manager/:id', component: ManagerDetailComponent,
+            resolve: {manager: ManagerDetailResolver}},
+            { path: 'managers/addManager', component: ManagerAddComponent},
+            { path: 'manager/:id/edit', component: ManagerEditComponent, canDeactivate: [PreventUnsavedChanges]},
             { path: 'areas', component: AreasComponent},
             { path: 'areas/:id', component: LeaguesComponent},
             { path: 'leagues', component: LeaguesComponent},

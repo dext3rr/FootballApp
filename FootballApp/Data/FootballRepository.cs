@@ -27,7 +27,7 @@ namespace FootballApp.Data
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
-           // var teamsLiked = await GetUserLikedTeams
+            // var teamsLiked = await GetUserLikedTeams
 
             return user;
         }
@@ -106,7 +106,7 @@ namespace FootballApp.Data
 
             return positions;
         }
-        
+
 
         public async Task<Team> GetTeam(int id)
         {
@@ -125,7 +125,7 @@ namespace FootballApp.Data
             return teams;
         }
 
-         public async Task<IEnumerable<Team>> GetLeagueTeams(int leagueId)
+        public async Task<IEnumerable<Team>> GetLeagueTeams(int leagueId)
         {
             var teams = await _context.Teams
             .Where(l => l.LeagueId == leagueId)
@@ -134,7 +134,7 @@ namespace FootballApp.Data
             return teams;
         }
 
-          public async Task AddTeam(Team team)
+        public async Task AddTeam(Team team)
         {
             await _context.Teams.AddAsync(team);
             await _context.SaveChangesAsync();
@@ -149,23 +149,56 @@ namespace FootballApp.Data
             }
         }
 
+        public async Task<Manager> GetManager(int id)
+        {
+            var manager = await _context.Managers
+            .Include(t => t.Team)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+            return manager;
+        }
+
+        public async Task<IEnumerable<Manager>> GetManagers()
+        {
+            var managers = await _context.Managers.ToListAsync();
+
+            return managers;
+        }
+
+        public async Task AddManager(Manager manager)
+        {
+            await _context.Managers.AddAsync(manager);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteManager(int id)
+        {
+            {
+                Manager manager = _context.Managers.Where(x => x.Id == id).Single<Manager>();
+                _context.Managers.Remove(manager);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
         }
 
 
-        public async Task<PlayerLike> GetPlayerLike(int userId, int playerId){
+        public async Task<PlayerLike> GetPlayerLike(int userId, int playerId)
+        {
             return await _context.PlayerLikes
             .FirstOrDefaultAsync(u => u.UserLikerId == userId && u.PlayerLikedId == playerId);
         }
 
-        public async Task<TeamLike> GetTeamLike(int userId, int teamId){
+        public async Task<TeamLike> GetTeamLike(int userId, int teamId)
+        {
             return await _context.TeamLikes
             .FirstOrDefaultAsync(u => u.UserLikerId == userId && u.TeamLikedId == teamId);
         }
 
-         public async Task<IEnumerable<PlayerLike>> GetUserLikedPlayers(int userId)
+        public async Task<IEnumerable<PlayerLike>> GetUserLikedPlayers(int userId)
         {
             var players = await _context.PlayerLikes
             .Where(x => x.UserLikerId == userId)
@@ -175,7 +208,7 @@ namespace FootballApp.Data
             return players;
         }
 
-           public async Task<IEnumerable<TeamLike>> GetUserLikedTeams(int userId)
+        public async Task<IEnumerable<TeamLike>> GetUserLikedTeams(int userId)
         {
             var teams = await _context.TeamLikes
             .Where(x => x.UserLikerId == userId)

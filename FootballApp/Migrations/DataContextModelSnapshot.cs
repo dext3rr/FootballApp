@@ -256,14 +256,14 @@ namespace FootballApp.API.Migrations
 
             modelBuilder.Entity("FootballApp.Models.SeasonStatus", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("SesonStatuses");
+                    b.ToTable("SeasonStatuses");
                 });
 
             modelBuilder.Entity("FootballApp.Models.SeasonTeam", b =>

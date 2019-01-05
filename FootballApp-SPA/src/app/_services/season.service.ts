@@ -16,8 +16,8 @@ export class SeasonService {
     return this.http.get<Season[]>(this.baseUrl + 'seasons/');
   }
 
-  getSeason(id): Observable<Season[]> {
-    return this.http.get<Season[]>(this.baseUrl + 'seasons/' + id);
+  getSeason(id): Observable<Season> {
+    return this.http.get<Season>(this.baseUrl + 'seasons/' + id);
   }
 
   getLeagueSeasons(leagueId): Observable<Season[]> {

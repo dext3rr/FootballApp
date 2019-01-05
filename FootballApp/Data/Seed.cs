@@ -44,6 +44,19 @@ namespace FootballApp.Data
                 _context.SaveChanges();
             }
 
+             var seasonStatuses = new List<SeasonStatus>
+            {
+                new SeasonStatus{Name = "Nierozpoczęty"},
+                new SeasonStatus{Name = "W toku"},
+                new SeasonStatus{Name = "Zakończony"}
+            };
+
+            foreach (var seasonStatus in seasonStatuses)
+            {
+                _context.SeasonStatuses.AddAsync(seasonStatus).Wait();
+                _context.SaveChanges();
+            }
+
             Area area = new Area
             {
                 Name = "OZPN Kalisz"

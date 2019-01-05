@@ -20,42 +20,42 @@ namespace FootballApp.Controllers
             _context = context;
         }
 
-        [AllowAnonymous]
         [HttpGet]
-
         public async Task<IActionResult> getSeasons()
         {
             var seasons = await _context.Seasons
+            .Include(st => st.SeasonStatus)
             .Include(l => l.League)
             .ToListAsync();
             return Ok(seasons);
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> getSeason(int id)
         {
             var season = await _context.Seasons
+            .Include(st => st.SeasonStatus)
             .Include(l => l.League)
             .FirstOrDefaultAsync(x => x.Id == id);
             return Ok(season);
         }
 
-        [AllowAnonymous]
         [HttpGet("league/{leagueId}")]
 
         public async Task<IActionResult> getLeagueSeasons(int leagueId)
         {
             var seasons= await _context.Seasons
+            .Include(st => st.SeasonStatus)
             .Include(l => l.League)
             .Where(x => x.LeagueId == leagueId).ToListAsync();
             return Ok(seasons);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         [HttpPost("addSeason")]
         public async Task<IActionResult> AddSeason(Season season)
         {
+            season.SeasonStatusId = 1;
             await _context.Seasons.AddAsync(season);
             await _context.SaveChangesAsync();
 
@@ -73,6 +73,7 @@ namespace FootballApp.Controllers
             }
 
             seasonToUpdate.Year = season.Year;
+            seasonToUpdate.SeasonStatusId = season.SeasonStatusId;
             seasonToUpdate.LeagueId = season.LeagueId;
             _context.Seasons.Update(seasonToUpdate);
             await _context.SaveChangesAsync();

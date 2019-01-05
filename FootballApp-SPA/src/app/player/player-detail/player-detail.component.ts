@@ -13,7 +13,6 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./player-detail.component.css']
 })
 export class PlayerDetailComponent implements OnInit {
-
   player: Player;
   team: Team;
   teamId: number;

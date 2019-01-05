@@ -1,33 +1,76 @@
 <div class="container mt-5">
-    <h2 class="text-center text-primary">Nowy zawodnik</h2>
-  
-    <form #newPlayerForm="ngForm" id="newPlayerForm" style="width: 50%; margin: 0 auto;" (ngSubmit)="addPlayer()">
+  <h2 class="text-center text-primary">Nowy zawodnik</h2>
+
+  <form [formGroup]="newPlayerForm" id="newPlayerForm" style="width: 50%; margin: 0 auto;" (ngSubmit)="addPlayer()">
+    <div class="form-group">
+      <div *ngIf="newPlayerForm.dirty" class="alert alert-info">
+        <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
+      </div>
+
       <div class="form-group">
-        <div *ngIf="newPlayerForm.dirty" class="alert alert-info">
-          <strong>Uwaga:</strong> Wprowadzono zmiany. Niezapisane zmiany zostaną utracone.
-        </div>
         <label for="name">Imię</label>
-        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="model.name" placeholder="Wpisz imię zawodnika"
-          required>
+        <input type="text" [ngClass]="{'is-invalid': newPlayerForm.get('name').errors && 
+        newPlayerForm.get('name').touched}"
+          class="form-control" formControlName="name" placeholder="Wpisz imię zawodnika">
+        <div class="invalid-feedback" *ngIf="newPlayerForm.get('name').hasError('required') && 
+        newPlayerForm.get('name').touched">Wpisz
+          imię zawodnika</div>
+      </div>
+
+      <div class="form-group">
         <label for="surname">Nazwisko</label>
-        <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="model.surname" placeholder="Wpisz nazwisko zawodnika"
-          required>
+        <input type="text" [ngClass]="{'is-invalid': newPlayerForm.get('surname').errors && 
+        newPlayerForm.get('surname').touched}"
+          class="form-control" formControlName="surname" placeholder="Wpisz nazwisko zawodnika">
+        <div class="invalid-feedback" *ngIf="newPlayerForm.get('surname').hasError('required') && 
+        newPlayerForm.get('surname').touched">Wpisz
+          nazwisko zawodnika</div>
+      </div>
+
+      <div class="form-group">
         <label for="country">Kraj</label>
-        <input type="text" class="form-control" id="country" name="country" [(ngModel)]="model.country" placeholder="Wpisz kraj pochodzenia zawodnika"
-          required>
+        <input type="text" [ngClass]="{'is-invalid': newPlayerForm.get('country').errors && 
+        newPlayerForm.get('country').touched}"
+          class="form-control" formControlName="country" placeholder="Wpisz kraj pochodzenia zawodnika">
+        <div class="invalid-feedback" *ngIf="newPlayerForm.get('country').hasError('required') && 
+        newPlayerForm.get('country').touched">Wpisz
+          kraj pochodzenia zawodnika</div>
+      </div>
+
+      <div class="form-group">
         <label for="dateOfBirth">Data urodzenia</label>
-        <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control" id="dateOfBirth" name="dateOfBirth"
-          [(ngModel)]="model.dateOfBirth" placeholder="Wpisz datę urodzenia zawodnika" required>
+        <input type="text" [ngClass]="{'is-invalid': newPlayerForm.get('dateOfBirth').errors && 
+        newPlayerForm.get('dateOfBirth').touched}"
+          class="form-control" bsDatepicker [bsConfig]="bsConfig" formControlName="dateOfBirth" placeholder="Wybierz datę urodzenia zawodnika">
+        <div class="invalid-feedback" *ngIf="newPlayerForm.get('dateOfBirth').hasError('required') && 
+        newPlayerForm.get('dateOfBirth').touched">Wybierz
+          datę urodzenia zawodnika</div>
+      </div>
+
+      <div class="form-group">
         <label for="team">Drużyna</label>
-        <mat-select class="form-control" id="team" name="team" [(ngModel)]="model.teamId" placeholder="Wybierz drużynę" required>
+        <mat-select [ngClass]="{'is-invalid': newPlayerForm.get('teamId').errors && 
+        newPlayerForm.get('teamId').touched}"
+          class="form-control" formControlName="teamId" placeholder="Wybierz drużynę">
           <mat-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</mat-option>
         </mat-select>
+        <div class="invalid-feedback" *ngIf="newPlayerForm.get('teamId').hasError('required') && 
+        newPlayerForm.get('teamId').touched">Wybierz
+          drużynę</div>
+      </div>
+
+      <div class="form-group">
         <label for="position">Pozycja</label>
-        <mat-select class="form-control" [(ngModel)]="model.positionId" id="position" name="position" placeholder="Wybierz pozycję" required>
+        <mat-select [ngClass]="{'is-invalid': newPlayerForm.get('positionId').errors && 
+        newPlayerForm.get('positionId').touched}"
+          class="form-control" formControlName="positionId" placeholder="Wybierz pozycję">
           <mat-option *ngFor="let position of positions" value="{{position.id}}">{{position.name}}</mat-option>
         </mat-select>
+        <div class="invalid-feedback" *ngIf="newPlayerForm.get('positionId').hasError('required') && 
+        newPlayerForm.get('positionId').touched">Wybierz
+          pozycję</div>
       </div>
-      <button type="submit" [disabled]="!newPlayerForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
-      <small *ngIf="!newPlayerForm.valid" class="form-text text-muted">Nie wszystkie pola zostały wypełnione.</small>
-    </form>
-  </div>
+    </div>
+    <button type="submit" [disabled]="!newPlayerForm.valid" class="btn btn-primary btn-block">Zatwierdź</button>
+  </form>
+</div>

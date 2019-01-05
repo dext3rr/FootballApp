@@ -17,6 +17,12 @@
     <select class="form-control" id="leagueSelect" name="leagueSelect" [(ngModel)]="season.leagueId" required>
       <option *ngFor="let league of leagues" value="{{league.id}}">{{league.name}}</option>
     </select>
+    <label for="seasonStatus">Status</label>
+    <select class="form-control" id="statusSelect" name="statusSelect" [(ngModel)]="season.seasonStatusId" required>
+      <option value="1">Nierozpoczęty</option>
+      <option value="2">W toku</option>
+      <option value="3">Zakończony</option>
+    </select>
   </form>
 </div>
 <div class="modal-footer">
