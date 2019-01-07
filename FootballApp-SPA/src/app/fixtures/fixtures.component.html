@@ -1,13 +1,14 @@
-<h2 class="text-primary mt-3">Kolejki</h2>
-<div *ngIf="fixtures?.length > 0; else noFixtures">
-  <mat-card style="width:50%" class="mt-1" *ngFor="let fixture of fixtures">
+<h2 class="text-primary text-center mt-3">Kolejki</h2>
+<hr class="mb-3" style="width: 50%">
+<div class="mb-5" *ngIf="fixtures?.length > 0; else noFixtures">
+  <mat-card style="width:50%; margin: 0 auto;" class="mt-1" *ngFor="let fixture of fixtures">
       <div class="row">
         <div class="col-sm-3" style="text-align: center; margin: auto;">Kolejka {{fixture.number}}</div>
         <div class="col-sm-2" style="text-align: center; margin: auto;">
           <button mat-raised-button class="btn-primary w-5" [routerLink]="['/fixtures/', fixture.id]">Szczegóły</button>
         </div>
-        <div class="col-sm-2" style="text-align: center; margin: auto;">
-          <button mat-raised-button class="btn-danger w-5" (click)="deleteFixture(fixture.id);">Usuń</button>
+        <div *appHasRole="['Moderator','Administrator']" class="col-sm-2" style="text-align: center; margin: auto;">
+          <button  mat-raised-button class="btn-danger w-5" (click)="deleteFixture(fixture.id);">Usuń</button>
         </div>
       </div>
   </mat-card>
@@ -16,10 +17,10 @@
   <p>Brak dostępnych kolejek.</p>
 </ng-template>
 
-<button class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj kolejkę</button>
+<button  *appHasRole="['Moderator','Administrator']" class="btn btn-primary w-10 mt-3" (click)="toggleForm()">Dodaj kolejkę</button>
 
 <div *ngIf="formActive" style="width: 50%; margin: 0 auto;">
-  <div>
+  <div class="mb-5">
     <form #addFixtureForm="ngForm" id="addFixtureForm" (ngSubmit)="addFixture()">
       <div class="form-group">
         <label for="fixtureNumber">Numer kolejki</label>

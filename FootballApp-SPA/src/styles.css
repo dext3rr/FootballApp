@@ -52,3 +52,12 @@
     border-top: 1px solid #eee;
     padding: 15px 0;
   }
+
+  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background: #78C2AD;
+  } 
+
+  .mat-tab-label-content {
+    font-size: 15px;
+    font-weight: bold;
+  }

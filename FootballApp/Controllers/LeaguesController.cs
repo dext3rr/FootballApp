@@ -49,7 +49,7 @@ namespace FootballApp.Controllers
             return Ok(areaLeagues);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         [HttpPost("addLeague")]
         public async Task<IActionResult> AddLeague(League league)
         {

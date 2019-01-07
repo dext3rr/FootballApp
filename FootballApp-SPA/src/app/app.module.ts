@@ -27,6 +27,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableComponent } from './table/table.component';
 import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
@@ -140,6 +141,7 @@ export function tokenGetter() {
       MatFormFieldModule,
       MatButtonModule,
       BrowserAnimationsModule,
+      MatTabsModule,
       MatTableModule,
       TabsModule.forRoot(),
       JwtModule.forRoot({

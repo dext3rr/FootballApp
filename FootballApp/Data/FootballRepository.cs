@@ -34,7 +34,9 @@ namespace FootballApp.Data
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users
+            .OrderBy(x => x.Id)
+            .ToListAsync();
 
             return users;
         }
@@ -79,7 +81,11 @@ namespace FootballApp.Data
 
         public async Task<IEnumerable<Player>> GetTeamPlayers(int teamId)
         {
-            var players = await _context.Players.Where(x => x.Team.Id == teamId).ToListAsync();
+            var players = await _context.Players.
+            Where(x => x.Team.Id == teamId)
+            .Include(p => p.Position)
+            .OrderBy(p => p.Position)
+            .ToListAsync();
 
             return players;
         }
@@ -111,6 +117,7 @@ namespace FootballApp.Data
         public async Task<Team> GetTeam(int id)
         {
             var team = await _context.Teams
+            .Include(m => m.Manager)
             .Include(l => l.League)
             .ThenInclude(a => a.Area)
             .FirstOrDefaultAsync(t => t.Id == id);
@@ -120,7 +127,7 @@ namespace FootballApp.Data
 
         public async Task<IEnumerable<Team>> GetTeams()
         {
-            var teams = await _context.Teams.ToListAsync();
+            var teams = await _context.Teams.OrderBy(x => x.Name).ToListAsync();
 
             return teams;
         }

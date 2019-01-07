@@ -1,8 +1,15 @@
 <div class="container mt-5">
-  <h2 class="text-center text-primary mb-5">Ulubieni zawodnicy</h2>
-  <mat-card class="text-center mb-2" style="width: 50%; margin: 0 auto;" *ngFor="let favouritePlayer of favouritePlayers">
-    <a style="font-size: 18px;" 
-    [routerLink]="['/player/', favouritePlayer.playerLikedId]">
-    {{favouritePlayer.playerLiked.name}}   {{favouritePlayer.playerLiked.surname}}
-  </a>
+  <h2 class="text-center text-primary">Ulubieni zawodnicy</h2>
+  <hr class="mb-5" style="width: 50%">
+  <mat-card class="text-center mb-2" style="width: 30%; margin: 0 auto;" *ngFor="let favouritePlayer of favouritePlayers">
+    <div class="row">
+      <div class="col-sm-6">
+        <a style="font-size: 18px;" [routerLink]="['/player/', favouritePlayer.playerLikedId]">
+          {{favouritePlayer.playerLiked.name}} {{favouritePlayer.playerLiked.surname}}
+        </a>
+      </div>
+        <div *appHasRole="['Użytkownik','Moderator','Administrator']" class="col-sm-2" style="text-align: center; margin: auto;">
+          <button mat-raised-button class="btn-danger w-5">Usuń</button>
+        </div>
+    </div>
   </mat-card>

@@ -1,10 +1,12 @@
 <div class="container mt-5">
-  <h2 class="text-center text-primary mb-5">Kolejka {{ fixture?.number}}</h2>
+  <h2 class="text-center text-primary">Kolejka {{ fixture?.number}}</h2>
+  <hr class="mb-3" style="width: 50%">
   <div *ngIf="matches?.length > 0; else noMatches">
     <mat-card class="mt-1" *ngFor="let match of matches">
       <div style="margin: 0 auto;">
         <div class="row">
-          <div class="col-sm-2" style="text-align: center; margin: auto;">{{ match.dateOfMatch | date: 'dd/MM/yy' }}</div>
+          <div class="col-sm-2" style="text-align: center; margin: auto;">{{ match.dateOfMatch | date: 'dd/MM/yy' }} <br>11:00</div>
+
           <div class="col-sm-3">
             <img class="img-thumbnail" style="margin-right: 10px;" src="{{ match.homeTeam.photoUrl }}" alt="image">
             {{ match.homeTeam.name }}</div>
@@ -15,6 +17,9 @@
           </div>
           <div class="col-sm-2" style="text-align: center; margin: auto;">
             <button mat-raised-button class="btn-primary w-10" [routerLink]="['/matches/', match.id]">Szczegóły</button>
+          </div>
+          <div class="col-sm-2" style="text-align: center; margin: auto;">
+            <button mat-raised-button class="btn-danger w-10" (click)="deleteMatch(match.id)">Usuń</button>
           </div>
         </div>
       </div>

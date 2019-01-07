@@ -19,4 +19,7 @@ export class AdminService {
     return this.http.post(this.baseUrl + 'admin/editRoles/' + user.username, roles);
   }
 
+  deleteUser(id: number) {
+    return this.http.delete<User>(this.baseUrl + 'admin/users/' + id + '/deleteUser');
+  }
 }

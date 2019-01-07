@@ -86,4 +86,15 @@ export class FixtureDetailComponent implements OnInit {
       this.alertify.error('Drużyna nie może grać sama ze sobą!');
     }
   }
+
+  deleteMatch(matchId) {
+    this.alertify.confirm('Czy na pewno chcesz usunąć mecz?', () => {
+      this.matchService.deleteMatch(matchId).subscribe(() => {
+        this.alertify.success('Mecz został usunięty.');
+        this.loadFixureMatches();
+      }, error => {
+        this.alertify.error('Nie udało się usunąć meczu.');
+    });
+  });
+  }
 }

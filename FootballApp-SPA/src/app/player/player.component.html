@@ -1,19 +1,18 @@
 <div class="container mt-5">
     <h2 class="text-center text-primary">Zawodnicy</h2>
+    <hr class="mb-2" style="width: 50%">
     <!-- <mat-card  *ngFor="let player of players">
       <a [routerLink]="['/player/', player.id]">{{player.name}} {{player.surname}} </a>
     </mat-card> -->
 
-    <form id="filter">
-      <label>Szukaj zawodnika </label>
-    </form>
+    <button class="btn btn-primary w-10 mb-3" [routerLink]="['/players/addPlayer']">Dodaj zawodnika</button>
 
     <div class="row">
-      <div *ngFor="let player of players" class="col-lg-2 col-md-3 col-sm-6">
+      <div *ngFor="let player of players" class="col-lg-3 col-md-4 col-sm-6">
         <app-player-card [player]="player"></app-player-card>
       </div>
     </div>
 
-    <button class="btn btn-primary w-10 mt-3" [routerLink]="['/players/addPlayer']">Dodaj zawodnika</button>
+    
 </div>
 

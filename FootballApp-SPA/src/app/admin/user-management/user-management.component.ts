@@ -29,6 +29,17 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
+  deleteUser(id: number, username: string) {
+    this.alertifyService.confirm('Czy na pewno chcesz usunąć użytkownika o nazwie \"' + username + '\" ?', () => {
+      this.adminService.deleteUser(id).subscribe(() => {
+        this.alertifyService.success('Użytkownik został usunięty.');
+        this.getUsersWithRoles();
+      }, error => {
+        this.alertifyService.error('Nie udało się usunąć użytkownika.');
+    });
+  });
+  }
+
   editRolesModal(user: User) {
     const initialState = {
       user,

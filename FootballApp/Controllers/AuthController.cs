@@ -34,7 +34,7 @@ namespace FootballApp.Controllers
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
             if (await _repo.UserExists(userForRegisterDto.Username))
-                return BadRequest("Użytkownik o tej nazwie już istnieje.");
+                return BadRequest("Użytkownik o tej nazwie już istnieje. Wybierz inną nazwę użytkownika");
 
             var userToCreate = new User
             {

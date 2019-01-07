@@ -8,15 +8,14 @@
         <th style="width: 10%"></th>
         <th style="width: 10%"></th>
         <th style="width: 10%"></th>
-        <th style="width: 10%"></th>
       </tr>
       <tr *ngFor="let season of seasons">
         <td>{{ season.id }}</td>
         <td>{{ season.league.name }}</td>
         <td>{{ season.year }}</td>
         <td>{{ season.seasonStatus.name }}</td>
-        <td><button class="btn btn-info" (click)="addTeamsToSeason(season.league.id, season.id)">Generuj</button></td>
-        <td><button class="btn btn-info" (click)="deleteTeamsFromSeason(season.league.id, season.id)">Wyczyść</button></td>
+        <td><button class="btn btn-info" (click)="addTeamsToSeason(season.league.id, season.id)" 
+          [disabled]="season.seasonStatusId === 2 || season.seasonStatusId === 3">Generuj</button></td>
         <td><button class="btn btn-info" (click)="editSeasonModal(season, leagues)">Edytuj sezon</button></td>
         <td><button class="btn btn-danger" (click)="deleteSeason(season.id, season.year)">Usuń sezon</button></td>
       </tr>

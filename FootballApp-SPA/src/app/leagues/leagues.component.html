@@ -1,5 +1,6 @@
 <div class="container mt-5">
-  <h2 class="text-center text-primary mb-5">Wybierz ligę w {{ area?.name }}</h2>
+  <h2 class="text-center text-primary">Wybierz ligę w {{ area?.name }}</h2>
+  <hr class="mb-5" style="width: 50%">
   <mat-card class="text-center mb-2" style="width: 30%; margin: 0 auto;" *ngFor="let league of leagues">
       <a style="font-size: 18px" [routerLink]="['/leagues/', league.id]">{{league.name}}</a>
   </mat-card>

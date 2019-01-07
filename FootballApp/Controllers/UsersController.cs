@@ -68,7 +68,7 @@ namespace FootballApp.Controllers
             _repo.Add<PlayerLike>(playerLike);
 
             if (await _repo.SaveAll())
-                return Ok();
+                return Ok(201);
 
             return BadRequest("Nie udało się dodać zawodnika do ulubionych");
         }

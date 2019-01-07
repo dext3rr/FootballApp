@@ -37,7 +37,7 @@ export class LeagueManagementComponent implements OnInit {
   }
 
   getAreas() {
-    this.areaService.getAreas().subscribe((areas: Area[]) =>{
+    this.areaService.getAreas().subscribe((areas: Area[]) => {
       this.areas = areas;
     }, error => {
       this.alertify.error(error);

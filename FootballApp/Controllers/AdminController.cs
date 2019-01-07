@@ -32,14 +32,29 @@ namespace FootballApp.Controllers
                                   {
                                       Id = user.Id,
                                       Username = user.Username,
+                                      AccountCreationDate = user.AccountCreationDate,
                                       Roles = (from userRole in user.UserRoles
                                                join role in _context.Roles
                                                on userRole.RoleId
                                                equals role.Id
                                                select role.Name).ToList()
-        }).ToListAsync();
+        })
+        .OrderBy(x => x.Id)
+        .ToListAsync();
 
         return Ok(userList);
+        }
+
+        [Authorize(Policy = "RequireAdmin")]
+        [HttpDelete("users/{id}/deleteUser")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            User user = _context.Users.Where(x => x.Id == id).Single<User>();
+            _context.Users.Remove(user); 
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         [Authorize(Policy = "RequireAdmin")]

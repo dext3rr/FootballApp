@@ -1,27 +1,28 @@
 <div class="container mt-5">
-  <h2>Panel administracyjny</h2>
+  <h2 class="text-primary text-center">Panel administracyjny</h2>
+  <hr class="mb-2" style="width: 50%">
   <div class="tab-panel">
-    <tabset class="member-tabset">
-      <tab heading="Użytkownicy" *appHasRole="['Administrator']">
+    <mat-tab-group class="member-tabset">
+      <mat-tab label="Użytkownicy" *appHasRole="['Administrator']">
         <div class="container">
           <app-user-management></app-user-management>
         </div>
-      </tab>
-      <tab heading="Okręgi" *appHasRole="['Administrator']">
+      </mat-tab>
+      <mat-tab label="Okręgi" *appHasRole="['Administrator']">
         <div class="container">
           <app-area-management></app-area-management>
         </div>
-      </tab>
-      <tab heading="Ligi"  *appHasRole="['Administrator']">
+      </mat-tab>
+      <mat-tab label="Ligi"  *appHasRole="['Administrator']">
           <div class="container">
               <app-league-management></app-league-management>
             </div>
-      </tab>
-      <tab heading="Sezony" *appHasRole="['Administrator']">
+          </mat-tab>
+      <mat-tab label="Sezony" *appHasRole="['Administrator']">
           <div class="container">
           <app-season-management></app-season-management>
           </div>
-      </tab>
-    </tabset>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
